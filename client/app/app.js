@@ -12,4 +12,10 @@ angular.module('boorishpenguin', [
       templateUrl: 'app/ask/ask.html',
       controller: 'askController'
     })
+    .when('/answers', {
+      templateUrl: 'app/answers/answers.html'
+    })
+    .otherwise({
+      routeTo: 'app/index.html'
+    })
 });
