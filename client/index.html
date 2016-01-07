@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="boorishpenguin">
+  <head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>-->
+    <script src="userController.js"></script>
+  </head>
+  <body ng-controller="UserController">
+    <!--<div ng-view></div>-->
+    <ul>
+      <li ng-repeat="user in users">
+        <span>{{user.name}}</span>
+      </li>
+    </ul>
+
+  </body>
+</html>
