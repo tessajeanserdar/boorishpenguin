@@ -1,12 +1,12 @@
 angular.module('boorish.question', [])
 
-.factory('Questions', function($http) {
+.factory('askQuestions', function($http) {
   return {
-    // question is a string 
+    // add a question from /ask
     addQuestion: function(question) {
       $http({
         method: 'POST',
-        url: 'townhall/questions',
+        url: 'townhall/ask',
         data: JSON.stringify({
           text: question.question,
           name: question.user,
@@ -23,7 +23,8 @@ angular.module('boorish.question', [])
 
 })
 
-.controller('questionController', function($scope) {
+
+.controller('askController', function($scope, Questions) {
   $scope.question = {};
   $scope.answers = [];
 

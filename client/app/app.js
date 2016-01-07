@@ -4,8 +4,8 @@ angular.module('boorishpenguin', [
 
 .config(function ($routeProvider) {
   $routeProvider
-    .when('/questions', {
-      templateUrl: 'app/questions/questions.html',
-      controller: 'questionController'
+    .when('/ask', {
+      templateUrl: 'app/questions/ask.html',
+      controller: 'askController'
     })
 });
