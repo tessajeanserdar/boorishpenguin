@@ -81,7 +81,7 @@ module.exports = {
     var qid = req.params.id;
     db.Question.findAll({
       where: {
-        id: qid;
+        id: qid
       },
       include: [db.User, db.Course, db.Tag]
     })
@@ -103,7 +103,7 @@ module.exports = {
 
       db.Answer.findAll({
         where: {
-          QuestionId: qid;
+          QuestionId: qid
         },
         include: [db.User]
       })
@@ -148,7 +148,7 @@ module.exports = {
     // anybody can like; doesn't need auth
     if (mod === 'like') {
       db.Question.update({
-        points: curLike + 1;
+        points: curLike + 1
       }, {
         where: {
           id: qid
@@ -160,7 +160,7 @@ module.exports = {
     } else if (mod === 'good') {
       // admin only
       db.Question.update({
-        isGood: !curGood;
+        isGood: !curGood
       }, {
         where: {
           id: qid
@@ -173,7 +173,7 @@ module.exports = {
       // admin only; maybe refactor this and the previous
       // to run the admin check first?
       db.Question.update({
-        isClosed: !curClosed;
+        isClosed: !curClosed
       }, {
         where: {
           id: qid
@@ -185,7 +185,7 @@ module.exports = {
     } else if (mod === 'answered') {
       // same-user only
       db.Question.update({
-        isAnswered: !curAnswered;
+        isAnswered: !curAnswered
       }, {
         where: {
           id: qid
