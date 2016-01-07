@@ -12,7 +12,7 @@ angular.module('boorish.services', [])
           points: 0,
           person: question.person, // these are not setup yet
           course: question.course,  // these are not setup yet
-          tag: question.tag,  // these are not setup yet
+          tags: question.tags,  // these are not setup yet
           isAnswered: false,
           isGood: false,
         })
