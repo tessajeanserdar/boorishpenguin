@@ -29,7 +29,7 @@ angular.module('boorish.services', [])
       })
     },
 
-    getQuestion: function() { // TODO: Ask Steven about how to send this GET
+    getQuestion: function($location) { // TODO: Ask Steven about how to send this GET
       return $http({
         method: 'GET',
         url: '/townhall/questions/:id'

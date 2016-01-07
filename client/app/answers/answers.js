@@ -3,6 +3,11 @@ angular.module('boorish.answers', [])
 .controller('answersController', function($scope, $location, Answers, Questions) {
   $scope.data = {};
   $scope.newAnswer = {};
+  
+  Questions.getQuestion().then(function(data) {
+    $scope.data.question = data;
+    $scope.data
+  })
 
   $scope.getQuestion = function() {
     Questions.getQuestion().then(function(data) {
