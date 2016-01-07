@@ -8,12 +8,17 @@
     <script src="userController.js"></script>
   </head>
   <body ng-controller="UserController">
-    <!--<div ng-view></div>-->
+    <div ng-view=></div>
     <ul>
       <li ng-repeat="user in users">
         <span>{{user.name}}</span>
       </li>
     </ul>
 
+  </body>
+  <!-- lib scripts -->
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular-route/angular-route.js"></script>
+  <script src="lib/underscore/underscore-min.js"></script>
   </body>
 </html>
