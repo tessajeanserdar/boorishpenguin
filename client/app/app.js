@@ -1,5 +1,7 @@
 angular.module('boorishpenguin', [
-  'boorish.question'
+  'boorish.question',
+  'boorish.services',
+  'boorish.answers'
   ])
 
 .config(function ($routeProvider) {
