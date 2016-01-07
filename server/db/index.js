@@ -1,0 +1,1 @@
+//sequelize schemas will go in here
