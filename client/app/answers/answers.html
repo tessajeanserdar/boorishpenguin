@@ -7,6 +7,7 @@
     <div>{{ question.tag }}</div>
     <div>{{ question.isAnswered }}</div>
     <div>{{ question.isGood }}</div>
+    <input type='submit' on-click='removeQuestion($index)' value='remove'>
   </div>
   <div ng-model='answers'>
     <div ng-repeat='answer in answers'>
@@ -16,6 +17,7 @@
       <div>{{ answer.person }}</div>
       <div>{{ answer.tag }}</div>
       <div>{{ answer.isGood }}</div>
+      <input type='submit' on-click='removeAnswer($index)' value='remove'>
     </div>
   </div>
   <div>

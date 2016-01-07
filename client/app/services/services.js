@@ -41,6 +41,10 @@ angular.module('boorish.services', [])
 
     updateQuestion: function(questionID) {
       // code to update a question when there is a new like or has been marked as answered
+    },
+
+    removeQuestion: function(questionID) {
+      // code to remove a question by the user who posted it or isAdmin
     }
   }
 })
@@ -74,6 +78,10 @@ angular.module('boorish.services', [])
       .then(function() {
         console.log('question sent');
       })
+    },
+
+    removeAnswer: function(answerID) {
+      // code to delete answer from the data base by answerer or isAdmin
     }
   }
 })
