@@ -1,11 +1,12 @@
 /**
  * Created by siobhan on 2016/01/06.
  */
-angular.module('boorishpenguin.users', [])
+angular.module('boorish.users', [])
   .controller('UsersController', function($scope, Users){
     $scope.newUser = {};
     $scope.toRemove = {};
-    $scope.all = []; //= [{'name': 'Jane'}, {'name': 'Paul'}];
+    //$scope.users = [];
+    $scope.users = [{'name': 'Jane'}, {'name': 'Paul'}];
 
     //$scope.data = {};
 
@@ -17,7 +18,7 @@ angular.module('boorishpenguin.users', [])
 
     $scope.allUsers = function(){
       Users.allUsers().then(function(users){
-        $scope.all = users;
+        $scope.users = users;
       })
     };
 
