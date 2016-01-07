@@ -6,7 +6,7 @@ var dbPass = process.env.DBPASS || 'mypw';
 var dbHost = process.env.DBHOST || 'localhost'
 
 var db = new Sequelize(database, dbUser, dbPass, {
-  host: dbHost;
+  host: dbHost
 });
 
 var User = db.define('User', {
