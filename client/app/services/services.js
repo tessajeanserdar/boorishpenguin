@@ -27,10 +27,17 @@ angular.module('boorish.services', [])
         method: 'GET',
         url: '/townhall/questions'
       })
-      .then(function() {
+      .then(function(res) {
         return res.data;
       })
-    }
+    },
+
+    // getQuestion: function(questionID) {
+    //   return $http({
+    //     method: 'GET',
+    //     url: '/townhall/questions/:id'
+    //   })
+    // }
   }
 })
 
@@ -42,7 +49,7 @@ angular.module('boorish.services', [])
         method: 'GET',
         url: 'townhall/answers',
       })
-      .then(function() {
+      .then(function(res) {
         return res.data;
       })
     }, 

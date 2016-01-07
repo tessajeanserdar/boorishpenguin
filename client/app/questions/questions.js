@@ -1,18 +1,9 @@
-angular.module('boorish.ask', [])
+angular.module('boorish.questions', [])
 
-.controller('askController', function($scope, Questions) {
-  $scope.question = {};
-  $scope.answers = [];
+.controller('questionsController', function($scope, Questions) {
+  $scope.data = {};
 
-  $scope.getUser = function() {
-    // grabs the username from wherever we're storing it.
-    // sets username to 
-      // $scope.question.user
-  }
-
-  $scope.addQuestion = function() {
-    // TODO: need to pull username into question object
-    Questions.addQuestion($scope.question);
-  }
-
+  Questions.getAllQuestions().then(function(data) {
+    $scope.data.questions = data;
+  })
 })

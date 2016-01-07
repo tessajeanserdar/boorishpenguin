@@ -1,3 +1,7 @@
 <div ng-module='boorish.question'>
-  <input type='submit' ng-click='Questions.likeQuestion()' value='like'>
+  <div>
+    <input type='submit' ng-click='likeAnswer()' value='like'>
+    <div ng-model='question'>{{ question.text }}</div>
+  </div>
 </div>
+<div ng-module='boorish.answers'></div>

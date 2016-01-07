@@ -1,13 +1,14 @@
 angular.module('boorishpenguin', [
+  'boorish.services',
+  'boorish.ask'
   'boorish.question',
   'boorish.answers',
-  'boorish.services'
   ])
 
 .config(function ($routeProvider) {
   $routeProvider
     .when('/ask', {
-      templateUrl: 'app/questions/ask.html',
+      templateUrl: 'app/ask/ask.html',
       controller: 'askController'
     })
 });
