@@ -18,15 +18,6 @@ angular.module('boorish.question', [])
       .then(function() {
         console.log('question sent');
       })
-    },
-
-    getAnswers: function(question) {
-      $http({
-        method: 'GET',
-        url: 'api/questions',
-      }).then(function() {
-        return res.data
-      })
     }
   }
 
