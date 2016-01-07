@@ -49,6 +49,11 @@ var Question = db.define('Question', {
     allowNull: false,
     defaultValue: 0
   },
+  responses: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0
+  },
   isAnswered: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
