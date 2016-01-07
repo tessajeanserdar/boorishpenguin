@@ -63,6 +63,7 @@ angular.module('boorish.services', [])
     }, 
 
     addAnswer: function(answer) {
+      console.log('clicked')
       $http({
         method: 'POST',
         url: 'townhall/answers',
