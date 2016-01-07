@@ -126,3 +126,64 @@ angular.module('boorish.services', [])
     }
   }
 })
+
+.factory('Users', function($http){
+    var allUsers = function(){
+      return $http({
+        method: 'GET',
+        url: '/townhall/users'
+      })
+      .then(function(res){
+        console.log('retrieved all users');
+        return res.data;
+      });
+    };
+
+    //TODO: get specific students/admins
+    //var getStudents = function(){
+    //
+    //};
+    //
+    //var getAdmins = function(){
+    //
+    //};
+
+    var addUser = function(user){
+      return $http({
+        method: 'POST',
+        url: '/townhall/users',
+        data: JSON.stringify({
+          schoolId: user.schoolId,
+          username: user.username,
+          password: user.password,
+          name: user.name,
+          isTeacher: user.isTeacher,
+          points: 0,
+          email: user.email,
+          picture: user.picture
+        })
+      })
+      .then(function() {
+        console.log('user added');
+      });
+    };
+
+    //TODO: add multiple users
+    //var addMany = function(users){
+    //  return $http({
+    //    method: 'POST',
+    //    url: '/townhall/users',
+    //    data: users
+    //  });
+    //};
+
+    return {
+      allUsers: allUsers,
+      //getStudents: getStudents,
+      //getAdmins: getAdmins,
+      addOne: addUser
+      //addMany: addMany
+    }
+
+  });
+

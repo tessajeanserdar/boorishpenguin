@@ -3,57 +3,28 @@
  */
 angular.module('boorishpenguin.users', [])
   .controller('UsersController', function($scope, Users){
-    $scope.users = [{'name': 'Jane'}, {'name': 'Paul'}];
+    $scope.newUser = {};
+    $scope.toRemove = {};
+    $scope.all = []; //= [{'name': 'Jane'}, {'name': 'Paul'}];
 
     //$scope.data = {};
 
-  })
-  .factory('Users', function($http){
-    var getAll = function(){
-      return $http({
-        method: 'GET',
-        url: '/townhall/users'
+    $scope.addUser = function(){
+      Users.addUser($scope.newUser).then(function(){
+        console.log('added new user!');
+      });
+    };
+
+    $scope.allUsers = function(){
+      Users.allUsers().then(function(users){
+        $scope.all = users;
       })
-      .then(function(res){
-        return res.data;
-      });
     };
 
-    //var getStudents = function(){
-    //
-    //};
-    //
-    //var getAdmins = function(){
-    //
-    //};
-
-    var addOne = function(user){
-      return $http({
-        method: 'POST',
-        url: '/townhall/users',
-        data: user
+    $scope.removeUser = function(){
+      $scope.removeUser($scope.toRemove()).then(function(){
+        console.log('removed user!');
       });
-    };
-
-    var addMany = function(users){
-      return $http({
-        method: 'POST',
-        url: '/townhall/users',
-        data: users
-      });
-    };
-
-    return {
-      getAll: getAll,
-      //getStudents: getStudents,
-      //getAdmins: getAdmins,
-      addOne: addOne,
-      addMany: addMany
     }
 
   });
-
-/*
-  app.get('/townhall/users', controllers.allUsers);
-  app.post('/townhall/users', controllers.addUser);
- */
