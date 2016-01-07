@@ -1,5 +1,13 @@
 var Sequelize = require('sequelize');
-var db = new Sequelize('townhall', 'root', 'mypw');
+
+var database = process.env.DATABASE || 'townhall';
+var dbUser = process.env.DBUSER || 'root';
+var dbPass = process.env.DBPASS || 'mypw';
+var dbHost = process.env.DBHOST || 'localhost'
+
+var db = new Sequelize(database, dbUser, dbPass, {
+  host: dbHost;
+});
 
 var User = db.define('User', {
   schoolId: Sequelize.INTEGER,
