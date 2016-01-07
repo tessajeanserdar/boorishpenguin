@@ -118,11 +118,19 @@ Answer.belongsTo(User);
 Question.hasMany(Answer);
 Answer.belongsTo(Question);
 
-Tag.sync();
-Course.sync();
-User.sync();
-Question.sync();
-Answer.sync();
+User.sync()
+.then(function() {
+  return Tag.sync();
+})
+.then(function() {
+  return Course.sync();
+})
+.then(function() {
+  return Question.sync();
+})
+.then(function() {
+  return Answer.sync();
+})
 
 exports.User = User;
 exports.Question = Question;
