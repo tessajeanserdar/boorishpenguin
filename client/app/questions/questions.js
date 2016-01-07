@@ -18,13 +18,23 @@ angular.module('boorish.question', [])
       .then(function() {
         console.log('question sent');
       })
+    },
+
+    getAnswers: function(question) {
+      $http({
+        method: 'GET',
+        url: 'api/questions',
+      }).then(function() {
+        return res.data
+      })
     }
   }
 
 })
 
-.controller('questionController', function($scope, Questions) {
+.controller('questionController', function($scope) {
   $scope.question = {};
+  $scope.answers = [];
 
   $scope.getUser = function() {
     // grabs the username from wherever we're storing it.
