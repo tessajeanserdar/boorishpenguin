@@ -16,7 +16,8 @@ angular.module('boorishpenguin', [
       templateUrl: 'app/questions/questions.html'
     })
     .when('/questions/:id', {
-      templateUrl: 'app/answers/answers.html'
+      templateUrl: 'app/answers/answers.html',
+      controller: 'answersController'
     })
     .otherwise({
       routeTo: 'app/index.html'
