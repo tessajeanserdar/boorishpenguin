@@ -41,8 +41,9 @@ angular.module('boorish.services', [])
       return $http({
         method: 'GET',
         url: 'townhall/answers',
-      }).then(function() {
-        return res.data
+      })
+      .then(function() {
+        return res.data;
       })
     }, 
 
@@ -53,10 +54,10 @@ angular.module('boorish.services', [])
         data: JSON.stringify({
           text: answer.text,
           points: 0,
+          answersQuestions: '', // what is this??
           isGood: false,
-          id_Question: // TODO: pull question ID
-          isAnswered: false,
-          name: question.user
+          id_Question: '', // TODO: pull question ID
+          person: question.user // TODO: pull question ID
         })
       })
       .then(function() {
