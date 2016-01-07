@@ -3,6 +3,7 @@ angular.module('boorishpenguin', [
   'boorish.ask',
   'boorish.questions',
   'boorish.answers',
+  'ngRoute'
   ])
 
 .config(function ($routeProvider) {
