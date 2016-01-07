@@ -1,7 +1,7 @@
 angular.module('boorishpenguin', [
   'boorish.services',
-  'boorish.ask'
-  'boorish.question',
+  'boorish.ask',
+  'boorish.questions',
   'boorish.answers',
   ])
 

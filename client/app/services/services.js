@@ -32,12 +32,12 @@ angular.module('boorish.services', [])
       })
     },
 
-    // getQuestion: function(questionID) {
-    //   return $http({
-    //     method: 'GET',
-    //     url: '/townhall/questions/:id'
-    //   })
-    // }
+    getQuestion: function(questionID) {
+      return $http({
+        method: 'GET',
+        url: '/townhall/questions/:id'
+      })
+    }
   }
 })
 
