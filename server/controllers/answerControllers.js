@@ -1,7 +1,7 @@
 // answer controllers go in here
 module.exports = {
-  newAnswer: function() {
-    console.log('new Answer received');
+  newAnswer: function(req, res) {
+    console.log('new Answer received', req.body);
   },
 
   modAnswer: function() {

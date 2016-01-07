@@ -4,8 +4,8 @@ module.exports = {
     console.log('request for all questions received');
   },
 
-  newQuestion: function() {
-    console.log('new question received');
+  newQuestion: function(req, res) {
+    console.log('new question received', req.body);
   },
 
   deleteQuestion: function() {
