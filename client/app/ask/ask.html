@@ -4,6 +4,7 @@
     <br />
     Tags: <input type='text' ng-model='question.tags' placeholder='Tags (e.g., genetics)'>
     <input type='reset' value='Cancel'>
-    <input type='submit' on-click='' value='Ask question'>
+    <input type='submit' ng-click='addQuestion()' value='Ask question'>
   </form>
+  <pre>{{question.tags}}</pre>
 </div>
