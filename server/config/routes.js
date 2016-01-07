@@ -1,14 +1,19 @@
-var controllers = require ('../controllers/controllers.js');
+var controllers = require ('../controllers/questionControllers.js');
+var controllers = require ('../controllers/answerControllers.js');
+var controllers = require ('../controllers/userControllers.js');
 
 module.exports = function(app, express) {
-  app.get('/townhall/questions', controllers.readQuestions);
-  app.post('/townhall/questions', controllers.writeQuestion);
-  app.delete('/townhall/questions', controllers.deleteQuestion);
+  app.get('/townhall/questions', questionControllers.allQuestions);
+  app.post('/townhall/questions', questionControllers.newQuestion);
+  app.delete('/townhall/questions', questionControllers.deleteQuestion);
 
-  app.get('/townhall/answers', controllers.readAnswers);
-  app.post('/townhall/answers', controllers.writeAnswer);
-  app.delete('/townhall/answers', controllers.deleteAnswer);
+  app.get('/townhall/questions/:id', questionControllers.readQuestion);
+  app.post('/townhall/questions/:id', questionControllers.modQuestion);
 
-  app.get('/townhall/users', controllers.allUsers);
-  app.post('/townhall/users', controllers.addUser);
+  app.post('/townhall/questions/:id/answers', answerControllers.newAnswer);
+  app.post('/townhall/questions/:id/answers/:id', answerControllers.modAnswer);
+  app.delete('/townhall/questions/:id/answers', answerControllers.deleteAnswer);
+
+  app.get('/townhall/users', userControllers.allUsers);
+  app.post('/townhall/signup', userControllers.newUser);
 };
