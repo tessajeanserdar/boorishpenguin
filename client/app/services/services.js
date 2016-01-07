@@ -32,11 +32,15 @@ angular.module('boorish.services', [])
       })
     },
 
-    getQuestion: function(questionID) {
+    getQuestion: function(questionID) { // TODO: Ask Steven about how to send this GET
       return $http({
         method: 'GET',
         url: '/townhall/questions/:id'
       })
+    },
+
+    updateQuestion: function(questionID) {
+      // code to update a question when there is a new like or has been marked as answered
     }
   }
 })

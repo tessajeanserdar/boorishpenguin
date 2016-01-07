@@ -1,20 +1,29 @@
 <div ng-module='boorish.answers'>
   <div ng-model='question'>
-
+    <input type='submit' ng-click='updateQuestion()' value='like'> 
+    <div>{{ question.points }}</div>
+    <div>{{ question.text }}</div>
+    <div>{{ question.person }}</div>
+    <div>{{ question.tag }}</div>
+    <div>{{ question.isAnswered }}</div>
+    <div>{{ question.isGood }}</div>
   </div>
   <div ng-model='answers'>
     <div ng-repeat='answer in answers'>
       <input type='submit' ng-click='likeAnswer()' value='like'>
       <div>{{ answer.points }}</div>
       <div>{{ answer.text }}</div>
+      <div>{{ answer.person }}</div>
+      <div>{{ answer.tag }}</div>
+      <div>{{ answer.isGood }}</div>
     </div>
   </div>
   <div>
+    <h3>Answer this question:</h3>
     <form>
-      <textarea type='question' rows='5' cols='80' ng-model='question.question'></textarea></br>
+      <textarea type='question' rows='5' cols='80' ng-model='answer.text' placeholder='Write your answer'></textarea></br>
+      <input type='reset' value='Cancel'>
+      <input type='submit' formmethod='post' value='Submit answer'>
     </form>
-    <input type='submit' ng-click='Questions.likeQuestion()' value='like'>
-    <input type='submit' value='Cancel'>
-    <input type='submit' formmethod='post' value='Ask question'>
   </div>
 </div>
