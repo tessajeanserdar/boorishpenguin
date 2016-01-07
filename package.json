@@ -3,6 +3,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.2",
     "express": "^4.13.3",
+    "mysql": "^2.10.0",
     "request": "^2.67.0",
     "sequelize": "^3.17.1"
   }
