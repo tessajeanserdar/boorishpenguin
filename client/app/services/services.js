@@ -115,7 +115,7 @@ angular.module('boorish.services', [])
       // DELETE to /answers
       $http({
         method: 'DELETE',
-        url: '/answers'
+        url: '/answers',
         data: JSON.stringify({
           id_answer: answerID
         })
