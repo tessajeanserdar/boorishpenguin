@@ -1,37 +1,17 @@
 angular.module('boorish.answers', [])
 
-.factory('Answers', function($http) {
+.controller('answersController', function($scope, Answers, Questions) {
+  $scope.question = Questions.getQuestion(); //TODO: need to pass in question ID
+  $scope.answers = $scope.question.answers;
+  $scope.newAnswer = {};
 
-  return {
-    getAnswers: function() {
-      return $http({
-        method: 'GET',
-        url: 'townhall/answers',
-      }).then(function() {
-        return res.data
-      })
-    }, 
-
-    addAnswer: function(answer) {
-      $http({
-        method: 'POST',
-        url: 'townhall/answers',
-        data: JSON.stringify({
-          text: answer.text,
-          points: 0,
-          isGood: false,
-          id_Question: // TODO: pull question ID
-          isAnswered: false,
-          name: question.user
-        })
-      })
-      .then(function() {
-        console.log('question sent');
-      })
-    }
+  $scope.removeQuestion = function() {
+    Questions.removeQuestion()
   }
-})
 
-.controller('answersController', function($scope, Answers) {
-  $scope.answer = {};
+  $scope.addAnswer = function() {
+    console.log('you clicked')
+    console.log($scope.newAnswer);
+    Answers.addAnswer($scope.newAnswer);
+  };
 })

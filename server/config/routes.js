@@ -1,6 +1,6 @@
-var controllers = require ('../controllers/questionControllers.js');
-var controllers = require ('../controllers/answerControllers.js');
-var controllers = require ('../controllers/userControllers.js');
+var questionControllers = require ('../controllers/questionControllers.js');
+var answerControllers = require ('../controllers/answerControllers.js');
+var userControllers = require ('../controllers/userControllers.js');
 
 module.exports = function(app, express) {
   app.get('/townhall/questions', questionControllers.allQuestions);
