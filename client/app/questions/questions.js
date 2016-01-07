@@ -10,4 +10,9 @@ angular.module('boorish.ask', [])
       // $scope.question.user
   }
 
+  $scope.addQuestion = function() {
+    // TODO: need to pull username into question object
+    Questions.addQuestion($scope.question);
+  }
+
 })

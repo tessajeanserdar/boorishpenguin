@@ -1,9 +1,9 @@
 <div ng-module='boorish.question'>
   <form>
-    <textarea type='question' rows='5' cols='80' ng-model='question.question' placeholder='What is your question?'></textarea>
+    <textarea type='question' rows='5' cols='80' ng-model='question.text' placeholder='What is your question?'></textarea>
     <br />
     Tags: <input type='text' ng-model='question.tags' placeholder='Tags (e.g., genetics)['>
   </form>
   <input type='submit' value='Cancel'>
-  <input type='submit' formmethod='post' value='Ask question'>
+  <input type='submit' on-click='' value='Ask question'>
 </div>

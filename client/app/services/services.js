@@ -8,11 +8,13 @@ angular.module('boorish.services', [])
         method: 'POST',
         url: 'townhall/ask',
         data: JSON.stringify({
-          text: question.question,
-          name: question.user,
+          text: question.text,
+          points: 0,
+          person: question.person, // these are not setup yet
+          course: question.course,  // these are not setup yet
+          tag: question.tag,  // these are not setup yet
           isAnswered: false,
           isGood: false,
-          points: 0
         })
       })
       .then(function() {
