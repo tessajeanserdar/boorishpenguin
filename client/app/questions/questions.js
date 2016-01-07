@@ -18,15 +18,6 @@ angular.module('boorish.question', [])
       .then(function() {
         console.log('question sent');
       })
-    },
-
-    getAnswers: function(question) {
-      $http({
-        method: 'GET',
-        url: 'api/questions',
-      }).then(function() {
-        return res.data
-      })
     }
   }
 
@@ -40,6 +31,10 @@ angular.module('boorish.question', [])
     // grabs the username from wherever we're storing it.
     // sets username to 
       // $scope.question.user
+  }
+
+  $scope.getAnswers = function() {
+    $scope.answers = Questions.getAnswers();
   }
 
 })
