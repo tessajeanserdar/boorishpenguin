@@ -11,8 +11,8 @@ module.exports = function(app, express) {
   app.post('/townhall/questions/:id', questionControllers.modQuestion);
 
   app.post('/townhall/answers', answerControllers.newAnswer);
-  app.post('/townhall/questions/:id/answers/:id', answerControllers.modAnswer);
-  app.delete('/townhall/questions/:id/answers', answerControllers.deleteAnswer);
+  app.post('/townhall/answers/:id', answerControllers.modAnswer);
+  app.delete('/townhall/answers', answerControllers.deleteAnswer);
 
   app.get('/townhall/users', userControllers.allUsers);
   app.post('/townhall/signup', userControllers.newUser);
