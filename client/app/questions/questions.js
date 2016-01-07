@@ -23,9 +23,8 @@ angular.module('boorish.question', [])
 
 })
 
-.controller('questionController', function($scope) {
+.controller('questionController', function($scope, Questions) {
   $scope.question = {};
-  $scope.answers = [];
 
   $scope.getUser = function() {
     // grabs the username from wherever we're storing it.
