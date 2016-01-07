@@ -1,20 +1,26 @@
 <div ng-module='boorish.answers'>
-  <div ng-model='question'>
-    <input type='submit' ng-click='updateQuestion()' value='like'> 
+  <div ng-model='data.question'>
+    <input type='submit' ng-click='updateQuestion("like")' value='like'>
+    <input type='submit' ng-click='updateQuestion("good")' value='Good'>
+    <input type='submit' ng-click='updateQuestion("closed")' value='Closed'>
+    <input type='submit' ng-click='updateQuestion("answered")' value='Answered'>
     <div>{{ question.points }}</div>
     <div>{{ question.text }}</div>
-    <div>{{ question.person }}</div>
+    <div>{{ question.username }}</div>
     <div>{{ question.tag }}</div>
     <div>{{ question.isAnswered }}</div>
     <div>{{ question.isGood }}</div>
     <input type='submit' on-click='removeQuestion($index)' value='remove'>
   </div>
-  <div ng-model='answers' ng-controller='answersController'>
-    <div ng-repeat='answer in answers'>
-      <input type='submit' ng-click='likeAnswer()' value='like'>
+  <div ng-model='data.answers'>
+    <div ng-repeat='answer in data.answers'>
+      <input type='submit' ng-click='updateAnswer($index, "like")' value='like'>
+      <input type='submit' ng-click='updateAnswer($index, "good")' value='like'>
+      <input type='submit' ng-click='updateAnswer($index, "closed")' value='Closed'>
+      <input type='submit' ng-click='updateAnswer($index, "answered")' value='Answered'>
       <div>{{ answer.points }}</div>
       <div>{{ answer.text }}</div>
-      <div>{{ answer.person }}</div>
+      <div>{{ answer.username }}</div>
       <div>{{ answer.tag }}</div>
       <div>{{ answer.isGood }}</div>
       <input type='submit' on-click='removeAnswer($index)' value='remove'>
@@ -23,7 +29,7 @@
   <div>
     <h3>Answer this question:</h3>
     <form>
-      <textarea type='question' rows='5' cols='80' ng-model='newAnswer.text' placeholder='Write your answer'></textarea></br>
+      <textarea rows='5' cols='80' ng-model='newAnswer.text' placeholder='Write your answer'></textarea></br>
       <input type='reset' value='Cancel'>
       <input type='submit' ng-click='addAnswer()' value='Submit answer'>
     </form>
