@@ -33,8 +33,4 @@ angular.module('boorish.question', [])
       // $scope.question.user
   }
 
-  $scope.getAnswers = function() {
-    $scope.answers = Questions.getAnswers();
-  }
-
 })
