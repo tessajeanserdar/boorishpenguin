@@ -5,16 +5,8 @@
     <title></title>
     <script src="userController.js"></script>
   </head>
-  <body ng-controller="UserController">
-    <div ng-view=></div>
-    <ul>
-      <li ng-repeat="user in users">
-        <span>{{user.name}}</span>
-      </li>
-    </ul>
-
-    <script src="lib/angular/angular.js"></script>
-    <script src="lib/angular-route/angular-route.js"></script>
+  <body>
+    <div ng-view></div>
 
     <script src="app/questions/questions.js"></script>
     <script src="app/answers/answers.js"></script>
