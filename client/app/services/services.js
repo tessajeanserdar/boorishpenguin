@@ -20,6 +20,7 @@ angular.module('boorish.services', [])
     },
 
     getAllQuestions: function() {
+      console.log('requesting all questions')
       return $http({
         method: 'GET',
         url: '/townhall/questions/'
@@ -184,7 +185,7 @@ angular.module('boorish.services', [])
       //addMany: addMany
     }
 
-  });
+  })
 
 .factory('Auth', function ($http, $location, $window) {
   // Don't touch this Auth service!!!

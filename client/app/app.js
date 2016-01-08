@@ -26,7 +26,11 @@ angular.module('boorishpenguin', [
       templateUrl: 'app/users/users.html',
       controller: 'UsersController'
     })
+    .when('/signin', {
+      templateUrl: 'app/auth/signin.html',
+      controller: 'AuthController'
+    })
     .otherwise({
-      routeTo: '/questions'
+      routeTo: '/signin'
     })
 });
