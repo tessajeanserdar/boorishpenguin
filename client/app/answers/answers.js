@@ -3,18 +3,13 @@ angular.module('boorish.answers', [])
 .controller('answersController', function($scope, $location, Answers, Questions) {
   $scope.data = {};
   $scope.newAnswer = {};
-  
-  Questions.getQuestion().then(function(data) {
-    $scope.data.question = data;
-    $scope.data
-  })
 
   $scope.getQuestion = function() {
     Questions.getQuestion().then(function(data) {
-      var question_answers = data.slice(); // question is always going to be the first item
-      $scope.data.question = question_answers.splice(0,1)[0];
-      $scope.data.answers = question_answers;
-    })
+      // question is always going to be the first item
+      $scope.data.question = data.results[0];
+      $scope.data.answers = data.results.slice(1);
+    });
   };
 
   $scope.addAnswer = function() {
