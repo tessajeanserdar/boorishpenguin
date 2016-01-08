@@ -15,7 +15,8 @@ angular.module('boorishpenguin', [
       controller: 'askController'
     })
     .when('/questions', {
-      templateUrl: 'app/questions/questions.html'
+      templateUrl: 'app/questions/questions.html',
+      controller: 'questionsController'
     })
     .when('/questions/:id', {
       templateUrl: 'app/answers/answers.html',
@@ -23,8 +24,9 @@ angular.module('boorishpenguin', [
     })
     .when('/users', {
       templateUrl: 'app/users/users.html',
+      controller: 'UsersController'
     })
     .otherwise({
-      routeTo: 'app/index.html'
+      routeTo: '/questions'
     })
 });
