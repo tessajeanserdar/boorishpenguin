@@ -12,28 +12,80 @@ module.exports = {
       }
     })
     .then(function(user) {
-      return db.Answer.create({
+      db.Answer.create({
         text: txt,
         UserId: user.get('id'),
         QuestionId: qid;
       })
-    })
-    .then(function() {
-      return user.update({
-        points: user.get('points') + 1
+      .then(function() {
+        return user.update({
+          points: user.get('points') + 1
+        })
       })
-    })
-    .then(function() {
-      res.sendStatus(201);
+      .then(function() {
+        res.sendStatus(201);
+      });
     });
   },
 
+  // TODO: 'good' needs admin auth; answered needs 
   modAnswer: function(req, res) {
     var aid = req.params.id;
     var mod = req.body.mod;
 
+    db.Answer.findOne({
+      where: {
+        id: aid
+      }
+    })
+    .then(function(answer) {
+      var uid = answer.get('UserId');
+
+      db.User.findOne({
+        where: {
+          id: uid
+        }
+      })
+      .then(function(user) {
+        if (mod === 'good') {
+          // DO YOUR ADMIN AUTH CHECK AROUND THIS PROMISE CHAIN
+          answer.update({
+            isGood: !answer.get('isGood')
+          })
+          .then(function(user) {
+            if (answer.get('isGood')) {
+              return user.update({
+                points: user.get('points') + 1
+              })
+            } else {
+              return user.update({
+                points: user.get('points') - 1
+              })
+            }
+          })
+          .then(function() {
+            res.sendStatus(201);
+          });
+          // END OF CHAIN
+        } else if (mod === 'like') {
+          answer.update({
+            points: answer.get('points') + 1
+          })
+          .then(function(user) {
+            return user.update({
+              points: user.get('points') + 1
+            })
+          })
+          .then(function() {
+            res.sendStatus(201);
+          })
+        }
+      });
+    });
+
   },
 
+  // TODO: auth/same-user check 
   deleteAnswer: function(req, res) {
     console.log('request to delete answer received');
   }
