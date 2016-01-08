@@ -15,7 +15,7 @@ module.exports = {
       db.Answer.create({
         text: txt,
         UserId: user.get('id'),
-        QuestionId: qid;
+        QuestionId: qid
       })
       .then(function() {
         return user.update({
