@@ -5,7 +5,7 @@ module.exports = {
     var course = req.body.coursename;
 
     db.User.findAll()
-    .then(function(users)) {
+    .then(function(users) {
       var formattedUsers = users.map(function(user) {
         return {
           id: user.id,
@@ -20,7 +20,7 @@ module.exports = {
       users = {};
       users.results = formattedUsers;
       res.json(users);
-    }
+    });
   },
 
   newUser: function(req, res) {
