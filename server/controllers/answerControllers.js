@@ -28,7 +28,7 @@ module.exports = {
     });
   },
 
-  // TODO: 'good' needs admin auth; answered needs 
+  // TODO: 'good' needs admin auth 
   modAnswer: function(req, res) {
     var aid = req.params.id;
     var mod = req.body.mod;
@@ -88,15 +88,33 @@ module.exports = {
   deleteAnswer: function(req, res) {
     var aid = req.body.id_Answer;
 
-    db.Answer.destroy({
+    db.Answer.findOne({
       where: {
         id: aid
       }
     })
-    .then(function(id) {
-      if (id) {
-        res.sendStatus(204);
-      }
+    .then(function(answer) {
+      var uid = answer.get('UserId');
+
+      db.User.findOne({
+        where: {
+          id: uid
+        }
+      })
+      .then(function(user) {
+        var username = user.get('name');
+        // DO AUTH/SAME-USER CHECK HERE
+        return answer.destroy({
+          where: {
+            id: aid
+          }
+        })  
+        .then(function(id) {
+          if (id) {
+            res.sendStatus(204);
+          }
+        })
+      })
     })
   }
 };
