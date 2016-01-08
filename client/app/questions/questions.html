@@ -1,7 +1,11 @@
-<div ng-module='boorish.question'>
-  <div>
-    <input type='submit' ng-click='likeAnswer()' value='like'>
-    <div ng-model='question'>{{ question.text }}</div>
+<div ng-module='boorish.questions'>
+  <h3>Questions</h3>
+  <div ng-repeat='question in data.questions'>
+    <!-- number of points current on question -->
+    <div>{{ question.points }}</div>
+    <!-- number of answers current on question -->
+    <div>{{ question.responses }}</div>
+    <!-- link to question id. Title is currently the first 60 characters in the text -->
+    <a ng-href='#/{{ question.id }}'>{{ question.title }}</a>
   </div>
 </div>
-<div ng-module='boorish.answers'></div>
