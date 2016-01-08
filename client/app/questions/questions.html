@@ -1,2 +1,10 @@
-<div ng-module='boorish.question'>
+<div ng-module='boorish.questions'>
+  <div ng-repeat='question in data.questions'>
+    <!-- number of points current on question -->
+    <div>{{ question.points }}</div>
+    <!-- number of answers current on question -->
+    <div>{{ question.responses }}</div>
+    <!-- link to question id. Title is currently the first 60 characters in the text -->
+    <a ng-href='#/{{ question.id }}'>{{ question.title }}</a>
+  </div>
 </div>
