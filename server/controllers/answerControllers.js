@@ -82,11 +82,21 @@ module.exports = {
         }
       });
     });
-
   },
 
   // TODO: auth/same-user check 
   deleteAnswer: function(req, res) {
-    console.log('request to delete answer received');
+    var aid = req.body.id_Answer;
+
+    db.Answer.destroy({
+      where: {
+        id: aid
+      }
+    })
+    .then(function(id) {
+      if (id) {
+        res.sendStatus(204);
+      }
+    })
   }
-}
+};
