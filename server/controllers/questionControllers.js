@@ -32,50 +32,69 @@ module.exports = {
     var coursename = req.body.course;
     var tagname = req.body.tag;
 
-    db.User.findOrCreate({
+    db.User.findOne({
       where: {
         username: uname
       }
     })
-    .spread(function(user, created) {
-      db.Course.findOrCreate({
-        where: {
-          name: coursename
-        }
+    .then(function(user) {
+      user.update({
+        points: user.get('points') + 1
       })
-      .spread(function(course, created) {
-        db.Tag.findOrCreate({
+      .then(function() {
+        db.Course.findOne({
           where: {
-            name: tagname
+            name: coursename
           }
         })
-        .spread(function(tag, created) {
-          db.Question.create({
-            text: txt,
-            UserId: user.get('id'),
-            CourseId: course.get('id'),
-            TagId: tag.get('id')
+        .then(function(course) {
+          db.Tag.findOne({
+            where: {
+              name: tagname
+            }
           })
-          .then(function(message) {
-            res.sendStatus(201);
+          .then(function(tag) {
+            db.Question.create({
+              text: txt,
+              UserId: user.get('id'),
+              CourseId: course.get('id'),
+              TagId: tag.get('id')
+            })
+            .then(function(message) {
+              res.sendStatus(201);
+            });
           });
         });
-      });
+      })
     });
   },
 
   // TODO: add check for admin or same-user
   deleteQuestion: function(req, res) {
-    db.Question.destroy({
+    var qid = req.params.id;
+
+    db.Question.findOne({
       where: {
-        id: req.params.id
+        id: qid
       }
     })
-    .then(function(id) {
-      if (id) {
-        res.sendStatus(204);
-      };
-    });
+    .then(function(question) {
+      db.User.findOne({
+        where: {
+          id: question.get('UserId')
+        }
+      })
+      .then(function(){
+        // MAKE CHECK AROUND THIS CHAIN HERE
+        question.destroy()
+        .then(function(id) {
+          if (id) {
+            res.sendStatus(204);
+          };
+        });
+        // END CHAIN
+      })
+    }) 
   },
 
   readQuestion: function(req, res) {
@@ -135,67 +154,68 @@ module.exports = {
     var qid = req.params.id;
     var mod = req.body.mod;
 
-    db.Question.findAll({
+    db.Question.findOne({
       where: {
         id: qid
       }
     })
-    .then(function(questions) {
-      var curGood = questions[0].isGood;
-      var curLike = questions[0].points;
-      var curClosed = questions[0].isClosed;
-      var curAnswered = questions[0].isAnswered;
-    });
+    .then(function(question) {
+      var curGood = question.isGood;
+      var curLike = question.points;
+      var curClosed = question.isClosed;
+      var curAnswered = question.isAnswered;
 
-    // anybody can like; doesn't need auth
-    if (mod === 'like') {
-      db.Question.update({
-        points: curLike + 1
-      }, {
+      db.User.findOne({
         where: {
-          id: qid
+          id: question.get('UserId');
         }
       })
-      .then(function() {
-        res.sendStatus(201);
-      })
-    } else if (mod === 'good') {
-      // admin only
-      db.Question.update({
-        isGood: !curGood
-      }, {
-        where: {
-          id: qid
+      .then(function(user) {
+        // anybody can like; doesn't need auth
+        if (mod === 'like') {
+          question.update({
+            points: curLike + 1
+          })
+          .then(function() {
+            return user.update({
+              points: user.get('points') + 1
+            })
+          })
+          .then(function() {
+            res.sendStatus(201);
+          });
+        } else if (mod === 'good') {
+          // admin only
+          question.update({
+            isGood: !curGood
+          })
+          .then(function() {
+            return user.update({
+              points: user.get('points') + 1
+            })
+          })
+          .then(function() {
+            res.sendStatus(201);
+          });
+        } else if (mod === 'closed') {
+          // admin only; maybe refactor this and the previous
+          // to run the admin check first?
+          question.update({
+            isClosed: !curClosed
+          })
+          .then(function() {
+            res.sendStatus(201);
+          });
+        } else if (mod === 'answered') {
+          // same-user only
+          question.update({
+            isAnswered: !curAnswered
+          })
+          .then(function() {
+            res.sendStatus(201);
+          })
         }
-      })
-      .then(function() {
-        res.sendStatus(201);
       });
-    } else if (mod === 'closed') {
-      // admin only; maybe refactor this and the previous
-      // to run the admin check first?
-      db.Question.update({
-        isClosed: !curClosed
-      }, {
-        where: {
-          id: qid
-        }
-      })
-      .then(function() {
-        res.sendStatus(201);
-      });
-    } else if (mod === 'answered') {
-      // same-user only
-      db.Question.update({
-        isAnswered: !curAnswered
-      }, {
-        where: {
-          id: qid
-        }
-      })
-      .then(function() {
-        res.sendStatus(201);
-      })
-    }
+    });
   }
 };

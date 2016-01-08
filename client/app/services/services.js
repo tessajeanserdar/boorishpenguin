@@ -86,7 +86,6 @@ angular.module('boorish.services', [])
         url: 'townhall/answers',
         data: JSON.stringify({
           text: answer.text,
-          answersQuestions: '', // what is this??
           id_Question: '', // TODO: pull question ID
           person: answer.user // TODO: pull question ID
         })

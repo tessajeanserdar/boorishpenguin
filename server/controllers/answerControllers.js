@@ -15,7 +15,7 @@ module.exports = {
       db.Answer.create({
         text: txt,
         UserId: user.get('id'),
-        QuestionId: qid;
+        QuestionId: qid
       })
       .then(function() {
         return user.update({
@@ -104,11 +104,7 @@ module.exports = {
       .then(function(user) {
         var username = user.get('name');
         // DO AUTH/SAME-USER CHECK HERE
-        return answer.destroy({
-          where: {
-            id: aid
-          }
-        })  
+        return answer.destroy()  
         .then(function(id) {
           if (id) {
             res.sendStatus(204);
