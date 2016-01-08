@@ -2,6 +2,7 @@ var db = require('../db/index.js');
 
 module.exports = {
   allQuestions: function(req, res) {
+    console.log('request to get all question')
     db.Question.findAll({include: [db.User, db.Course, db.Tag]})
     .then(function(questions) {
       formattedQs = questions.map(function(question) {
@@ -167,7 +168,7 @@ module.exports = {
 
       db.User.findOne({
         where: {
-          id: question.get('UserId');
+          id: question.get('UserId')
         }
       })
       .then(function(user) {

@@ -15,9 +15,4 @@ angular.module('boorish.ask', [])
     Questions.addQuestion($scope.question);
   }
 
-  $scope.cancel = function() {
-    $scope.question.text = '';
-    $scope.question.tags = '';
-  }
-
 })
