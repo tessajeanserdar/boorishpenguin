@@ -23,7 +23,7 @@ module.exports = function(app, express, ensureAuth) {
 
   app.get('/townhall/courses', ensureAuth, courseControllers.allCourses);
 
-  app.get('/townhall/tags', ensureAuth, tagControllers.allCourses);
+  app.get('/townhall/tags', ensureAuth, tagControllers.allTags);
 
   app.get('/auth/google',
   passport.authenticate('google', { scope:  ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.me', "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"] }));
