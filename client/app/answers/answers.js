@@ -31,7 +31,8 @@ angular.module('boorish.answers', [])
     })
 
   $scope.removeQuestion = function() {
-    Questions.removeQuestion().then(function() {
+    var id_question = $scope.data.question.id;
+    Questions.removeQuestion(id_question).then(function() {
       $location.path('/questions');
     })
   };

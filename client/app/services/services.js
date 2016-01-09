@@ -6,7 +6,7 @@ angular.module('boorish.services', [])
     addQuestion: function(question) {
       $http({
         method: 'POST',
-        url: 'townhall/ask',
+        url: 'townhall/questions',
         data: JSON.stringify({
           text: question.text,
           username: question.username, // TODO: this needs to be a username
@@ -54,11 +54,14 @@ angular.module('boorish.services', [])
       })
     },
 
-    removeQuestion: function() {
+    removeQuestion: function(questionID) {
       // code to remove a question by the user who posted it or isAdmin
       $http({
         method: 'DELETE',
-        url: 'townhall/questions/:id'
+        url: 'townhall/questions/',
+        data: JSON.stringify({
+          id_question: questionID;
+        })
       })
       .then(function() {
         console.log('question deleted');
