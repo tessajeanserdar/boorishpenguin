@@ -2,9 +2,10 @@ var db = require('../db/index.js');
 
 module.exports = {
   allQuestions: function(req, res) {
+    console.log('request to get all question')
     db.Question.findAll({include: [db.User, db.Course, db.Tag]})
     .then(function(questions) {
-      formattedQs = questions.map(function(question) {
+      var formattedQs = questions.map(function(question) {
         return {
           id: question.id,
           text: question.text,
@@ -106,7 +107,7 @@ module.exports = {
       include: [db.User, db.Course, db.Tag]
     })
     .then(function(questions) {
-      formattedQs = questions.map(function(question) {
+      var formattedQs = questions.map(function(question) {
         return {
           id: question.id,
           text: question.text,
@@ -129,7 +130,7 @@ module.exports = {
         include: [db.User]
       })
       .then(function(answers) {
-        formattedAs = answers.map(function(answer) {
+        var formattedAs = answers.map(function(answer) {
           return {
             id: answer.id,
             text: answer.text,
@@ -167,7 +168,7 @@ module.exports = {
 
       db.User.findOne({
         where: {
-          id: question.get('UserId');
+          id: question.get('UserId')
         }
       })
       .then(function(user) {

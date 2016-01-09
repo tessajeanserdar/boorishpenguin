@@ -17,6 +17,7 @@ exports.signup = function (profileObj, callback){
   user.gender = profileObj.profile.gender;
   user.nickName = profileObj.profile._json.nickname;
   user.image = profileObj.profile._json.image.url;
+  console.log(user);
   // save to database
   return callback(null, user);
 };
