@@ -72,7 +72,7 @@ module.exports = {
 
   // TODO: add check for admin or same-user
   deleteQuestion: function(req, res) {
-    var qid = req.params.id;
+    var qid = req.body.id_question;
 
     db.Question.findOne({
       where: {
