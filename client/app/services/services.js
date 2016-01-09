@@ -58,7 +58,7 @@ angular.module('boorish.services', [])
       // code to remove a question by the user who posted it or isAdmin
       $http({
         method: 'DELETE',
-        url: '/questions:id'
+        url: 'townhall/questions/:id'
       })
       .then(function() {
         console.log('question deleted');
@@ -115,7 +115,7 @@ angular.module('boorish.services', [])
       // DELETE to /answers
       $http({
         method: 'DELETE',
-        url: '/answers',
+        url: 'townhall/answers',
         data: JSON.stringify({
           id_answer: answerID
         })
