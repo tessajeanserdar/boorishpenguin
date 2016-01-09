@@ -9,8 +9,9 @@ module.exports = {
       var formattedUsers = users.map(function(user) {
         return {
           id: user.id,
-          schoolId: user.schoolId,
           name: user.name,
+          name_first: user.name_last,
+          name_last: user.name_first,
           email: user.email,
           points: user.points,
           image: user.image
@@ -23,7 +24,32 @@ module.exports = {
     });
   },
 
-  newUser: function(req, res) {
-    console.log('new user received');
+  newUser: function(user) {
+    db.User.create(user)
+    .then(function(newUser) {
+      return newUser;
+    });
+  },
+
+  isUserInDb: function(uname) {
+    db.User.count({
+      where: {
+        username: uname
+      }
+    })
+    .then(function(number) {
+      return !!number;
+    });
+  },
+
+  isUserTeacher: function(uname) {
+    db.User.find({
+      where: {
+        username: uname
+      }
+    })
+    .then(function(user) {
+      return user.isTeacher;
+    })
   }
-}
+};

@@ -10,10 +10,10 @@ var db = new Sequelize(database, dbUser, dbPass, {
 });
 
 var User = db.define('User', {
-  schoolId: Sequelize.INTEGER,
   username: Sequelize.STRING,
-  password: Sequelize.STRING,
   name: Sequelize.STRING,
+  name_last: Sequelize.STRING,
+  name_first: Sequelize.STRING,
   isTeacher: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
