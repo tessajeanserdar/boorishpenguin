@@ -61,8 +61,8 @@ module.exports = {
               CourseId: course.get('id'),
               TagId: tag.get('id')
             })
-            .then(function(message) {
-              res.sendStatus(201);
+            .then(function(question) {
+              res.status(201).json(question);
             });
           });
         });
@@ -145,7 +145,7 @@ module.exports = {
 
         qAndAs = {};
         qAndAs.results = formattedQs.concat(formattedAs);
-        res.send(qAndAs);
+        res.json(qAndAs);
       })
     })
   },
@@ -183,7 +183,7 @@ module.exports = {
             })
           })
           .then(function() {
-            res.sendStatus(201);
+            res.status(201).json(question);
           });
         } else if (mod === 'good') {
           // admin only
@@ -196,7 +196,7 @@ module.exports = {
             })
           })
           .then(function() {
-            res.sendStatus(201);
+            res.status(201).json(question);
           });
         } else if (mod === 'closed') {
           // admin only; maybe refactor this and the previous
@@ -205,7 +205,7 @@ module.exports = {
             isClosed: !curClosed
           })
           .then(function() {
-            res.sendStatus(201);
+            res.status(201).json(question);
           });
         } else if (mod === 'answered') {
           // same-user only
@@ -213,7 +213,7 @@ module.exports = {
             isAnswered: !curAnswered
           })
           .then(function() {
-            res.sendStatus(201);
+            res.status(201).json(question);
           })
         }
       });

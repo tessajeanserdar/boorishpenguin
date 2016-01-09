@@ -22,8 +22,8 @@ module.exports = {
           points: user.get('points') + 1
         })
       })
-      .then(function() {
-        res.sendStatus(201);
+      .then(function(createdUser) {
+        res.status(201).json(createdUser);
       });
     });
   },
@@ -52,7 +52,7 @@ module.exports = {
           answer.update({
             isGood: !answer.get('isGood')
           })
-          .then(function(user) {
+          .then(function(answer) {
             if (answer.get('isGood')) {
               return user.update({
                 points: user.get('points') + 1
@@ -64,20 +64,20 @@ module.exports = {
             }
           })
           .then(function() {
-            res.sendStatus(201);
+            res.status(201).json(answer);
           });
           // END OF CHAIN
         } else if (mod === 'like') {
           answer.update({
             points: answer.get('points') + 1
           })
-          .then(function(user) {
+          .then(function(answer) {
             return user.update({
               points: user.get('points') + 1
             })
           })
           .then(function() {
-            res.sendStatus(201);
+            res.status(201).json(answer);
           })
         }
       });
@@ -86,7 +86,7 @@ module.exports = {
 
   // TODO: auth/same-user check 
   deleteAnswer: function(req, res) {
-    var aid = req.body.id_Answer;
+    var aid = req.body.id_answer;
 
     db.Answer.findOne({
       where: {
