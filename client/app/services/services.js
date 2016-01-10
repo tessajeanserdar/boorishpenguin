@@ -30,12 +30,14 @@ angular.module('boorish.services', [])
       })
     },
 
-    getQuestion: function($location) { // TODO: Ask Steven about how to send this GET
+    getQuestion: function(path) { // TODO: Ask Steven about how to send this GET
+      
       return $http({
         method: 'GET',
-        url: '/townhall/questions/:id'
+        url: '/townhall' + path
       })
       .then(function(res) {
+        console.log('res.data', res.data)
         return res.data;
       })
     },
