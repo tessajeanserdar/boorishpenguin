@@ -36,14 +36,19 @@ passport.use(new GoogleStrategy({
   callbackURL: "http://127.0.0.1:8001/auth/google/callback",
 },
   function(accessToken, refreshToken, profile, done) {
-    if (controllers.isUserInDb(profile.emails[0].value)) {
-      googleAuth.login({profile: profile}, function (err, profile){
-        return done(err, profile);
-      });
-    } else {
-      googleAuth.signup({profile: profile}, function (err, profile){
-        return done(err, profile);
-    });
+    controllers.isUserInDb(profile.emails[0].value, function (bool){
+      if(bool){
+        googleAuth.login({profile: profile}, function (err, profile){
+          return done(err, profile);
+        });
+      } else {
+        googleAuth.signup({profile: profile}, function (err, profile){
+          return done(err, profile);
+        })
+      }
+      }) 
+   
+    }));
     
     //   exports.login({profile: profile}, function (err, profile){
     //     return done(err, profile);
@@ -56,7 +61,4 @@ passport.use(new GoogleStrategy({
     // if user in database
     // else
 
-    
-  }}
-));
 

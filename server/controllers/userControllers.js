@@ -31,14 +31,16 @@ module.exports = {
     });
   },
 
-  isUserInDb: function(uname) {
+  isUserInDb: function(uname, callback) {
     db.User.count({
       where: {
         username: uname
       }
     })
     .then(function(number) {
-      return !!number;
+      callback(!!number);
+      return;
+      // return !!number;
     });
   },
 

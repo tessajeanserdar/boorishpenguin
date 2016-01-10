@@ -12,7 +12,7 @@ exports.signup = function (profileObj, callback){
   // user.displayName = profileObj.profile.displayName;
   user.name_last  = profileObj.profile.name.familyName;
   user.name_first = profileObj.profile.name.givenName;
-  user.name = user.firstName+" "+user.lastName;
+  user.name = user.name_first + " " + user.name_last;
   user.email = profileObj.profile.emails[0].value;
   user.username = user.email;
   // user.gender = profileObj.profile.gender;
@@ -29,7 +29,7 @@ exports.signup = function (profileObj, callback){
 };
 
 exports.login = function (profileObj, callback){
-  return callback(null, user);
+  return callback(null, profileObj);
 };
 
 // exports.serializeUser = function (){
