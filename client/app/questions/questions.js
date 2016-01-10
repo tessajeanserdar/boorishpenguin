@@ -6,7 +6,7 @@ angular.module('boorish.questions', [])
   $scope.init = function() {
     var user = Auth.isAuth();
 
-    if (!user) { 
+    if (user ) { 
       $location.path('/signin')
     } else {
       Questions.getAllQuestions().then(function(data) {
