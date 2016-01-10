@@ -1,25 +1,12 @@
 angular.module('boorish.auth', [])
 
-.controller('AuthController', function ($scope, $window, $location, Auth) {
+.controller('AuthController', function ($scope, $location, Auth) {
   $scope.user = {};
 
   $scope.signin = function () {
-    Auth.signin($scope.user)
-      .then(function (token) {
-        $window.localStorage.setItem('com.shortly', token);
-        $location.path('/links');
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-  };
-
-  $scope.signup = function () {
-    Auth.signup($scope.user)
-      .then(function (token) {
-        $window.localStorage.setItem('com.shortly', token);
-        $location.path('/links');
-      })
+    Auth.setUser().then(function() {
+      $location.path('/questions');
+    })
       .catch(function (error) {
         console.error(error);
       });

@@ -60,7 +60,7 @@ angular.module('boorish.services', [])
         method: 'DELETE',
         url: 'townhall/questions/',
         data: JSON.stringify({
-          id_question: questionID;
+          id_question: questionID
         })
       })
       .then(function() {
