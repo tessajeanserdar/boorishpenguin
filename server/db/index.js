@@ -104,6 +104,40 @@ var Answer = db.define('Answer', {
   updatedAt: false
 });
 
+// replaces question and answer
+var Post = db.define('Post', {
+  text: Sequelize.STRING,
+  isAnAnswer: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  responses: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0
+  },
+  isAnswered: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  isGood: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  isClosed: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  createdAt: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.fn('NOW')
+  }
+});
+
 Course.belongsToMany(User, {
   through: 'CourseUser'
 });
@@ -123,6 +157,11 @@ Answer.belongsTo(User);
 Question.hasMany(Answer);
 Answer.belongsTo(Question);
 
+Post.hasMany(Post, {as: 'Responses', foreignKey: 'QuestionId'});
+
+Post.belongsToMany(User, {through: 'Likes'});
+User.belongsToMany(Post, {through: 'Likes'});
+
 User.sync()
 .then(function() {
   return Tag.sync();
@@ -136,9 +175,13 @@ User.sync()
 .then(function() {
   return Answer.sync();
 })
+.then(function() {
+  return Post.sync({force: true});
+});
 
 exports.User = User;
 exports.Question = Question;
 exports.Answer = Answer;
 exports.Course = Course;
 exports.Tag = Tag;
+exports.Post = Post;
