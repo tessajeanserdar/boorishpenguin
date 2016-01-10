@@ -10,7 +10,7 @@ module.exports = {
     .then(function(question) {
       if (!question.isClosed) {
         question.update({
-          responses: question.responses + 1;
+          responses: question.responses + 1
         })
         .then(function() {
           return db.User.findOne({

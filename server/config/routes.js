@@ -31,7 +31,7 @@ module.exports = function(app, express, ensureAuth) {
   app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   function(req, res) {
-    res.redirect('/townhall/questions');
+    res.redirect('/#/questions');
   });
 
   app.get('/user', function (req, res){
