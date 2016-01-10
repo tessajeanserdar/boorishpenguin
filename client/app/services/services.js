@@ -193,7 +193,7 @@ angular.module('boorish.services', [])
 .factory('Auth', function ($http, $location, $window) {
   
   return { 
-    getUser: function () {
+    setUser: function () {
     return $http({
       method: 'GET',
       url: '/user'
