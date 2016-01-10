@@ -141,6 +141,9 @@ var Post = db.define('Post', {
     type: Sequelize.DATE,
     defaultValue: Sequelize.fn('NOW')
   }
+}, {
+  timestamps: true,
+  updatedAt: false
 });
 
 Course.belongsToMany(User, {
@@ -162,9 +165,15 @@ Answer.belongsTo(User);
 Question.hasMany(Answer);
 Answer.belongsTo(Question);
 
+User.hasMany(Post);
+Post.belongsTo(User);
+Tag.hasMany(Post);
+Post.belongsTo(Tag);
+Course.hasMany(Post);
+Post.belongsTo(Course);
 Post.hasMany(Post, {as: 'Responses', foreignKey: 'QuestionId'});
 
-Post.belongsToMany(User, {through: 'Likes'});
+Post.belongsToMany(User, {as: 'Votes', through: 'Likes'});
 User.belongsToMany(Post, {through: 'Likes'});
 
 User.sync()
@@ -181,7 +190,7 @@ User.sync()
   return Answer.sync();
 })
 .then(function() {
-  return Post.sync({force: true});
+  return Post.sync();
 });
 
 exports.User = User;
