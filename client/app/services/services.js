@@ -30,14 +30,12 @@ angular.module('boorish.services', [])
       })
     },
 
-    getQuestion: function(path) { // TODO: Ask Steven about how to send this GET
-      
+    getQuestion: function($location) { // TODO: Ask Steven about how to send this GET
       return $http({
         method: 'GET',
-        url: '/townhall' + path
+        url: '/townhall/questions/:id'
       })
       .then(function(res) {
-        console.log('res.data', res.data)
         return res.data;
       })
     },
@@ -83,7 +81,7 @@ angular.module('boorish.services', [])
       .then(function(res) {
         return res.data;
       })
-    }, 
+    },
 
     addAnswer: function(answer, questionID) {
 
@@ -193,17 +191,17 @@ angular.module('boorish.services', [])
   })
 
 .factory('Auth', function ($http, $location, $window) {
-  
-  return { 
+
+  return {
     setUser: function () {
     return $http({
       method: 'GET',
       url: '/user'
     })
     .then(function (res) {
-      var email = res.data.email;
-      if (email) {
-        $window.localStorage.setItem('com.boorish', email);
+      var username = res.data;
+      if (username) {
+        $window.localStorage.setItem('com.boorish', res.data.displayName);
       }
     });
   },
@@ -220,4 +218,3 @@ angular.module('boorish.services', [])
 }
 
 });
-
