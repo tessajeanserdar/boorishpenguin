@@ -199,10 +199,9 @@ angular.module('boorish.services', [])
       url: '/user'
     })
     .then(function (res) {
-      var username = res.data;
-      console.log('res from setUser: ', res.data)
-      if (username) {
-        $window.localStorage.setItem('com.boorish', res.data.displayName);
+      var email = res.data.email;
+      if (email) {
+        $window.localStorage.setItem('com.boorish', email);
       }
     });
   },
