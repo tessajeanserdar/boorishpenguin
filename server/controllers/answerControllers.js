@@ -5,26 +5,38 @@ module.exports = {
     var txt = req.body.text;
     var uname = req.body.person;
     var qid = req.body.id_Question;
-    
-    db.User.findOne({
-      where: {
-        username: uname,
-      }
-    })
-    .then(function(user) {
-      db.Answer.create({
-        text: txt,
-        UserId: user.get('id'),
-        QuestionId: qid
-      })
-      .then(function() {
-        return user.update({
-          points: user.get('points') + 1
+
+    db.Question.findById(qid)
+    .then(function(question) {
+      if (!question.isClosed) {
+        question.update({
+          responses: question.responses + 1;
         })
-      })
-      .then(function(createdUser) {
-        res.status(201).json(createdUser);
-      });
+        .then(function() {
+          return db.User.findOne({
+            where: {
+              username: uname,
+            }
+          })
+        })
+        .then(function(user) {
+          db.Answer.create({
+            text: txt,
+            UserId: user.get('id'),
+            QuestionId: qid
+          })
+          .then(function(answer) {
+            user.update({
+              points: user.get('points') + 1
+            })
+            .then(function() {
+              res.status(201).json(answer);
+            });
+          });
+        });
+      } else {
+        res.sendStatus(404);
+      }
     });
   },
 
