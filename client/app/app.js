@@ -11,9 +11,15 @@ angular.module('boorishpenguin', [
 .config(function ($routeProvider) {
   $routeProvider
     .when('/', {
+<<<<<<< HEAD
       templateUrl: 'app/questions/questions.html',
       controller: 'questionsController'
     })
+=======
+        templateUrl: 'app/ask/ask.html',
+        controller: 'askController'
+      })
+>>>>>>> 00138eb7f99c0cc1c6f8a8060fc3e2b449a75c6f
     .when('/ask', {
       templateUrl: 'app/ask/ask.html',
       controller: 'askController'
