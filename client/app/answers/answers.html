@@ -3,12 +3,12 @@
     <input type='submit' ng-click='updateQuestion("like")' value='like'>
     <input type='submit' ng-click='updateQuestion("good")' value='Good'>
     <input type='submit' ng-click='updateQuestion("answered")' value='Answered'>
-    <div>{{ question.points }}</div>
-    <div>{{ question.text }}</div>
-    <div>{{ question.username }}</div>
-    <div>{{ question.tag }}</div>
-    <div>{{ question.isAnswered }}</div>
-    <div>{{ question.isGood }}</div>
+    <div>{{ data.question.points }}</div>
+    <div>{{ data.question.text }}</div>
+    <div>{{ data.question.username }}</div>
+    <div>{{ data.question.tag }}</div>
+    <div>{{ data.question.isAnswered }}</div>
+    <div>{{ data.question.isGood }}</div>
     <input type='submit' on-click='removeQuestion($index)' value='remove'>
   </div>
   <div ng-model='data.answers'>
