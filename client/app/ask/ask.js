@@ -1,6 +1,6 @@
 angular.module('boorish.ask', [])
 
-.controller('askController', function($scope, Questions) {
+.controller('askController', function($scope, Questions, $window) {
   $scope.question = {};
 
   $scope.getUser = function() {
