@@ -1,6 +1,6 @@
-var passport = require('passport');
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
 var apikeys = require('../config/apikeys.js');
+var controller = require('../controllers/userControllers.js');
 
 exports.ensureAuth = function (req, res, next){
   if (req.isAuthenticated()) { return next(); }
@@ -18,40 +18,22 @@ exports.signup = function (profileObj, callback){
   user.nickName = profileObj.profile._json.nickname;
   user.image = profileObj.profile._json.image.url;
   // save to database
+  // res.redirect('auth/party');
+  // username = email 
+  // email = email
+  // image = image
+  // name = fullName
   return callback(null, user);
 };
 
-exports.login = function (){
-  //  if !user in database
-  // redirect to signup
+exports.login = function (profileObj, callback){
   return callback(null, user);
 };
 
-exports.serializeUser = function (){
-  passport.serializeUser(function(user, done) {
-    done(null, user);
-  });
+// exports.serializeUser = function (){
 
-  passport.deserializeUser(function(obj, done) {
-    done(null, obj);
-  });
-};
+// };
 
-exports.oauth = function (){
-  passport.use(new GoogleStrategy({
-    clientID: apikeys.googleOauth.clientID,
-    clientSecret: apikeys.googleOauth.clientSecret,
-    callbackURL: "http://127.0.0.1:8001/auth/google/callback",
-  },
-    function(accessToken, refreshToken, profile, done) {
-      // if signup
-      exports.signup({profile: profile}, function (err, profile){
-        return done(err, profile);
-      });
-      // if login 
-      // exports.signup({profile: profile}, function (err, profile){
-        // return done(err, profile)
-      // });
-    }
-  ));
-};
+// exports.oauth = function (){
+
+// };
