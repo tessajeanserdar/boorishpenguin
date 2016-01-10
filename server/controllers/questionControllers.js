@@ -138,7 +138,7 @@ module.exports = {
             answersQuestion: answer.answersQuestion,
             isGood: answer.isGood,
             QuestionId: qid,
-            user: question.User.name,
+            user: answer.User.name,
             createdAt: answer.createdAt
           }
         });

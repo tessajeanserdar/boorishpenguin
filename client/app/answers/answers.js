@@ -4,10 +4,14 @@ angular.module('boorish.answers', [])
   $scope.data = {};
   $scope.newAnswer = {};
 
+  console.log('location from controller: ', $location)
+
   $scope.getQuestion = function() {
-    Questions.getQuestion().then(function(data) {
+    var path = $location.path();
+    Questions.getQuestion(path).then(function(data) {
       // question is always going to be the first item
       $scope.data.question = data.results[0];
+      console.log('Question: ', $scope.data.question)
       $scope.data.answers = data.results.slice(1);
     });
   };
