@@ -112,6 +112,11 @@ var Post = db.define('Post', {
     allowNull: false,
     defaultValue: false
   },
+  points: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0
+  },
   responses: {
     type: Sequelize.INTEGER,
     allowNull: false,
