@@ -2,7 +2,6 @@
   <div ng-model='data.question'>
     <input type='submit' ng-click='updateQuestion("like")' value='like'>
     <input type='submit' ng-click='updateQuestion("good")' value='Good'>
-    <input type='submit' ng-click='updateQuestion("closed")' value='Closed'>
     <input type='submit' ng-click='updateQuestion("answered")' value='Answered'>
     <div>{{ question.points }}</div>
     <div>{{ question.text }}</div>
@@ -16,7 +15,6 @@
     <div ng-repeat='answer in data.answers'>
       <input type='submit' ng-click='updateAnswer($index, "like")' value='like'>
       <input type='submit' ng-click='updateAnswer($index, "good")' value='like'>
-      <input type='submit' ng-click='updateAnswer($index, "closed")' value='Closed'>
       <input type='submit' ng-click='updateAnswer($index, "answered")' value='Answered'>
       <div>{{ answer.points }}</div>
       <div>{{ answer.text }}</div>
