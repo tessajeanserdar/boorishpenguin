@@ -5,7 +5,7 @@ angular.module('boorish.services', [])
     // add a question from /ask
     addQuestion: function(question) {
   
-      $http({
+      return $http({
         method: 'POST',
         url: '/townhall/questions',
         data: JSON.stringify({
@@ -103,7 +103,7 @@ angular.module('boorish.services', [])
     },
 
     updateAnswer: function(answerID, mod) {
-      $http({
+      return $http({
         method: 'POST',
         url: 'townhall/answers/' + answerID,
         data: JSON.stringify({
@@ -119,7 +119,7 @@ angular.module('boorish.services', [])
     removeAnswer: function(answerID) {
       // code to delete answer from the data base by answerer or isAdmin
       // DELETE to /answers
-      $http({
+      return $http({
         method: 'DELETE',
         url: 'townhall/answers',
         data: JSON.stringify({

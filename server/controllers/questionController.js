@@ -37,11 +37,11 @@ module.exports = {
     var txt = req.body.text;
     var coursename = req.body.course;
     var tagname = req.body.tag;
-    var reqName = req.user.profile.emails[0].value;
+    var uid = req.body.userId;
 
     db.User.findOne({
       where: {
-        username: reqName
+        id: uid
       }
     })
     .then(function(user) {
