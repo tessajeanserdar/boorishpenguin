@@ -1,6 +1,6 @@
 angular.module('boorish.answers', [])
 
-.controller('answersController', function($scope, $location, Answers, Questions) {
+.controller('answersController', function($scope, $location, Answers, Questions, Users) {
   $scope.data = {};
   $scope.newAnswer = {};
 
