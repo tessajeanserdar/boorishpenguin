@@ -39,6 +39,7 @@ module.exports = function(app, express, ensureAuth) {
   });
 
   app.get('/user', ensureAuth, function (req, res){
+    // sends google user data to client so they can know whose currenty logged in
     res.json(req.user);
   });
 
