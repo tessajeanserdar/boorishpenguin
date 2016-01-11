@@ -213,7 +213,7 @@ angular.module('boorish.services', [])
         url: '/user'
       })
       .then(function (res) {
-        console.log('res.user: ', res.data)
+        console.log('GoogUser: ', res.data)
         user.google = res.data.email || res.data.profile.emails[0].value;
         console.log(user)
 
