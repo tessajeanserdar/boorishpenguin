@@ -1,28 +1,15 @@
 <div ng-module='boorish.answers'>
-  <div ng-model='data.question' class="question-page-item">
+  <div ng-model='data.question' class="answer">
     <div class="answer-content">
-      <div class="question-header">
-        <h1 class="">
+      <div>
+        <h1>
           {{ data.question.title }}
           <span class="glyphicon glyphicon-ok-sign" ng-if="data.question.isGood == false"></span>
         </h1>
-
-        <div class="dropdown" style="margin-left: auto">
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Mark
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-            <li><a href="" type='submit' ng-click='updateQuestion("good")'>Approved</a></li>
-            <li><a href="" type='submit' ng-click='updateQuestion("answered")'>Answered</a></li>
-          </ul>
-        </div>
-        <input class="btn btn-default" type='submit' ng-click='removeQuestion(data.question.id)' value='Remove'>
-
       </div>
-      <hr>
       <div>{{ data.question.text }}</div>
       <div>{{ data.question.user }}</div>
+      <div>{{ data.question.tag }}</div>
 
        <!-- number of points current on question -->
           <a href="" ng-click='updateQuestion("like")'>
@@ -32,19 +19,14 @@
           </a>
 
           <!-- number of answers current on question -->
-          <!--<div>-->
-            <!--<span class="glyphicon glyphicon-comment"></span>-->
-            <!--<span>{{ question.responses }}</span>-->
-            <!--<span>Answers</span>-->
-          <!--</div>-->
-
-
-          <div class="course">{{ data.question.coursename }}</div>
-          <div class="tag">{{ data.question.tagname }}</div>
-
-      <!--<input class="btn btn-default" type='submit' ng-click='updateQuestion("good")' value='Approve'>-->
-      <!--<input class="btn btn-default" type='submit' ng-click='updateQuestion("answered")' value='Answered'>-->
-      <hr>
+          <div>
+            <span class="glyphicon glyphicon-comment"></span>
+            <span>{{ question.responses }}</span>
+            <span>Answers</span>
+          </div>
+      <input class="btn btn-default" type='submit' ng-click='removeQuestion(data.question.id)' value='Remove'>
+      <input class="btn btn-default" type='submit' ng-click='updateQuestion("good")' value='Approve'>
+      <input class="btn btn-default" type='submit' ng-click='updateQuestion("answered")' value='Answered'>
     </div>
   </div>
 
