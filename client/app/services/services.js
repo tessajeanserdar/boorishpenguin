@@ -57,10 +57,7 @@ angular.module('boorish.services', [])
       // code to remove a question by the user who posted it or isAdmin
       return $http({
         method: 'DELETE',
-        url: 'townhall/questions/',
-        data: JSON.stringify({
-          id_question: questionID
-        })
+        url: 'townhall/questions/' + questionID
       })
       .then(function() {
         console.log('question deleted');
@@ -117,10 +114,7 @@ angular.module('boorish.services', [])
       // DELETE to /answers
       return $http({
         method: 'DELETE',
-        url: 'townhall/answers',
-        data: JSON.stringify({
-          id_answer: answerID
-        })
+        url: 'townhall/answers/' + answerID
       })
       .then(function() {
         console.log('answer deleted');
