@@ -145,7 +145,7 @@ angular.module('boorish.services', [])
       });
     };
 
-    var getUserNameWithId = function(callback) {
+    var getUserWithId = function(callback) {
       var userID = $window.localStorage.getItem('com.boorish');
       return $http({
         method: 'GET',
@@ -153,7 +153,7 @@ angular.module('boorish.services', [])
       }).then(function(res) {
         callback(res.data.results);
       })
-    }
+    };
 
     //TODO: get specific students/admins
     //var getStudents = function(){
@@ -195,6 +195,7 @@ angular.module('boorish.services', [])
 
     return {
       allUsers: allUsers,
+      getUserWithId: getUserWithId,
       //getStudents: getStudents,
       //getAdmins: getAdmins,
       addOne: addUser

@@ -15,7 +15,7 @@ module.exports = {
           isGood: question.isGood,
           isClosed: question.isClosed,
           createdAt: question.createdAt,
-          coursename: question.Course.name,
+          // coursename: question.Course.name,
           tagname: question.Tag.name,
           user: question.User.name
         }
@@ -117,7 +117,7 @@ module.exports = {
           isGood: question.isGood,
           isClosed: question.isClosed,
           createdAt: question.createdAt,
-          coursename: question.Course.name,
+          // coursename: question.Course.name,
           tagname: question.Tag.name,
           user: question.User.name
         }
