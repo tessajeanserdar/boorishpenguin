@@ -1,6 +1,6 @@
 angular.module('boorish.answers', [])
 
-.controller('answersController', function($scope, $location, $window, Answers, Questions, Users) {
+.controller('answersController', function($scope, $location, $window, Answers, Questions, Users, Auth) {
   $scope.data = {};
   $scope.newAnswer = {};
 
@@ -60,7 +60,7 @@ angular.module('boorish.answers', [])
     Questions.updateQuestion(questionID, mod).then(function() {
       $scope.getQuestion();
     });
-  }
+  };
 
   $scope.removeQuestion = function() {
     var id_question = $scope.data.question.id;  // pulls the id of the question
@@ -72,7 +72,11 @@ angular.module('boorish.answers', [])
   $scope.removeAnswer = function(index) {
     var answerID = $scope.data.answers[index].id; // pulls the answer id of the selected answer
     Answers.removeAnswer(answerID); // removes answer
-  }
+  };
 
-  $scope.getQuestion();
+  if (!Auth.isAuth()) {
+    $location.path('/signin');
+  } else {
+    $scope.getQuestion();
+  }
 })
