@@ -2,7 +2,11 @@
   <h1>Questions</h1>
 
       <div ng-repeat='question in questions' class="question-list-item">
-        <div class="col-xs-2">
+        <div class="col-sm-2 col-xs-3">
+         img url:  <a>{{ question.imgUrl }}</a>
+          <div>
+            <img src="https://pixabay.com/static/uploads/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" width="64" height="64">
+          </div>
           <!-- number of points current on question -->
           <div>
             <span class="glyphicon glyphicon-heart"></span>
@@ -18,7 +22,7 @@
           </div>
           <!-- link to question id. Title is currently the first 60 characters in the text -->
         </div>
-        <div class="col-xs-10">
+        <div class="col-sm-10 col-xs-9">
           <h3>
             <a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a>
             <span class="glyphicon glyphicon-ok-sign" ng-if="question.isGood == true"></span>
