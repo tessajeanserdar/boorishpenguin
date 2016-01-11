@@ -66,3 +66,20 @@ body {
   /*width: 70%;*/
   flex-grow: 1;
 }
+
+.answer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}
+
+.answer-votes {
+  width: 100px;
+
+}
+
+.answer-content {
+  flex-grow: 1;
+}

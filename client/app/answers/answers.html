@@ -1,15 +1,27 @@
 <div ng-module='boorish.answers'>
-  <div ng-model='data.question'>
-    <input type='submit' ng-click='updateQuestion("like")' value='like'>
-    <input type='submit' ng-click='updateQuestion("good")' value='Good'>
-    <input type='submit' ng-click='updateQuestion("answered")' value='Answered'>
-    <div>{{ data.question.points }}</div>
-    <div>{{ data.question.text }}</div>
-    <div>{{ data.question.user }}</div>
-    <div>{{ data.question.tag }}</div>
-    <div>{{ data.question.isAnswered }}</div>
-    <div>{{ data.question.isGood }}</div>
-    <input type='submit' ng-click='removeQuestion(data.question.id)' value='remove'>
+  <div ng-model='data.question' class="answer">
+    <div class="answer-votes">
+      <a href="" ng-click='updateQuestion("like")'>
+        <span class="glyphicon glyphicon-heart"></span>
+        <span>{{ data.question.points }}</span>
+      </a>
+      <!--<input type='submit' ng-click='updateQuestion("like")' value='like'>-->
+      <a href="" ng-click='updateQuestion("good")'>
+        <span class="glyphicon glyphicon-ok-sign"></span>
+        <span>{{ data.question.isGood }}</span>
+      </a>
+      <!--<input type='submit' ng-click='updateQuestion("good")' value='Good'>-->
+      <!--<div>{{ data.question.isGood }}</div>-->
+
+      <!--<input type='submit' ng-click='updateQuestion("answered")' value='Answered'>-->
+      <!--<div>{{ data.question.isAnswered }}</div>-->
+    </div>
+    <div class="answer-content">
+      <div><h1>{{ data.question.text }}</h1></div>
+      <div>{{ data.question.user }}</div>
+      <div>{{ data.question.tag }}</div>
+      <input type='submit' ng-click='removeQuestion(data.question.id)' value='remove'>
+    </div>
   </div>
   <div ng-model='data.answers'>
     <div ng-repeat='answer in data.answers'>
