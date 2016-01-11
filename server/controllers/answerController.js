@@ -3,7 +3,6 @@ var UCtrl = require('./userControllers.js');
 
 module.exports = {
   newAnswer: function(req, res) {
-    console.log('this is what the server receives: ',req.body)
     var txt = req.body.text;
     var uid = req.body.id_user;
     var qid = req.body.id_question;
@@ -18,7 +17,6 @@ module.exports = {
           return db.User.findById(uid);
         })
         .then(function(user) {
-          console.log('userID: ', uid);
           db.Post.create({
             text: txt,
             isAnAnswer: true,
@@ -53,23 +51,29 @@ module.exports = {
 
       db.User.findById(uid)
       .then(function(user) {
-        if (mod === 'good' && UCtrl.isUserTeacher(reqName)) {
-          answer.update({
-            isGood: !answer.isGood
-          })
-          .then(function(answer) {
-            if (answer.isGood) {
-              return user.update({
-                points: user.points + 1
+        if (mod === 'good') {
+          UCtrl.isUserTeacher(reqName, function(is) {
+            if (is) {
+              answer.update({
+                isGood: !answer.isGood
               })
+              .then(function(answer) {
+                if (answer.isGood) {
+                  return user.update({
+                    points: user.points + 1
+                  })
+                } else {
+                  return user.update({
+                    points: user.points - 1
+                  })
+                }
+              })
+              .then(function() {
+                res.status(201).json(answer);
+              });
             } else {
-              return user.update({
-                points: user.points - 1
-              })
+              res.sendStatus(404);
             }
-          })
-          .then(function() {
-            res.status(201).json(answer);
           });
         } else if (mod === 'like') {
           answer.getVote({where: ['UserId='+user.id+' AND PostId='+answer.id]})
@@ -111,7 +115,7 @@ module.exports = {
   },
 
   deleteAnswer: function(req, res) {
-    var aid = req.body.id_answer;
+    var aid = req.params.id;
     var reqName = req.user.profile.emails[0].value;
 
     db.Post.findById(aid)
@@ -122,29 +126,32 @@ module.exports = {
       .then(function(user) {
         var authorname = user.username;
 
-        if (reqName === authorname || UCtrl.isUserTeacher(reqName)) {
-          var qid = answer.QuestionId;
+        UCtrl.isUserTeacher(reqName, function(is) {
+          if (is || reqName === authorname) {
+            var qid = answer.QuestionId;
 
-          db.Post.findById(qid)
-          .then(function(question) {
-            return question.update({
-              responses: question.responses - 1
+            db.Post.findById(qid)
+            .then(function(question) {
+              return question.update({
+                responses: question.responses - 1
+              })
             })
-          })
-          .then(function() {
-            return user.update({
-              points: user.points - 1
-            });
-          })
-          .then(function() {
-            return answer.destroy()
             .then(function() {
-              res.sendStatus(204);
+              return user.update({
+                points: user.points - 1
+              });
+            })
+            .then(function() {
+              return answer.destroy()
+              .then(function() {
+                res.sendStatus(204);
+              });
             });
-          });
-        } else {
-          res.sendStatus(404);
-        }
+            
+          } else {
+            res.sendStatus(404);
+          }
+        });
       });
     });
   }

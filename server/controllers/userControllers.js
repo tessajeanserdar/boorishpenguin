@@ -63,18 +63,18 @@ module.exports = {
     .then(function(number) {
       callback(!!number);
       return;
-      // return !!number;
     });
   },
 
-  isUserTeacher: function(uname) {
+  isUserTeacher: function(uname, callback) {
     db.User.find({
       where: {
         username: uname
       }
     })
     .then(function(user) {
-      return user.isTeacher;
+      callback(user.isTeacher);
+      return;
     })
   }
 };
