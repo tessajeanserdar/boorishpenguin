@@ -136,10 +136,10 @@ module.exports = {
           .then(function() {
             return user.update({
               points: user.points - 1
-            }); 
+            });
           })
           .then(function() {
-            return answer.destroy()  
+            return answer.destroy()
             .then(function() {
               res.sendStatus(204);
             });
