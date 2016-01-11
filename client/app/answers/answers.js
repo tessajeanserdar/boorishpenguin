@@ -6,22 +6,22 @@ angular.module('boorish.answers', [])
 
   $scope.getQuestion = function() {
     var path = $location.path(); // e.g., '/questions/19'
-    Questions.getQuestion(path).then(function(req, res) {
-      console.log(res);
+    Questions.getQuestion(path).then(function(res) {
+      console.log('Data: ', res);
       // question is always going to be the first item
       $scope.data.question = res.data.results[0];
-      console.log('Question: ', $scope.data.question)
-      $scope.data.answers = data.results.slice(1);
+      $scope.data.answers = res.data.results.slice(1);
     });
   };
 
   $scope.addAnswer = function() {
     var id_question = $scope.data.question.id;
-    Users.getUserWithId(function(user) {
-      $scope.newAnswer.user = user.id;
+    Users.getUserWithId().then(function(userID) {
+      console.log('user id: ', userID);
+      $scope.newAnswer.user = userID;
       Answers.addAnswer($scope.newAnswer, id_question).then(function() {
         $scope.getQuestion();
-      })
+      });
     });
   };
 

@@ -28,6 +28,7 @@ angular.module('boorish.services', [])
         url: '/townhall/questions/'
       })
       .then(function(res) {
+        console.log('res.data: ', res.data);
         return res.data;
       })
     },
@@ -37,9 +38,8 @@ angular.module('boorish.services', [])
         method: 'GET',
         url: '/townhall' + path
       })
-      .then(function(req, res) {
-        console.log('res from getQuestion', req);
-        // return res.data;
+      .then(function(res) {
+        return res;
       })
     },
 
@@ -88,7 +88,7 @@ angular.module('boorish.services', [])
 
     addAnswer: function(answer, questionID) {
 
-      $http({
+      return $http({
         method: 'POST',
         url: 'townhall/answers',
         data: JSON.stringify({
@@ -98,8 +98,7 @@ angular.module('boorish.services', [])
         })
       })
       .then(function(req, res, next) {
-        console.log('question sent');
-        next();
+        console.log('answer sent');
       })
     },
 
@@ -146,13 +145,13 @@ angular.module('boorish.services', [])
       });
     };
 
-    var getUserWithId = function(callback) {
+    var getUserWithId = function() {
       var userID = $window.localStorage.getItem('com.boorish');
       return $http({
         method: 'GET',
         url: '/townhall/users/' + userID
       }).then(function(res) {
-        callback(res.data.results);
+        return res.data.results.id;
       })
     };
 
