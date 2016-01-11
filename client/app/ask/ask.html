@@ -1,11 +1,33 @@
 <div ng-module='boorish.ask'>
   <form>
     <h3>My question:</h3>
-    <textarea type='question' rows='5' cols='80' ng-model='question.text' placeholder='What is your question?'></textarea>
+
+
+    <textarea class="form-control"  type='question' rows='5' cols='80' ng-model='question.text' placeholder='What is your question?'></textarea>
     <br />
-    <select name="courseSelect" ng-model="courseOptions.selectedOption" ng-options="option.name for option in courseOptions.availableOptions track by option.id"></select>
-    <select name="tagSelect" ng-model="tagOptions.selectedOption" ng-options="option.name for option in tagOptions.availableOptions track by option.id"></select>
-    <input type='reset' value='Cancel'>
-    <input type='submit' ng-click='addQuestion()' value='Ask question'>
+     <div class="form-group col-xs-6">
+      <label class="dropdown-label col-xs-4">Course</label>
+      <select class="col-xs-8 form-control" name="courseSelect" ng-model="courseOptions.selectedOption" ng-options="option.name for option in courseOptions.availableOptions track by option.id"></select>
+    </div>
+    <div class="col-xs-6 form-group">
+      <label class="dropdown-label col-xs-4">Topic</label>
+      <select class="col-xs-8 form-control" name="tagSelect" ng-model="tagOptions.selectedOption" ng-options="option.name for option in tagOptions.availableOptions track by option.id"></select>
+    </div>
+
+    <div class="col-xs-12 form-group">
+    <input class="btn btn-default" type='reset' value='Cancel'>
+    <input class="btn btn-primary" type='submit' ng-click='addQuestion()' value='Ask question'>
+    </div>
   </form>
 </div>
+
+
+<!--<div class="dropdown">-->
+  <!--<a href="" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true">-->
+    <!--{{courseOptions.selectedOption.name}}-->
+    <!--<span class="caret"></span>-->
+  <!--</a>-->
+   <!--<ul class="dropdown-menu">-->
+     <!--<li ng-repeat="option in courseOptions.availableOptions"><a href="" ng-click="">{{option.name}}</a></li>-->
+   <!--</ul>-->
+<!--</div>-->
