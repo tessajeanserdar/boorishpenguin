@@ -26,16 +26,19 @@ module.exports = function(app, express, ensureAuth) {
 
   app.get('/townhall/tags', ensureAuth, tagControllers.allTags);
 
+  // Client does get request to /auth/google on signin
   app.get('/auth/google',
   passport.authenticate('google', { scope:  ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.me', "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"] }));
-  
+
+  // Server.js:38 sends get req to /auth/google/callback after user has successfully logged into google
   app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   function(req, res) {
+    // sends user to questions page after they successfully login
     res.redirect('/#/questions');
   });
 
-  app.get('/user', function (req, res){
+  app.get('/user', ensureAuth, function (req, res){
     res.json(req.user);
   });
 
