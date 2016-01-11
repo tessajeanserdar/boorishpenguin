@@ -50,14 +50,3 @@ passport.use(new GoogleStrategy({
       }
       })
 }));
-
-    //   exports.login({profile: profile}, function (err, profile){
-    //     return done(err, profile);
-    //   });
-    // } else {
-      // exports.signup({profile: profile}, function (err, profile){
-      //   return done(err, profile);
-      // });
-
-    // if user in database
-    // else

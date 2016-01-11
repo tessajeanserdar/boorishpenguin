@@ -5,11 +5,11 @@
     <input type='submit' ng-click='updateQuestion("answered")' value='Answered'>
     <div>{{ data.question.points }}</div>
     <div>{{ data.question.text }}</div>
-    <div>Asked by {{ data.question.user }}</div>
+    <div>{{ data.question.username }}</div>
     <div>{{ data.question.tag }}</div>
     <div>{{ data.question.isAnswered }}</div>
     <div>{{ data.question.isGood }}</div>
-    <input type='submit' on-click='removeQuestion($index)' value='remove'>
+    <input type='submit' ng-click='removeQuestion(data.question.id)' value='remove'>
   </div>
   <div ng-model='data.answers'>
     <div ng-repeat='answer in data.answers'>
@@ -18,7 +18,7 @@
       <input type='submit' ng-click='updateAnswer($index, "answered")' value='Answered'>
       <div>{{ answer.points }}</div>
       <div>{{ answer.text }}</div>
-      <div>Answered by {{ answer.user }}</div>
+      <div>{{ answer.username }}</div>
       <div>{{ answer.tag }}</div>
       <div>{{ answer.isGood }}</div>
       <input type='submit' on-click='removeAnswer($index)' value='remove'>

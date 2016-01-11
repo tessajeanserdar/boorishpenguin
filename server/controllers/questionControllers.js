@@ -72,8 +72,7 @@ module.exports = {
 
   // TODO: add check for admin or same-user
   deleteQuestion: function(req, res) {
-    var qid = req.body.id_question;
-
+    var qid = req.params.id;
     db.Question.findOne({
       where: {
         id: qid
@@ -82,7 +81,7 @@ module.exports = {
     .then(function(question) {
       db.User.findOne({
         where: {
-          id: question.get('UserId')
+          id: question.get(req.user.profile.emails[0].value)
         }
       })
       .then(function(){
@@ -93,9 +92,10 @@ module.exports = {
             res.sendStatus(204);
           };
         });
+        // res.end();
         // END CHAIN
       })
-    }) 
+    })
   },
 
   readQuestion: function(req, res) {
@@ -132,7 +132,7 @@ module.exports = {
       .then(function(answers) {
         var formattedAs = answers.map(function(answer) {
           return {
-            id: answer.id,  
+            id: answer.id,
             text: answer.text,
             points: answer.points,
             answersQuestion: answer.answersQuestion,
