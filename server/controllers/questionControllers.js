@@ -132,7 +132,7 @@ module.exports = {
       .then(function(answers) {
         var formattedAs = answers.map(function(answer) {
           return {
-            id: answer.id,
+            id: answer.id,  
             text: answer.text,
             points: answer.points,
             answersQuestion: answer.answersQuestion,
@@ -145,6 +145,7 @@ module.exports = {
 
         qAndAs = {};
         qAndAs.results = formattedQs.concat(formattedAs);
+        console.log(qAndAs);
         res.json(qAndAs);
       })
     })
