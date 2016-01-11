@@ -4,11 +4,13 @@ angular.module('boorish.questions', [])
   $scope.questions = [];
 
   $scope.init = function() {
+    
     var user = Auth.isAuth();
-    Auth.setUser();
 
     if (!user) {
-      $location.path('/signin')
+      Auth.setUser();
+      console.log('There is no token. redirecting to sign-in');
+      $location.path('/signin');
     } else {
 
       Questions.getAllQuestions().then(function(data) {

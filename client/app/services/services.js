@@ -30,10 +30,10 @@ angular.module('boorish.services', [])
       })
     },
 
-    getQuestion: function($location) { // TODO: Ask Steven about how to send this GET
+    getQuestion: function(path) { // TODO: Ask Steven about how to send this GET
       return $http({
         method: 'GET',
-        url: '/townhall/questions/:id'
+        url: '/townhall' + path
       })
       .then(function(res) {
         return res.data;
@@ -199,9 +199,10 @@ angular.module('boorish.services', [])
       url: '/user'
     })
     .then(function (res) {
-      var username = res.data;
-      if (username) {
-        $window.localStorage.setItem('com.boorish', res.data.displayName);
+      console.log(res.data)
+      var email = res.data.email || res.data.profile.emails[0].value;
+      if (email) {
+        $window.localStorage.setItem('com.boorish', email);
       }
     });
   },

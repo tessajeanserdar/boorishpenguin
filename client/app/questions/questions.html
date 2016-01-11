@@ -6,6 +6,6 @@
     <!-- number of answers current on question -->
     <div>{{ question.responses }}</div>
     <!-- link to question id. Title is currently the first 60 characters in the text -->
-    <a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a>
+    <a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a> - asked by {{ question.user }}
   </div>
 </div>
