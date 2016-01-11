@@ -77,7 +77,7 @@ module.exports = {
 
   // TODO: add check for admin or same-user
   deleteQuestion: function(req, res) {
-    var qid = req.body.id_question;
+    var qid = req.params.id;
     var reqName = req.user.profile.emails[0].value;
 
     db.Post.findById(qid)
@@ -88,23 +88,25 @@ module.exports = {
       .then(function(user){
         var authorname = user.username;
 
-        if (reqName === authorname || UCtrl.isUserTeacher(reqName)) {
-          user.update({
-            points: user.points - 1
-          })
-          .then(function() {
-            question.destroy()
-            .then(function(id) {
-              if (id) {
-                res.sendStatus(204);
-              };
-            });
-          });
-        } else {
-          res.sendStatus(404);
-        }
-      })
-    }) 
+        UCtrl.isUserTeacher(reqName, function(is) {
+          if (is || reqName === authorname) {
+            user.update({
+              points: user.points - 1
+            })
+            .then(function() {
+              question.destroy()
+              .then(function(id) {
+                if (id) {
+                  res.sendStatus(204);
+                };
+              });
+            }); 
+          } else{
+            res.sendStatus(404);
+          }
+        });
+      });
+    });
   },
 
   readQuestion: function(req, res) {
@@ -223,34 +225,38 @@ module.exports = {
           .then(function() {
             res.status(201).json(question);
           });
-        } else if (UCtrl.isUserTeacher(reqName)) {
-          if (mod === 'good') {
-            // admin only
-            question.update({
-              isGood: !curGood
-            })
-            .then(function() {
-              return user.update({
-                points: user.points + 1
-              })
-            })
-            .then(function() {
-              res.status(201).json(question);
-            });
-          } else if (mod === 'closed') {
-            // admin only; maybe refactor this and the previous
-            // to run the admin check first?
-            question.update({
-              isClosed: !curClosed
-            })
-            .then(function() {
-              res.status(201).json(question);
-            });
-          } else {
-            res.sendStatus(404);
-          }
         } else {
-          res.sendStatus(404);
+          UCtrl.isUserTeacher(reqName, function(is) {
+            if (is) {
+              if (mod === 'good') {
+                // admin only
+                question.update({
+                  isGood: !curGood
+                })
+                .then(function() {
+                  return user.update({
+                    points: user.points + 1
+                  })
+                })
+                .then(function() {
+                  res.status(201).json(question);
+                });
+              } else if (mod === 'closed') {
+                // admin only; maybe refactor this and the previous
+                // to run the admin check first?
+                question.update({
+                  isClosed: !curClosed
+                })
+                .then(function() {
+                  res.status(201).json(question);
+                });
+              } else {
+                res.sendStatus(404);
+              }
+            } else {
+              res.sendStatus(404);
+            }
+          });
         }
       });
     });
