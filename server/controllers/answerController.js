@@ -147,7 +147,6 @@ module.exports = {
                 res.sendStatus(204);
               });
             });
-            
           } else {
             res.sendStatus(404);
           }
