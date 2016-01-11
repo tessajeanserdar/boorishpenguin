@@ -17,7 +17,7 @@ angular.module('boorish.answers', [])
 
   $scope.addAnswer = function() {
     var id_question = $scope.data.question.id;
-    Users.getUserNameWithId(function(user) {
+    Users.getUserWithId(function(user) {
       $scope.newAnswer.user = user.id;
       Answers.addAnswer($scope.newAnswer, id_question).then(function() {
         $scope.getQuestion();
