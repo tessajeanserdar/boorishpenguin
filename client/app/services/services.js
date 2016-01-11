@@ -143,6 +143,7 @@ angular.module('boorish.services', [])
       });
     };
 
+
     var getUserWithId = function() {
       var userID = $window.localStorage.getItem('com.boorish');
       return $http({
