@@ -218,16 +218,17 @@ module.exports = {
           .then(function() {
             res.status(201).json(question);
           });
-        } else if (mod === 'answered' && reqName === authorname) {
-          question.update({
-            isAnswered: !curAnswered
-          })
-          .then(function() {
-            res.status(201).json(question);
-          });
         } else {
           UCtrl.isUserTeacher(reqName, function(is) {
-            if (is) {
+            if (mod === 'answered' && (reqName === authorname || is)) {
+              question.update({
+                isAnswered: !curAnswered
+              })
+              .then(function() {
+                res.status(201).json(question);
+              });
+            }
+            else if (is) {
               if (mod === 'good') {
                 // admin only
                 question.update({
