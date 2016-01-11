@@ -22,7 +22,7 @@ require('./config/routes.js')(app, express, googleAuth.ensureAuth);
 app.listen(port);
 module.exports = app;
 
-/* If you decide to move this to another file make sure you use the same instance of passport
+/* If you decide to move passport functionality to another file make sure you use the same instance of passport
 rather than requiring passport in multiple files */
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -32,6 +32,7 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
+// When user logged in does a get req to auth/google/callback
 passport.use(new GoogleStrategy({
   clientID: apikeys.googleOauth.clientID,
   clientSecret: apikeys.googleOauth.clientSecret,
@@ -39,6 +40,7 @@ passport.use(new GoogleStrategy({
 },
   function(accessToken, refreshToken, profile, done) {
     controllers.isUserInDb(profile.emails[0].value, function (inDb){
+      // if the username/email is in the database run login
       if(inDb){
         googleAuth.login({profile: profile}, function (err, profile){
           return done(err, profile);
