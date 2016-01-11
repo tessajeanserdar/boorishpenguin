@@ -15,13 +15,10 @@ angular.module('boorish.services', [])
           tag: question.tag  // these are not setup yet
         })
       })
-      .then(function(req, res) {
-        console.log('question sent');
-      })
     },
 
     getAllQuestions: function() {
-      console.log('requesting all questions')
+    
       return $http({
         method: 'GET',
         url: '/townhall/questions/'
@@ -48,22 +45,13 @@ angular.module('boorish.services', [])
         url: 'townhall/questions/' + id,
         data: { mod: mod }
       })
-      .then(function() {
-        console.log('updated answer');
-      })
     },
 
     removeQuestion: function(questionID) {
       // code to remove a question by the user who posted it or isAdmin
       return $http({
         method: 'DELETE',
-        url: 'townhall/questions/',
-        data: JSON.stringify({
-          id_question: questionID
-        })
-      })
-      .then(function() {
-        console.log('question deleted');
+        url: 'townhall/questions/' + questionID
       })
     }
   }
@@ -72,6 +60,7 @@ angular.module('boorish.services', [])
 .factory('Answers', function($http) {
 
   return {
+
     getAnswers: function() {
       return $http({
         method: 'GET',
@@ -93,9 +82,6 @@ angular.module('boorish.services', [])
           id_user: answer.user
         })
       })
-      .then(function(req, res, next) {
-        console.log('answer sent');
-      })
     },
 
     updateAnswer: function(answerID, mod) {
@@ -107,25 +93,15 @@ angular.module('boorish.services', [])
           mod: mod
         })
       })
-      .then(function() {
-        console.log('updated answer');
-      });
     },
 
     removeAnswer: function(answerID) {
-      // code to delete answer from the data base by answerer or isAdmin
-      // DELETE to /answers
       return $http({
         method: 'DELETE',
-        url: 'townhall/answers',
-        data: JSON.stringify({
-          id_answer: answerID
-        })
-      })
-      .then(function() {
-        console.log('answer deleted');
+        url: 'townhall/answers/' + answerID
       })
     }
+    
   }
 })
 
@@ -136,7 +112,6 @@ angular.module('boorish.services', [])
         url: '/townhall/users'
       })
       .then(function(res){
-        console.log('retrieved all users');
         return res.data;
       });
     };
@@ -152,15 +127,6 @@ angular.module('boorish.services', [])
       })
     };
 
-    //TODO: get specific students/admins
-    //var getStudents = function(){
-    //
-    //};
-    //
-    //var getAdmins = function(){
-    //
-    //};
-
     var addUser = function(user){
       return $http({
         method: 'POST',
@@ -175,27 +141,12 @@ angular.module('boorish.services', [])
           picture: user.picture
         })
       })
-      .then(function() {
-        console.log('user added');
-      });
     };
-
-    //TODO: add multiple users
-    //var addMany = function(users){
-    //  return $http({
-    //    method: 'POST',
-    //    url: '/townhall/users',
-    //    data: users
-    //  });
-    //};
 
     return {
       allUsers: allUsers,
       getUserWithId: getUserWithId,
-      //getStudents: getStudents,
-      //getAdmins: getAdmins,
       addOne: addUser
-      //addMany: addMany
     }
 
   })
@@ -247,7 +198,6 @@ angular.module('boorish.services', [])
         })
         .then(function(res) {
           var users = res.data.results;
-          console.log(users);
           var isUser = false;
           for (var i = 0; i < users.length; i++) {
             if (users[i].email === user.google) {
@@ -255,7 +205,6 @@ angular.module('boorish.services', [])
               user.id = users[i].id;
             }
           }
-          console.log(user);
           if (isUser) {
             $window.localStorage.setItem('com.boorish', user.id);
           } else {
@@ -266,7 +215,6 @@ angular.module('boorish.services', [])
   },
 
   isAuth: function () {
-    console.log('in Local Storage? ', !!$window.localStorage.getItem('com.boorish'))
     return !!$window.localStorage.getItem('com.boorish');
   },
 

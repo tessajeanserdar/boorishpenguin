@@ -9,7 +9,6 @@ angular.module('boorish.ask', [])
       availableOptions: data.results,
       selectedOption: data.results[data.results.length - 1]
     }
-    console.log($scope.tagOptions);
     return;
   })
   .then(function() {
