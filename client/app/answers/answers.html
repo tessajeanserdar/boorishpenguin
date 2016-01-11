@@ -1,8 +1,8 @@
 <div ng-module='boorish.answers'>
   <div ng-model='data.question'>
-    <input type='submit' ng-click='updateQuestion("like")' value='like'>
-    <input type='submit' ng-click='updateQuestion("good")' value='Good'>
-    <input type='submit' ng-click='updateQuestion("answered")' value='Answered'>
+    <input type='submit' ng-click='updateQuestion("like")' value='Like'>
+    <input type='submit' ng-click='updateQuestion("good")' value='Good Question!'>
+    <input type='submit' ng-click='updateQuestion("answered")' value='My Question Has Been Answered'>
     <div>Points: {{ data.question.points }}</div>
     <div>Question: {{ data.question.text }}</div>
     <div>Tag:{{ data.question.tagname }}</div>
@@ -13,9 +13,8 @@
   </div>
   <div ng-model='data.answers'>
     <div ng-repeat='answer in data.answers'>
-      <input type='submit' ng-click='updateAnswer($index, "like")' value='like'>
-      <input type='submit' ng-click='updateAnswer($index, "good")' value='like'>
-      <input type='submit' ng-click='updateAnswer($index, "answered")' value='Answered'>
+      <input type='submit' ng-click='updateAnswer($index, "like")' value='Like'>
+      <input type='submit' ng-click='updateAnswer($index, "good")' value='Good Answer!'>
       <div>{{ answer.points }}</div>
       <div>{{ answer.text }}</div>
       <div>Posted by {{ answer.user }}</div>
