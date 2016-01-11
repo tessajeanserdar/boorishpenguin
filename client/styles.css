@@ -5,6 +5,10 @@ h1 {
 
 }
 
+select {
+  width: auto !important;
+}
+
 .btn {
   padding-top: 10px;
 }
@@ -114,4 +118,9 @@ h1 {
   padding: 10px;
   background-color: lightblue;
   display: inline-block;
+}
+
+.dropdown-label {
+  text-align: right;
+  padding-top:5px;
 }
