@@ -1,24 +1,41 @@
 <div ng-module='boorish.questions' >
   <h1>Questions</h1>
-  <!--<table class="table table-striped table-hover">-->
-    <!--<tbody>-->
+
       <div ng-repeat='question in questions' class="question">
         <div class="question-summary">
           <!-- number of points current on question -->
-          <div>Points: {{ question.points }}</div>
+          <div>
+            <span class="glyphicon glyphicon-heart"></span>
+            <span>{{ question.points }}</span>
+            <span>Likes</span>
+          </div>
+
           <!-- number of answers current on question -->
-          <div>Answers: {{ question.responses }}</div>
+          <div>
+            <span class="glyphicon glyphicon-comment"></span>
+            <span>{{ question.responses }}</span>
+            <span>Answers</span>
+          </div>
           <!-- link to question id. Title is currently the first 60 characters in the text -->
         </div>
         <div class="question-content">
-          <h3><a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a></h3>
-           - asked by {{ question.user }}
-        </div>
+          <h3>
+            <a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a>
+            <span class="glyphicon glyphicon-ok-sign" ng-if="question.isGood == true"></span>
+          </h3>
 
+          <div class="course">{{ question.coursename }}</div>
+          <div class="tag">{{ question.tagname }}</div>
+          <div>- asked by {{ question.user }} at {{ question.createdAt }}</div>
+        </div>
       </div>
-    <!--</tbody>-->
-    <!--</table>-->
 </div>
+
+<script>
+  jQuery(document).ready(function() {
+    jQuery("time.timeago").timeago();
+  });
+</script>
 
           <!--text: question.text,-->
           <!--isAnAnswer: false,-->
