@@ -1,7 +1,7 @@
 angular.module('boorish.questions', [])
 
 .controller('questionsController', function($scope, $location, Questions, Auth) {
-  $scope.questions = [];
+  $scope.questions = [{}, {}, {}];
 
   $scope.init = function() {
     
@@ -17,6 +17,8 @@ angular.module('boorish.questions', [])
           return question;
         });
       });
+
+      console.log("questions ", $scope.questions);
     }
   };
 
