@@ -1,4 +1,5 @@
 var db = require('../db/index.js');
+var UCtrl = require('./userControllers.js');
 
 module.exports = {
   newAnswer: function(req, res) {
@@ -43,10 +44,10 @@ module.exports = {
     });
   },
 
-  // TODO: 'good' needs admin auth 
   modAnswer: function(req, res) {
     var aid = req.params.id;
     var mod = req.body.mod;
+    var reqName = req.user.profile.emails[0].value;
 
     db.Post.findById(aid)
     .then(function(answer) {
@@ -54,8 +55,7 @@ module.exports = {
 
       db.User.findById(uid)
       .then(function(user) {
-        if (mod === 'good') {
-          // DO YOUR ADMIN AUTH CHECK AROUND THIS PROMISE CHAIN
+        if (mod === 'good' && UCtrl.isUserTeacher(reqName)) {
           answer.update({
             isGood: !answer.isGood
           })
@@ -73,7 +73,6 @@ module.exports = {
           .then(function() {
             res.status(201).json(answer);
           });
-          // END OF CHAIN
         } else if (mod === 'like') {
           answer.getVote({where: ['UserId='+user.id+' AND PostId='+answer.id]})
           .then(function(result) {
@@ -113,9 +112,9 @@ module.exports = {
     });
   },
 
-  // TODO: auth/same-user check 
   deleteAnswer: function(req, res) {
     var aid = req.body.id_answer;
+    var reqName = req.user.profile.emails[0].value;
 
     db.Post.findById(aid)
     .then(function(answer) {
@@ -123,28 +122,32 @@ module.exports = {
 
       db.User.findById(uid)
       .then(function(user) {
-        var username = user.name;
-        // DO AUTH/SAME-USER CHECK HERE
-        var qid = answer.QuestionId;
+        var authorname = user.username;
 
-        db.Post.findById(qid)
-        .then(function(question) {
-          return question.update({
-            responses: question.responses - 1
+        if (reqName === authorname || UCtrl.isUserTeacher(reqName)) {
+          var qid = answer.QuestionId;
+
+          db.Post.findById(qid)
+          .then(function(question) {
+            return question.update({
+              responses: question.responses - 1
+            })
           })
-        })
-        .then(function() {
-          return user.update({
-            points: user.points - 1
-          }); 
-        })
-        .then(function() {
-          return answer.destroy()  
           .then(function() {
-            res.sendStatus(204);
+            return user.update({
+              points: user.points - 1
+            });
+          })
+          .then(function() {
+            return answer.destroy()
+            .then(function() {
+              res.sendStatus(204);
+            });
           });
-        })
-      })
-    })
+        } else {
+          res.sendStatus(404);
+        }
+      });
+    });
   }
 };
