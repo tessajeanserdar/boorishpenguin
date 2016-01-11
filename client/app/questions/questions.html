@@ -1,8 +1,8 @@
 <div ng-module='boorish.questions' >
   <h1>Questions</h1>
 
-      <div ng-repeat='question in questions' class="question">
-        <div class="question-summary">
+      <div ng-repeat='question in questions' class="question-list-item">
+        <div class="col-xs-2">
           <!-- number of points current on question -->
           <div>
             <span class="glyphicon glyphicon-heart"></span>
@@ -18,7 +18,7 @@
           </div>
           <!-- link to question id. Title is currently the first 60 characters in the text -->
         </div>
-        <div class="question-content">
+        <div class="col-xs-10">
           <h3>
             <a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a>
             <span class="glyphicon glyphicon-ok-sign" ng-if="question.isGood == true"></span>
