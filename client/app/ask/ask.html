@@ -1,9 +1,10 @@
 <div ng-module='boorish.ask'>
   <form>
     <h3>My question:</h3>
-
-
-    <textarea class="form-control"  type='question' rows='5' cols='80' ng-model='question.text' placeholder='What is your question?'></textarea>
+    <input type='question' ng-model='question.title'  size = "50" placeholder='What is your question?'></input>
+    <br>
+    <br>
+    <textarea class="form-control" type='question' ng-model='question.text' rows='5' cols='80' placeholder='Add more details'></textarea>a
     <br />
      <div class="form-group col-xs-6">
       <label class="dropdown-label col-xs-4">Course</label>
