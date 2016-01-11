@@ -5,7 +5,7 @@ angular.module('boorish.answers', [])
   $scope.newAnswer = {};
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
-  ///// Questions Controller:
+  ///// Answers Controller:
   ///// This controller enables functionality to get and display individual questions and the answers that are related to that question
   ///// Methods:
   /////   getQuestion. Retreives the Post data from the database using the getQuestion method. This returns an array of Posts.
