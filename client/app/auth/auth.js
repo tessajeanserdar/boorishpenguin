@@ -1,10 +1,17 @@
 angular.module('boorish.auth', [])
 
-.controller('AuthController', function ($scope, $location, Auth) {
+.controller('AuthController', function ($scope, $location, Auth, $window) {
   $scope.user = {};
 
   $scope.signin = function () {
-  
+    $http({
+      method: 'GET',
+      url: '/townhall/users'
+    }).then(function(res) {
+      var users = res.results;
+      console.log('Users: ', users)
+      $window.localStorage.setItem('com.boorish', users);
+    })
     Auth.setUser().then(function() {
       $location.path('/questions');
     })

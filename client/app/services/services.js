@@ -4,17 +4,19 @@ angular.module('boorish.services', [])
   return {
     // add a question from /ask
     addQuestion: function(question) {
+  
       $http({
         method: 'POST',
-        url: 'townhall/questions',
+        url: '/townhall/questions',
         data: JSON.stringify({
           text: question.text,
-          username: question.username, // TODO: this needs to be a username
+          userId: question.userId,
           course: question.course,  // these are not setup yet
           tag: question.tag  // these are not setup yet
         })
       })
-      .then(function() {
+      .then(function(req, res) {
+        console.log('Question Req: ', req.body);
         console.log('question sent');
       })
     },
@@ -40,11 +42,11 @@ angular.module('boorish.services', [])
       })
     },
 
-    updateQuestion: function(mod) {
+    updateQuestion: function(id, mod) {
       // code to update a question when there is a new like or has been marked as answered
       $http({
         method: 'POST',
-        url: 'townhall/questions/:id',
+        url: 'townhall/questions/' + id,
         data: JSON.stringify({
           mod: mod
         })
@@ -94,15 +96,16 @@ angular.module('boorish.services', [])
           person: answer.user // TODO: pull question ID
         })
       })
-      .then(function() {
+      .then(function(req, res, next) {
         console.log('question sent');
+        next();
       })
     },
 
     updateAnswer: function(answerID, mod) {
       $http({
         method: 'POST',
-        url: 'townhall/answers/:id',
+        url: 'townhall/answers/' + answerID,
         data: JSON.stringify({
           id_answer: answerID,
           mod: mod
@@ -130,7 +133,7 @@ angular.module('boorish.services', [])
   }
 })
 
-.factory('Users', function($http){
+.factory('Users', function($http, $window){
     var allUsers = function(){
       return $http({
         method: 'GET',
@@ -141,6 +144,16 @@ angular.module('boorish.services', [])
         return res.data;
       });
     };
+
+    var getUserNameWithId = function(callback) {
+      var userID = $window.localStorage.getItem('com.boorish');
+      return $http({
+        method: 'GET',
+        url: '/townhall/users/' + userID
+      }).then(function(res) {
+        callback(res.data.results);
+      })
+    }
 
     //TODO: get specific students/admins
     //var getStudents = function(){
@@ -191,20 +204,40 @@ angular.module('boorish.services', [])
   })
 
 .factory('Auth', function ($http, $location, $window) {
+  var user = {};
 
   return {
     setUser: function () {
-    return $http({
-      method: 'GET',
-      url: '/user'
-    })
-    .then(function (res) {
-      console.log(res.data)
-      var email = res.data.email || res.data.profile.emails[0].value;
-      if (email) {
-        $window.localStorage.setItem('com.boorish', email);
-      }
-    });
+      return $http({
+        method: 'GET',
+        url: '/user'
+      })
+      .then(function (googUser) {
+        user.google = googUser.data.email || googUser.data.profile.emails[0].value;
+        console.log(user)
+
+        $http({
+          method: 'GET',
+          url: '/townhall/users'
+        })
+        .then(function(res) {
+          var users = res.data.results;
+          console.log(users);
+          var isUser = false;
+          for (var i = 0; i < users.length; i++) {
+            if (users[i].email === user.google) {
+              isUser = true;
+              user.id = users[i].id;
+            }
+          }
+          console.log(user);
+          if (isUser) {
+            $window.localStorage.setItem('com.boorish', user.id);
+          } else {
+            $location.path('/signin');
+          }
+        })
+      });
   },
 
   isAuth: function () {

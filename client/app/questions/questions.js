@@ -5,14 +5,13 @@ angular.module('boorish.questions', [])
 
   $scope.init = function() {
     
+    Auth.setUser();
     var user = Auth.isAuth();
 
     if (!user) {
-      Auth.setUser();
       console.log('There is no token. redirecting to sign-in');
       $location.path('/signin');
     } else {
-
       Questions.getAllQuestions().then(function(data) {
         $scope.questions = data.results.map(function(question) {
           question.title = question.text.slice(0,60);

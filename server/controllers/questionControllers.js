@@ -29,13 +29,13 @@ module.exports = {
 
   newQuestion: function(req, res) {
     var txt = req.body.text;
-    var uname = req.body.username;
+    var uid = req.body.userId;
     var coursename = req.body.course;
     var tagname = req.body.tag;
 
     db.User.findOne({
       where: {
-        username: uname
+        id: uid 
       }
     })
     .then(function(user) {
@@ -58,7 +58,7 @@ module.exports = {
             db.Question.create({
               text: txt,
               UserId: user.get('id'),
-              CourseId: course.get('id'),
+              // CourseId: course.get('id'),
               TagId: tag.get('id')
             })
             .then(function(question) {
