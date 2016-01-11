@@ -16,7 +16,6 @@ angular.module('boorish.services', [])
         })
       })
       .then(function(req, res) {
-        console.log('Question Req: ', req.body);
         console.log('question sent');
       })
     },
@@ -28,7 +27,6 @@ angular.module('boorish.services', [])
         url: '/townhall/questions/'
       })
       .then(function(res) {
-        console.log('res.data: ', res.data);
         return res.data;
       })
     },
@@ -92,7 +90,7 @@ angular.module('boorish.services', [])
         data: JSON.stringify({
           text: answer.text,
           id_Question: questionID,
-          person: answer.user // TODO: pull question ID
+          person: answer.user
         })
       })
       .then(function(req, res, next) {
@@ -242,11 +240,9 @@ angular.module('boorish.services', [])
         url: '/user'
       })
       .then(function (res) {
-        console.log('GoogUser: ', res.data)
         user.google = res.data.email || res.data.profile.emails[0].value;
-        console.log(user)
 
-        $http({
+        return $http({
           method: 'GET',
           url: '/townhall/users'
         })
