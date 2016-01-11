@@ -23,7 +23,7 @@ body {
 
 .navs > * {
   list-style: none;
-  margin: 0px 10px;
+  margin: 0 5px;
   display: inline-flex;
   padding: 5px;
 }
@@ -36,9 +36,9 @@ body {
   padding: 2px;
 }
 
-
 .search-box {
-  max-width: 300px;
+  width: 250px;
+  margin-left: auto;
 }
 
 .user-profile-link {
@@ -73,6 +73,7 @@ body {
   justify-content: space-between;
   align-items: center;
   align-content: center;
+  background-color: green;
 }
 
 .answer-votes {
