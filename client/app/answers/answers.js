@@ -5,11 +5,11 @@ angular.module('boorish.answers', [])
   $scope.newAnswer = {};
 
   $scope.getQuestion = function() {
-    var path = $location.path();
-    Questions.getQuestion(path).then(function(data) {
-      console.log('Questions/Answers: ', data)
+    var path = $location.path(); // e.g., '/questions/19'
+    Questions.getQuestion(path).then(function(req, res) {
+      console.log(res);
       // question is always going to be the first item
-      $scope.data.question = data.results[0];
+      $scope.data.question = res.data.results[0];
       console.log('Question: ', $scope.data.question)
       $scope.data.answers = data.results.slice(1);
     });

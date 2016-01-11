@@ -37,8 +37,9 @@ angular.module('boorish.services', [])
         method: 'GET',
         url: '/townhall' + path
       })
-      .then(function(res) {
-        return res.data;
+      .then(function(req, res) {
+        console.log('res from getQuestion', req);
+        // return res.data;
       })
     },
 
