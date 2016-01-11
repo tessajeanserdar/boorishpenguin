@@ -44,7 +44,7 @@ angular.module('boorish.services', [])
 
     updateQuestion: function(id, mod) {
       // code to update a question when there is a new like or has been marked as answered
-      $http({
+      return $http({
         method: 'POST',
         url: 'townhall/questions/' + id,
         data: JSON.stringify({
@@ -58,7 +58,7 @@ angular.module('boorish.services', [])
 
     removeQuestion: function(questionID) {
       // code to remove a question by the user who posted it or isAdmin
-      $http({
+      return $http({
         method: 'DELETE',
         url: 'townhall/questions/',
         data: JSON.stringify({
@@ -202,6 +202,35 @@ angular.module('boorish.services', [])
     }
 
   })
+
+.factory('Tags', function($http) {
+  return {
+    getTags: function() {
+      return $http({
+        method: 'GET',
+        url: '/townhall/tags'
+      })
+      .then(function(res) {
+        return res.data;
+      });
+    }
+  };
+})
+
+.factory('Courses', function($http) {
+  return {
+    getCourses: function() {
+      return $http({
+        method: 'GET',
+        url: '/townhall/courses'
+
+      })
+      .then(function(res) {
+        return res.data;
+      });
+    }
+  };
+})
 
 .factory('Auth', function ($http, $location, $window) {
   var user = {};
