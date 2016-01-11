@@ -24,6 +24,27 @@ module.exports = {
     });
   },
 
+  oneUser: function(req, res) {
+    var uid = req.params.id;
+
+    db.User.findById(uid)
+    .then(function(user) {
+      var formattedUser = {
+        id: user.id,
+        name: user.name,
+        name_first: user.name_last,
+        name_last: user.name_first,
+        email: user.email,
+        points: user.points,
+        image: user.image
+      }
+
+      user = {};
+      user.results = formattedUser;
+      res.json(user);
+    });
+  },
+
   newUser: function(user) {
     db.User.create(user)
     .then(function(newUser) {
