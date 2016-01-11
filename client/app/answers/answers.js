@@ -7,7 +7,6 @@ angular.module('boorish.answers', [])
   $scope.getQuestion = function() {
     var path = $location.path(); // e.g., '/questions/19'
     Questions.getQuestion(path).then(function(res) {
-      console.log('Data: ', res);
       // question is always going to be the first item
       $scope.data.question = res.data.results[0];
       $scope.data.answers = res.data.results.slice(1);
@@ -18,7 +17,6 @@ angular.module('boorish.answers', [])
     var id_question = $scope.data.question.id;
 
     Users.getUserWithId().then(function(userID) {
-      console.log('user id: ', userID);
       $scope.newAnswer.user = userID;
       Answers.addAnswer($scope.newAnswer, id_question).then(function() {
         $scope.getQuestion();

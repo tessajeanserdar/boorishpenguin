@@ -17,8 +17,6 @@ angular.module('boorish.questions', [])
           return question;
         });
       });
-
-      console.log("questions ", $scope.questions);
     }
   };
 

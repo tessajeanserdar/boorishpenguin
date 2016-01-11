@@ -9,7 +9,6 @@ angular.module('boorish.auth', [])
       url: '/townhall/users'
     }).then(function(res) {
       var users = res.results;
-      console.log('Users: ', users)
       $window.localStorage.setItem('com.boorish', users);
     })
     Auth.setUser().then(function() {
