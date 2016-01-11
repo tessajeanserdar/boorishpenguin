@@ -52,9 +52,9 @@
 
   <div ng-model='data.answers'>
     <div ng-repeat='answer in data.answers'>
-      <input type='submit' ng-click='updateAnswer($index, "like")' value='like'>
-      <input type='submit' ng-click='updateAnswer($index, "good")' value='like'>
-      <input type='submit' ng-click='updateAnswer($index, "answered")' value='Answered'>
+      <input class="btn btn-default" type='submit' ng-click='updateAnswer($index, "like")' value='Like'>
+      <input class="btn btn-default" type='submit' ng-click='updateAnswer($index, "good")' value='Good'>
+      <!-- <input type='submit' ng-click='updateAnswer($index, "answered")' value='Answered'> -->
       <div>{{ answer.points }}</div>
       <div>{{ answer.text }}</div>
       <div>{{ answer.user }}</div>
