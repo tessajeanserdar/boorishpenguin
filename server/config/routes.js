@@ -1,5 +1,5 @@
-var questionControllers = require ('../controllers/questionControllers.js');
-var answerControllers = require ('../controllers/answerControllers.js');
+var questionControllers = require ('../controllers/questionController.js');
+var answerControllers = require ('../controllers/answerController.js');
 var userControllers = require ('../controllers/userControllers.js');
 var courseControllers = require ('../controllers/courseControllers.js');
 var tagControllers = require ('../controllers/tagControllers.js');
@@ -19,6 +19,7 @@ module.exports = function(app, express, ensureAuth) {
   app.delete('/townhall/answers', ensureAuth, answerControllers.deleteAnswer);
 
   app.get('/townhall/users', ensureAuth, userControllers.allUsers);
+  app.get('/townhall/users/:id', ensureAuth, userControllers.oneUser);
   app.post('/townhall/signup', userControllers.newUser);
 
   app.get('/townhall/courses', ensureAuth, courseControllers.allCourses);
