@@ -1,5 +1,12 @@
 angular.module('boorish.ask', [])
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+///// Ask Controller: Pulls tags and courses from the database to display to the user. User
+/////   writes question, and selects tag and course.
+///// 
+///// addQuestion: uses the addQuestion facotry to add question to the database
+///////////////////////////////////////////////////////////////////////////////////////////////
+
 .controller('askController', function($scope, $window, $location, Tags, Courses, Questions) {
   $scope.question = {};
 
@@ -22,12 +29,11 @@ angular.module('boorish.ask', [])
   });
 
   $scope.addQuestion = function() {
-    $scope.question.userId = $window.localStorage.getItem('com.boorish');
-    // TODO: need to pull username into question object
-    $scope.question.course = $scope.courseOptions.selectedOption.name;
-    $scope.question.tag = $scope.tagOptions.selectedOption.name;
-    Questions.addQuestion($scope.question).then(function() {
-      $location.path('/questions');
+    $scope.question.userId = $window.localStorage.getItem('com.boorish');  // pulls userId from localStorage
+    $scope.question.course = $scope.courseOptions.selectedOption.name; // pulls selected course
+    $scope.question.tag = $scope.tagOptions.selectedOption.name;  // pulls selected tag
+    Questions.addQuestion($scope.question).then(function() { // adds new Question with addQuestion factory method
+      $location.path('/questions'); // redirects to all questions
     });
 
   }
