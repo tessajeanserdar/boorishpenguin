@@ -34,6 +34,7 @@ angular.module('boorish.answers', [])
     Questions.updateQuestion(mod).then(function() {
       $scope.getQuestion();
     })
+  }
 
   $scope.removeQuestion = function() {
     var id_question = $scope.data.question.id;
@@ -46,7 +47,6 @@ angular.module('boorish.answers', [])
     var answerID = $scope.data.answers[index].id;
     $scope.data.answers.splice(index, 1);
     Answers.removeAnswer(answerID);
-  };
   }
 
   $scope.getQuestion();
