@@ -37,13 +37,9 @@ module.exports = {
     var txt = req.body.text;
     var coursename = req.body.course;
     var tagname = req.body.tag;
-    var uid = req.body.userId;
+    var uid = req.body.id_user;
 
-    db.User.findOne({
-      where: {
-        id: uid
-      }
-    })
+    db.User.findById(uid)
     .then(function(user) {
       user.update({
         points: user.points + 1
