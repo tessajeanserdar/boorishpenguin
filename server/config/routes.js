@@ -8,7 +8,7 @@ var passport = require('passport');
 
 module.exports = function(app, express, ensureAuth) {
   app.get('/townhall/questions', ensureAuth, questionControllers.allQuestions);
-  app.post('/townhall/questions', ensureAuth, questionControllers.newQuestion);
+  app.post('/townhall/questions', questionControllers.newQuestion);
   app.delete('/townhall/questions/', ensureAuth, questionControllers.deleteQuestion);
 
   app.get('/townhall/questions/:id', ensureAuth, questionControllers.readQuestion);
