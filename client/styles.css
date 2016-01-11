@@ -45,3 +45,24 @@ body {
   width: 32px;
   height: 32px;
 }
+
+.question {
+  border-top: 1px solid lightgray;
+  padding: 5px 5px 15px 5px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}
+
+.question-summary {
+  width: 150px;
+}
+
+.question-content {
+  /*width: 70%;*/
+  flex-grow: 1;
+}
