@@ -3,8 +3,9 @@ var UCtrl = require('./userControllers.js');
 
 module.exports = {
   newAnswer: function(req, res) {
+    console.log('this is what the server receives: ',req.body)
     var txt = req.body.text;
-    var uname = req.body.person;
+    var uid = req.body.person;
     var qid = req.body.id_Question;
 
     db.Post.findById(qid)
@@ -16,15 +17,16 @@ module.exports = {
         .then(function() {
           return db.User.findOne({
             where: {
-              username: uname,
+              id: uid
             }
           })
         })
         .then(function(user) {
+          console.log('userID: ', uid);
           db.Post.create({
             text: txt,
             isAnAnswer: true,
-            UserId: user.id,
+            UserId: uid,
             QuestionId: qid,
             CourseId: question.CourseId,
             TagId: question.TagId

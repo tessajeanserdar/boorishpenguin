@@ -9,7 +9,6 @@ angular.module('boorish.questions', [])
     var user = Auth.isAuth();
 
     if (!user) {
-      console.log('There is no token. redirecting to sign-in');
       $location.path('/signin');
     } else {
       Questions.getAllQuestions().then(function(data) {

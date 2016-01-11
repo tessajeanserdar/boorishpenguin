@@ -5,7 +5,7 @@ angular.module('boorish.services', [])
     // add a question from /ask
     addQuestion: function(question) {
   
-      $http({
+      return $http({
         method: 'POST',
         url: '/townhall/questions',
         data: JSON.stringify({
@@ -16,7 +16,6 @@ angular.module('boorish.services', [])
         })
       })
       .then(function(req, res) {
-        console.log('Question Req: ', req.body);
         console.log('question sent');
       })
     },
@@ -38,7 +37,7 @@ angular.module('boorish.services', [])
         url: '/townhall' + path
       })
       .then(function(res) {
-        return res.data;
+        return res;
       })
     },
 
@@ -47,12 +46,10 @@ angular.module('boorish.services', [])
       return $http({
         method: 'POST',
         url: 'townhall/questions/' + id,
-        data: JSON.stringify({
-          mod: mod
-        })
-        .then(function() {
-          console.log('updated answer');
-        })
+        data: { mod: mod }
+      })
+      .then(function() {
+        console.log('updated answer');
       })
     },
 
@@ -87,39 +84,38 @@ angular.module('boorish.services', [])
 
     addAnswer: function(answer, questionID) {
 
-      $http({
+      return $http({
         method: 'POST',
         url: 'townhall/answers',
         data: JSON.stringify({
           text: answer.text,
           id_Question: questionID,
-          person: answer.user // TODO: pull question ID
+          person: answer.user
         })
       })
       .then(function(req, res, next) {
-        console.log('question sent');
-        next();
+        console.log('answer sent');
       })
     },
 
     updateAnswer: function(answerID, mod) {
-      $http({
+      return $http({
         method: 'POST',
         url: 'townhall/answers/' + answerID,
         data: JSON.stringify({
           id_answer: answerID,
           mod: mod
         })
-        .then(function() {
-          console.log('updated answer');
-        })
       })
+      .then(function() {
+        console.log('updated answer');
+      });
     },
 
     removeAnswer: function(answerID) {
       // code to delete answer from the data base by answerer or isAdmin
       // DELETE to /answers
-      $http({
+      return $http({
         method: 'DELETE',
         url: 'townhall/answers',
         data: JSON.stringify({
@@ -145,15 +141,16 @@ angular.module('boorish.services', [])
       });
     };
 
-    var getUserNameWithId = function(callback) {
+
+    var getUserWithId = function() {
       var userID = $window.localStorage.getItem('com.boorish');
       return $http({
         method: 'GET',
         url: '/townhall/users/' + userID
       }).then(function(res) {
-        callback(res.data.results);
+        return res.data.results.id;
       })
-    }
+    };
 
     //TODO: get specific students/admins
     //var getStudents = function(){
@@ -195,6 +192,7 @@ angular.module('boorish.services', [])
 
     return {
       allUsers: allUsers,
+      getUserWithId: getUserWithId,
       //getStudents: getStudents,
       //getAdmins: getAdmins,
       addOne: addUser
@@ -242,11 +240,9 @@ angular.module('boorish.services', [])
         url: '/user'
       })
       .then(function (res) {
-        console.log('GoogUser: ', res.data)
         user.google = res.data.email || res.data.profile.emails[0].value;
-        console.log(user)
 
-        $http({
+        return $http({
           method: 'GET',
           url: '/townhall/users'
         })

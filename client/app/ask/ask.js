@@ -27,8 +27,9 @@ angular.module('boorish.ask', [])
     // TODO: need to pull username into question object
     $scope.question.course = $scope.courseOptions.selectedOption.name;
     $scope.question.tag = $scope.tagOptions.selectedOption.name;
-    Questions.addQuestion($scope.question);
-    $location.path('/questions');
+    Questions.addQuestion($scope.question).then(function() {
+      $location.path('/questions');
+    });
 
   }
 

@@ -44,7 +44,7 @@
         <form class="navbar-form navbar-right" role="search">
           <div class="form-group">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
+              <input type="text" class="form-control" ng-model='searchText'placeholder="Search for...">
               <span class="input-group-btn">
                 <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
               </span>
@@ -64,12 +64,12 @@
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular-route/angular-route.js"></script>
 
+    <script src="app/services/services.js"></script>
     <script src="app/users/users.js"></script>
     <script src="app/answers/answers.js"></script>
     <script src="app/ask/ask.js"></script>
     <script src="app/auth/auth.js"></script>
     <script src="app/questions/questions.js"></script>
-    <script src="app/services/services.js"></script>
     <script src="app/app.js"></script>
   </body>
 </html>

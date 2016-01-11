@@ -1,6 +1,6 @@
 <div ng-module='boorish.questions' >
   <h3>Questions</h3>
-  <div ng-repeat='question in questions'>
+  <div ng-repeat='question in questions | filter:searchText'>
     <!-- number of points current on question -->
     <div>{{ question.points }}</div>
     <!-- number of answers current on question -->

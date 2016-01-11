@@ -37,11 +37,11 @@ module.exports = {
     var txt = req.body.text;
     var coursename = req.body.course;
     var tagname = req.body.tag;
-    var reqName = req.user.profile.emails[0].value;
+    var uid = req.body.userId;
 
     db.User.findOne({
       where: {
-        username: reqName
+        id: uid
       }
     })
     .then(function(user) {
@@ -127,7 +127,8 @@ module.exports = {
         createdAt: question.createdAt,
         coursename: question.Course.name,
         tagname: question.Tag.name,
-        user: question.User.name
+        user: question.User.name,
+        userid: question.User.id
       }];
 
       db.Post.findAll({
@@ -146,6 +147,7 @@ module.exports = {
             isGood: answer.isGood,
             QuestionId: qid,
             user: answer.User.name,
+            userid: answer.User.id,
             createdAt: answer.createdAt
           }
         });
