@@ -104,6 +104,53 @@ var Answer = db.define('Answer', {
   updatedAt: false
 });
 
+// replaces question and answer
+var Post = db.define('Post', {
+  text: Sequelize.STRING,
+  isAnAnswer: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  points: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0
+  },
+  responses: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0
+  },
+  isAnswered: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  isGood: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  isClosed: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  createdAt: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.fn('NOW')
+  }
+}, {
+  timestamps: true,
+  updatedAt: false
+});
+
+var Like = db.define('Like', {
+  }, {
+    timestamps: false
+});
+
 Course.belongsToMany(User, {
   through: 'CourseUser'
 });
@@ -123,6 +170,17 @@ Answer.belongsTo(User);
 Question.hasMany(Answer);
 Answer.belongsTo(Question);
 
+User.hasMany(Post);
+Post.belongsTo(User);
+Tag.hasMany(Post);
+Post.belongsTo(Tag);
+Course.hasMany(Post);
+Post.belongsTo(Course);
+Post.hasMany(Post, {as: 'Responses', foreignKey: 'QuestionId'});
+
+Post.belongsToMany(User, {as: 'Vote', through: 'Like'});
+User.belongsToMany(Post, {through: 'Like'});
+
 User.sync()
 .then(function() {
   return Tag.sync();
@@ -136,9 +194,16 @@ User.sync()
 .then(function() {
   return Answer.sync();
 })
+.then(function() {
+  return Post.sync();
+})
+.then(function() {
+  return Like.sync();
+});
 
 exports.User = User;
 exports.Question = Question;
 exports.Answer = Answer;
 exports.Course = Course;
 exports.Tag = Tag;
+exports.Post = Post;
