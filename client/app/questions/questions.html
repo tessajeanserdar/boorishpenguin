@@ -1,23 +1,29 @@
 <div ng-module='boorish.questions' >
   <h1>Questions</h1>
-  <!--<table class="table table-striped table-hover">-->
-    <!--<tbody>-->
+
       <div ng-repeat='question in questions' class="question">
         <div class="question-summary">
           <!-- number of points current on question -->
-          <div>Points: {{ question.points }}</div>
+          <div>
+            <span class="glyphicon glyphicon-heart"></span>
+            <span>{{ question.points }}</span>
+          </div>
+
           <!-- number of answers current on question -->
-          <div>Answers: {{ question.responses }}</div>
+          <div>
+            <span class="glyphicon glyphicon-share-alt"></span>
+            <span>{{ question.responses }}</span>
+          </div>
           <!-- link to question id. Title is currently the first 60 characters in the text -->
         </div>
         <div class="question-content">
-          <h3><a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a></h3>
+          <h3>
+            <a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a>
+            <span class="glyphicon glyphicon-ok-sign" ng-if="question.isGood == true"></span>
+          </h3>
            - asked by {{ question.user }}
         </div>
-
       </div>
-    <!--</tbody>-->
-    <!--</table>-->
 </div>
 
           <!--text: question.text,-->
