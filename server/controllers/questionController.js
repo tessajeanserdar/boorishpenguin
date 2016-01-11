@@ -13,6 +13,7 @@ module.exports = {
       var formattedQs = questions.map(function(question) {
         return {
           id: question.id,
+          title: question.title,
           text: question.text,
           isAnAnswer: false,
           points: question.points,
@@ -34,6 +35,7 @@ module.exports = {
   },
 
   newQuestion: function(req, res) {
+    var titl = req.body.title;
     var txt = req.body.text;
     var coursename = req.body.course;
     var tagname = req.body.tag;
@@ -58,6 +60,7 @@ module.exports = {
           })
           .then(function(tag) {
             db.Post.create({
+              title: titl,
               text: txt,
               UserId: user.id,
               CourseId: course.id,
@@ -113,6 +116,7 @@ module.exports = {
     .then(function(question) {
       var formattedQ = [{
         id: question.id,
+        title: question.title,
         text: question.text,
         isAnAnswer: false,
         points: question.points,
