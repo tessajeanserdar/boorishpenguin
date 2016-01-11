@@ -8,7 +8,7 @@ angular.module('boorishpenguin', [
   'ngRoute'
   ])
 
-.config(function ($routeProvider) {
+.config(function ($routeProvider, $sceProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'app/questions/questions.html',
@@ -37,4 +37,6 @@ angular.module('boorishpenguin', [
     .otherwise({
       routeTo: '/signin'
     })
+
+  $sceProvider.enabled(false);
 });
