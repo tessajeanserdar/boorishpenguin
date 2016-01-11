@@ -10,7 +10,7 @@ angular.module('boorish.services', [])
         url: '/townhall/questions',
         data: JSON.stringify({
           text: question.text,
-          userId: question.userId,
+          id_user: question.userId,
           course: question.course,  // these are not setup yet
           tag: question.tag  // these are not setup yet
         })
@@ -89,8 +89,8 @@ angular.module('boorish.services', [])
         url: 'townhall/answers',
         data: JSON.stringify({
           text: answer.text,
-          id_Question: questionID,
-          person: answer.user
+          id_question: questionID,
+          id_user: answer.user
         })
       })
       .then(function(req, res, next) {
@@ -166,7 +166,6 @@ angular.module('boorish.services', [])
         method: 'POST',
         url: '/townhall/users',
         data: JSON.stringify({
-          schoolId: user.schoolId,
           username: user.username,
           password: user.password,
           name: user.name,

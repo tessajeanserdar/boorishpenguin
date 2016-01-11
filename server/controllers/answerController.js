@@ -5,8 +5,8 @@ module.exports = {
   newAnswer: function(req, res) {
     console.log('this is what the server receives: ',req.body)
     var txt = req.body.text;
-    var uid = req.body.person;
-    var qid = req.body.id_Question;
+    var uid = req.body.id_user;
+    var qid = req.body.id_question;
 
     db.Post.findById(qid)
     .then(function(question) {
@@ -15,11 +15,7 @@ module.exports = {
           responses: question.responses + 1
         })
         .then(function() {
-          return db.User.findOne({
-            where: {
-              id: uid
-            }
-          })
+          return db.User.findById(uid);
         })
         .then(function(user) {
           console.log('userID: ', uid);
@@ -33,7 +29,7 @@ module.exports = {
           })
           .then(function(answer) {
             user.update({
-              points: user.points
+              points: user.points + 1
             })
             .then(function() {
               res.status(201).json(answer);
