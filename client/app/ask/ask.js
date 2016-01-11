@@ -1,15 +1,10 @@
 angular.module('boorish.ask', [])
 
-.controller('askController', function($scope, Questions, $window) {
+.controller('askController', function($scope, $window, Questions) {
   $scope.question = {};
 
-  $scope.getUser = function() {
-    // grabs the username from wherever we're storing it.
-    // sets username to 
-      // $scope.question.user
-  }
-
   $scope.addQuestion = function() {
+    $scope.question.userId = $window.localStorage.getItem('com.boorish');
     // TODO: need to pull username into question object
     Questions.addQuestion($scope.question);
   }

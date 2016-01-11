@@ -4,17 +4,19 @@ angular.module('boorish.services', [])
   return {
     // add a question from /ask
     addQuestion: function(question) {
+  
       $http({
         method: 'POST',
-        url: 'townhall/questions',
+        url: '/townhall/questions',
         data: JSON.stringify({
           text: question.text,
-          username: question.username, // TODO: this needs to be a username
+          userId: question.userId,
           course: question.course,  // these are not setup yet
           tag: question.tag  // these are not setup yet
         })
       })
-      .then(function() {
+      .then(function(req, res) {
+        console.log('Question Req: ', req.body);
         console.log('question sent');
       })
     },
@@ -40,11 +42,11 @@ angular.module('boorish.services', [])
       })
     },
 
-    updateQuestion: function(mod) {
+    updateQuestion: function(id, mod) {
       // code to update a question when there is a new like or has been marked as answered
       $http({
         method: 'POST',
-        url: 'townhall/questions/:id',
+        url: 'townhall/questions/' + id,
         data: JSON.stringify({
           mod: mod
         })
@@ -94,15 +96,16 @@ angular.module('boorish.services', [])
           person: answer.user // TODO: pull question ID
         })
       })
-      .then(function() {
+      .then(function(req, res, next) {
         console.log('question sent');
+        next();
       })
     },
 
     updateAnswer: function(answerID, mod) {
       $http({
         method: 'POST',
-        url: 'townhall/answers/:id',
+        url: 'townhall/answers/' + answerID,
         data: JSON.stringify({
           id_answer: answerID,
           mod: mod
@@ -142,13 +145,13 @@ angular.module('boorish.services', [])
       });
     };
 
-    var getUserNameWithId = function() {
+    var getUserNameWithId = function(callback) {
       var userID = $window.localStorage.getItem('com.boorish');
       return $http({
         method: 'GET',
         url: '/townhall/users/' + userID
       }).then(function(res) {
-        return res.data.results;
+        callback(res.data.results);
       })
     }
 

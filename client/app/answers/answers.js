@@ -17,9 +17,12 @@ angular.module('boorish.answers', [])
 
   $scope.addAnswer = function() {
     var id_question = $scope.data.question.id;
-    Answers.addAnswer($scope.newAnswer, id_question).then(function() {
-      $scope.getQuestion();
-    })
+    Users.getUserNameWithId(function(user) {
+      $scope.newAnswer.user = user.id;
+      Answers.addAnswer($scope.newAnswer, id_question).then(function() {
+        $scope.getQuestion();
+      })
+    });
   };
 
   $scope.updateAnswer = function(index, mod) {
@@ -31,7 +34,8 @@ angular.module('boorish.answers', [])
   };
 
   $scope.updateQuestion = function(mod) {
-    Questions.updateQuestion(mod).then(function() {
+    var questionID = $scope.data.question.id;
+    Questions.updateQuestion(questionID, mod).then(function() {
       $scope.getQuestion();
     })
 
