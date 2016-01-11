@@ -1,21 +1,5 @@
 <div ng-module='boorish.answers'>
   <div ng-model='data.question' class="answer">
-    <!--<div class="answer-votes">-->
-      <!--<a href="" ng-click='updateQuestion("like")'>-->
-        <!--<span class="glyphicon glyphicon-heart"></span>-->
-        <!--<span>{{ data.question.points }}</span>-->
-      <!--</a>-->
-      <!--&lt;!&ndash;<input type='submit' ng-click='updateQuestion("like")' value='like'>&ndash;&gt;-->
-      <!--<a href="" ng-click='updateQuestion("good")'>-->
-        <!--<span class="glyphicon glyphicon-ok-sign"></span>-->
-        <!--<span>{{ data.question.isGood }}</span>-->
-      <!--</a>-->
-      <!--&lt;!&ndash;<input type='submit' ng-click='updateQuestion("good")' value='Good'>&ndash;&gt;-->
-      <!--&lt;!&ndash;<div>{{ data.question.isGood }}</div>&ndash;&gt;-->
-
-      <!--&lt;!&ndash;<input type='submit' ng-click='updateQuestion("answered")' value='Answered'>&ndash;&gt;-->
-      <!--&lt;!&ndash;<div>{{ data.question.isAnswered }}</div>&ndash;&gt;-->
-    <!--</div>-->
     <div class="answer-content">
       <div>
         <h1>
@@ -28,11 +12,11 @@
       <div>{{ data.question.tag }}</div>
 
        <!-- number of points current on question -->
-          <div>
+          <a href="" ng-click='updateQuestion("like")'>
             <span class="glyphicon glyphicon-heart"></span>
             <span>{{ question.points }}</span>
             <span>Likes</span>
-          </div>
+          </a>
 
           <!-- number of answers current on question -->
           <div>
@@ -40,9 +24,14 @@
             <span>{{ question.responses }}</span>
             <span>Answers</span>
           </div>
-      <input class="btn btn-default" type='submit' ng-click='removeQuestion(data.question.id)' value='remove'>
+      <input class="btn btn-default" type='submit' ng-click='removeQuestion(data.question.id)' value='Remove'>
+      <input class="btn btn-default" type='submit' ng-click='updateQuestion("good")' value='Approve'>
+      <input class="btn btn-default" type='submit' ng-click='updateQuestion("answered")' value='Answered'>
     </div>
   </div>
+
+
+
   <div ng-model='data.answers'>
     <div ng-repeat='answer in data.answers'>
       <input type='submit' ng-click='updateAnswer($index, "like")' value='like'>
@@ -53,7 +42,7 @@
       <div>{{ answer.user }}</div>
       <div>{{ answer.tag }}</div>
       <div>{{ answer.isGood }}</div>
-      <input type='submit' ng-click='removeAnswer($index)' value='remove'>
+      <input class="btn btn-default" type='submit' ng-click='removeAnswer($index)' value='remove'>
     </div>
   </div>
   <div>
