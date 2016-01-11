@@ -24,7 +24,8 @@ module.exports = {
           createdAt: question.createdAt,
           coursename: question.Course.name,
           tagname: question.Tag.name,
-          user: question.User.name
+          user: question.User.name,
+          imgUrl: question.User.picture
         }
       });
 
@@ -130,7 +131,8 @@ module.exports = {
         coursename: question.Course.name,
         tagname: question.Tag.name,
         user: question.User.name,
-        userid: question.User.id
+        userid: question.User.id,
+        imgUrl: question.User.picture
       }];
 
       db.Post.findAll({
@@ -150,7 +152,8 @@ module.exports = {
             QuestionId: qid,
             user: answer.User.name,
             userid: answer.User.id,
-            createdAt: answer.createdAt
+            createdAt: answer.createdAt,
+            imgUrl: answer.User.picture
           }
         });
 
