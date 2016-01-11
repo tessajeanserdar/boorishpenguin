@@ -48,12 +48,10 @@ angular.module('boorish.services', [])
       return $http({
         method: 'POST',
         url: 'townhall/questions/' + id,
-        data: JSON.stringify({
-          mod: mod
-        })
-        .then(function() {
-          console.log('updated answer');
-        })
+        data: { mod: mod }
+      })
+      .then(function() {
+        console.log('updated answer');
       })
     },
 
@@ -110,10 +108,10 @@ angular.module('boorish.services', [])
           id_answer: answerID,
           mod: mod
         })
-        .then(function() {
-          console.log('updated answer');
-        })
       })
+      .then(function() {
+        console.log('updated answer');
+      });
     },
 
     removeAnswer: function(answerID) {
