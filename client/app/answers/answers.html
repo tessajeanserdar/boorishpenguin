@@ -17,11 +17,30 @@
       <!--&lt;!&ndash;<div>{{ data.question.isAnswered }}</div>&ndash;&gt;-->
     <!--</div>-->
     <div class="answer-content">
-      <div><h1>{{ data.question.title }}</h1></div>
+      <div>
+        <h1>
+          {{ data.question.title }}
+          <span class="glyphicon glyphicon-ok-sign" ng-if="data.question.isGood == false"></span>
+        </h1>
+      </div>
       <div>{{ data.question.text }}</div>
       <div>{{ data.question.user }}</div>
       <div>{{ data.question.tag }}</div>
-      <!--<input type='submit' ng-click='removeQuestion(data.question.id)' value='remove'>-->
+
+       <!-- number of points current on question -->
+          <div>
+            <span class="glyphicon glyphicon-heart"></span>
+            <span>{{ question.points }}</span>
+            <span>Likes</span>
+          </div>
+
+          <!-- number of answers current on question -->
+          <div>
+            <span class="glyphicon glyphicon-comment"></span>
+            <span>{{ question.responses }}</span>
+            <span>Answers</span>
+          </div>
+      <input class="btn btn-default" type='submit' ng-click='removeQuestion(data.question.id)' value='remove'>
     </div>
   </div>
   <div ng-model='data.answers'>
@@ -40,9 +59,9 @@
   <div>
     <h3>Answer this question:</h3>
     <form>
-      <textarea rows='5' cols='80' ng-model='newAnswer.text' placeholder='Write your answer'></textarea></br>
-      <input type='reset' value='Cancel'>
-      <input type='submit' ng-click='addAnswer()' value='Submit answer'>
+      <textarea class="form-control" rows='5' cols='80' ng-model='newAnswer.text' placeholder='Write your answer'></textarea></br>
+      <input class="btn btn-default" type='reset' value='Cancel'>
+      <input class="btn btn-primary" type='submit' ng-click='addAnswer()' value='Submit answer'>
     </form>
   </div>
 </div>
