@@ -127,7 +127,8 @@ module.exports = {
         createdAt: question.createdAt,
         coursename: question.Course.name,
         tagname: question.Tag.name,
-        user: question.User.name
+        user: question.User.name,
+        userid: question.User.id
       }];
 
       db.Post.findAll({
@@ -146,6 +147,7 @@ module.exports = {
             isGood: answer.isGood,
             QuestionId: qid,
             user: answer.User.name,
+            userid: answer.User.id,
             createdAt: answer.createdAt
           }
         });

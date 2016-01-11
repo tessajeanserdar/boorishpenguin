@@ -1,6 +1,6 @@
 angular.module('boorish.answers', [])
 
-.controller('answersController', function($scope, $location, Answers, Questions, Users) {
+.controller('answersController', function($scope, $location, $window, Answers, Questions, Users) {
   $scope.data = {};
   $scope.newAnswer = {};
 
@@ -35,9 +35,14 @@ angular.module('boorish.answers', [])
 
   $scope.updateQuestion = function(mod) {
     var questionID = $scope.data.question.id;
+    var user = $window.localStorage.getItem('com.boorish');
+    console.log(user)
+    if (mod === 'answered' && $scope.data.question.userid.toString() !== user) {
+      throw 'You are not authorized because you did not post this question'
+    }
     Questions.updateQuestion(questionID, mod).then(function() {
       $scope.getQuestion();
-    })
+    });
   }
 
   $scope.removeQuestion = function() {
