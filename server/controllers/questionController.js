@@ -25,7 +25,8 @@ module.exports = {
           coursename: question.Course.name,
           tagname: question.Tag.name,
           user: question.User.name,
-          imgUrl: question.User.picture
+          imgUrl: question.User.picture,
+          updatedAt: question.updatedAt
         }
       });
 
@@ -132,7 +133,8 @@ module.exports = {
         tagname: question.Tag.name,
         user: question.User.name,
         userid: question.User.id,
-        imgUrl: question.User.picture
+        imgUrl: question.User.picture,
+        updatedAt: question.updatedAt
       }];
 
       db.Post.findAll({
