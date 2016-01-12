@@ -104,7 +104,7 @@ module.exports = {
                   });
                 });
               } else {
-                return answer.removeVote(user)
+                return answer.removeVote(requester)
                 .then(function() {
                   return answer.update({
                     points: answer.points - 1

@@ -192,33 +192,42 @@ module.exports = {
         var authorname = user.username;
 
         if (mod === 'like') {
-          question.getVote({where: ['UserId='+user.id+' AND PostId='+question.id]})
-          .then(function(result) {
-            if (!result.length) {
-              return question.addVote(user)
-              .then(function() {
-                return question.update({
-                  points: question.points + 1
-                });
-              })
-              .then(function(question) {
-                return user.update({
-                  points: user.points + 1
-                });
-              });
-            } else {
-              return question.removeVote(user)
-              .then(function() {
-                return question.update({
-                  points: question.points - 1
-                });
-              })
-              .then(function(question) {
-                return user.update({
-                  points: user.points -1
-                });
-              });
+          db.User.find({
+            where: {
+              username: reqName
             }
+          })
+          .then(function(requester) {
+            return question.getVote({
+              where: ['UserId='+requester.id+' AND PostId='+question.id]
+            })
+            .then(function(result) {
+              if (!result.length) {
+                return question.addVote(requester)
+                .then(function() {
+                  return question.update({
+                    points: question.points + 1
+                  });
+                })
+                .then(function(question) {
+                  return user.update({
+                    points: user.points + 1
+                  });
+                });
+              } else {
+                return question.removeVote(requester)
+                .then(function() {
+                  return question.update({
+                    points: question.points - 1
+                  });
+                })
+                .then(function(question) {
+                  return user.update({
+                    points: user.points -1
+                  });
+                });
+              }
+            });
           })
           .then(function() {
             res.status(201).json(question);
