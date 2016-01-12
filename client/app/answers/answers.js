@@ -71,7 +71,9 @@ angular.module('boorish.answers', [])
 
   $scope.removeAnswer = function(index) {
     var answerID = $scope.data.answers[index].id; // pulls the answer id of the selected answer
-    Answers.removeAnswer(answerID); // removes answer
+    Answers.removeAnswer(answerID).then(function() {
+      $scope.getQuestion();
+    }); // removes answer
   };
 
   $scope.QuestionisPostedByLoggedInUser = function() {
