@@ -18,13 +18,4 @@ angular.module('boorish.auth', [])
         console.error(error);
       });
   };
-
-  $scope.signin = function() {
-    Auth.setUser();
-    var user = Auth.isAuth();
-
-    if (!user) {
-      $location.path('/signin');
-    } else { }
-  }
 });

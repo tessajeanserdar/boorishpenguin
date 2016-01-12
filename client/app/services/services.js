@@ -1,5 +1,7 @@
 angular.module('boorish.services', [])
 
+// Questions factory handles all requests to add, retrieve, or modify questions in the database
+
 .factory('Questions', function($http, $location) {
   return {
     // add a question from /ask
@@ -25,31 +27,31 @@ angular.module('boorish.services', [])
         url: '/townhall/questions/'
       })
       .then(function(res) {
-        return res.data;
+        return res.data; // returns all questions
       })
     },
 
-    getQuestion: function(path) { // TODO: Ask Steven about how to send this GET
+    getQuestion: function(path) { 
       return $http({
         method: 'GET',
         url: '/townhall' + path
       })
       .then(function(res) {
-        return res;
+        return res; // returns question and related answers
       })
     },
 
+    // updates a question. takes in the id of the question and the required modification
     updateQuestion: function(id, mod) {
-      // code to update a question when there is a new like or has been marked as answered
       return $http({
         method: 'POST',
         url: 'townhall/questions/' + id,
-        data: { mod: mod }
+        data: { mod: mod } // possible mods = 'like' to increase like points, 'good' to mark as good (by teacher), 'answered', 'closed'
       })
     },
 
+    // removes a question. Only available to the user who posted it or a Teacher (isAdmin = true)
     removeQuestion: function(questionID) {
-      // code to remove a question by the user who posted it or isAdmin
       return $http({
         method: 'DELETE',
         url: 'townhall/questions/' + questionID
@@ -58,10 +60,12 @@ angular.module('boorish.services', [])
   }
 })
 
+// Answers factory handles all requests to add, retrieve, or modify answers in the database
+
 .factory('Answers', function($http) {
 
   return {
-
+    // get all answers
     getAnswers: function() {
       return $http({
         method: 'GET',
@@ -72,6 +76,7 @@ angular.module('boorish.services', [])
       })
     },
 
+    // adds an answer to a question. requires the answer object and question ID
     addAnswer: function(answer, questionID) {
 
       return $http({
@@ -85,17 +90,19 @@ angular.module('boorish.services', [])
       })
     },
 
+    // updates an answer. requires the answerID and requested modification (mod). mod is a string.
     updateAnswer: function(answerID, mod) {
       return $http({
         method: 'POST',
         url: 'townhall/answers/' + answerID,
         data: JSON.stringify({
           id_answer: answerID,
-          mod: mod
+          mod: mod // possible mods: 'like' to increase the number of points on a question, 'good' to mark as good
         })
       })
     },
 
+    // removes an answer. requires the id of the answer
     removeAnswer: function(answerID) {
       return $http({
         method: 'DELETE',
@@ -106,8 +113,13 @@ angular.module('boorish.services', [])
   }
 })
 
+// Users factory handles all requests to add and retrieve users in the database
+
 .factory('Users', function($http, $window){
-    var allUsers = function(){
+
+  return {
+
+    allUsers: function(){
       return $http({
         method: 'GET',
         url: '/townhall/users'
@@ -115,10 +127,10 @@ angular.module('boorish.services', [])
       .then(function(res){
         return res.data;
       });
-    };
+    },
 
-
-    var getUserWithId = function() {
+    // users the userID that is stored in localStorage to obtain the user from the database
+    getUserWithId: function() {
       var userID = $window.localStorage.getItem('com.boorish');
       return $http({
         method: 'GET',
@@ -126,9 +138,9 @@ angular.module('boorish.services', [])
       }).then(function(res) {
         return res.data.results.id;
       })
-    };
+    },
 
-    var addUser = function(user){
+    addUser: function(user) {
       return $http({
         method: 'POST',
         url: '/townhall/users',
@@ -142,18 +154,17 @@ angular.module('boorish.services', [])
           picture: user.picture
         })
       })
-    };
-
-    return {
-      allUsers: allUsers,
-      getUserWithId: getUserWithId,
-      addOne: addUser
     }
 
-  })
+  };
+})
+
+// Tags and Course factories just pull Tags and Courses from the database
 
 .factory('Tags', function($http) {
+  
   return {
+
     getTags: function() {
       return $http({
         method: 'GET',
@@ -163,11 +174,14 @@ angular.module('boorish.services', [])
         return res.data;
       });
     }
+
   };
 })
 
 .factory('Courses', function($http) {
+  
   return {
+
     getCourses: function() {
       return $http({
         method: 'GET',
@@ -178,6 +192,7 @@ angular.module('boorish.services', [])
         return res.data;
       });
     }
+
   };
 })
 
@@ -185,6 +200,7 @@ angular.module('boorish.services', [])
   var user = {};
 
   return {
+    
     setUser: function () {
       return $http({
         method: 'GET',
