@@ -1,7 +1,7 @@
 <div ng-module='boorish.questions' >
   <h1>Questions</h1>
 
-      <div ng-repeat='question in questions' class="question-list-item">
+      <div ng-repeat='question in questions | filter:searchText' class="question-list-item">
         <div class="col-sm-2 col-xs-3">
          img url:  <a>{{ question.imgUrl }}</a>
           <div>
