@@ -27,7 +27,7 @@ module.exports = {
           })
           .then(function(answer) {
             question.update({
-              updatedAt: Sequelize.fn('NOW');
+              updatedAt: Sequelize.fn('NOW')
             })
             .then(function() {
               return user.update({
