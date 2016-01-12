@@ -81,33 +81,42 @@ module.exports = {
             }
           });
         } else if (mod === 'like') {
-          answer.getVote({where: ['UserId='+user.id+' AND PostId='+answer.id]})
-          .then(function(result) {
-            if (!result.length) {
-              return answer.addVote(user)
-              .then(function() {
-                return answer.update({
-                  points: answer.points + 1
-                });
-              })
-              .then(function(answer) {
-                return user.update({
-                  points: user.points + 1
-                });
-              });
-            } else {
-              return answer.removeVote(user)
-              .then(function() {
-                return answer.update({
-                  points: answer.points - 1
-                });
-              })
-              .then(function(answer) {
-                return user.update({
-                  points: user.points - 1
-                });
-              });
+          db.User.find({
+            where: {
+              username: reqName
             }
+          })
+          .then(function(requester) {
+            return answer.getVote({
+              where: ['UserId='+requester.id+' AND PostId='+answer.id]
+            })
+            .then(function(result) {
+              if (!result.length) {
+                return answer.addVote(user)
+                .then(function() {
+                  return answer.update({
+                    points: answer.points + 1
+                  });
+                })
+                .then(function(answer) {
+                  return user.update({
+                    points: user.points + 1
+                  });
+                });
+              } else {
+                return answer.removeVote(user)
+                .then(function() {
+                  return answer.update({
+                    points: answer.points - 1
+                  });
+                })
+                .then(function(answer) {
+                  return user.update({
+                    points: user.points - 1
+                  });
+                });
+              }
+            });
           })
           .then(function() {
             res.status(201).json(answer);
