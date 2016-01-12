@@ -1,11 +1,12 @@
 <div ng-module='boorish.questions' >
-  <h1>Questions</h1>
+  <h3>Questions</h3>
+
+    <hr>
 
       <div ng-repeat='question in questions | filter:searchText' class="question-list-item">
         <div class="col-sm-2 col-xs-3">
-         img url:  <a>{{ question.imgUrl }}</a>
           <div>
-            <img src="https://pixabay.com/static/uploads/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" width="64" height="64">
+            <img ng-src="{{ question.imgUrl }}0" width="50" height="50">
           </div>
           <!-- number of points current on question -->
           <div>
@@ -32,7 +33,9 @@
           <div class="tag">{{ question.tagname }}</div>
           <div>- asked by {{ question.user }} at {{ question.createdAt }}</div>
         </div>
+        <hr>
       </div>
+  <!--<hr>-->
 </div>
 
 

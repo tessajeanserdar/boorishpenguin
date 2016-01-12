@@ -2,12 +2,11 @@
   <div ng-model='data.question' class="question-page-item">
     <div class="answer-content">
       <div class="question-header">
-        <h1 class="">
+        <h3 class="">
           {{ data.question.title }}
-          <span class="glyphicon glyphicon-ok-sign" ng-if="data.question.isGood == false"></span>
-        </h1>
-
-        <div class="dropdown" style="margin-left: auto">
+          <span class="glyphicon glyphicon-ok-sign" ></span>
+        </h3>
+        <div class="dropdown" style="margin-left: auto" ng-if="data.user == true">
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             Mark
             <span class="caret"></span>
@@ -17,54 +16,67 @@
             <li><a href="" type='submit' ng-click='updateQuestion("answered")'>Answered</a></li>
           </ul>
         </div>
-        <input class="btn btn-default" type='submit' ng-click='removeQuestion(data.question.id)' value='Remove'>
-
       </div>
       <hr>
-      <div>{{ data.question.text }}</div>
-      <div>{{ data.question.user }}</div>
+      <div class="col-xs-4">
+        <div>
+          <img ng-src="{{ data.question.imgUrl }}0" width="64" height="64">
+        </div>
+        <!-- number of points current on question -->
+        <a href="" type='submit'  ng-click='updateQuestion("like")'>
+          <span class="glyphicon glyphicon-heart"></span>
+          <span>{{ data.question.points }}</span>
+          <span>Likes</span>
+        </a>
+      </div>
+      <div class="col-xs-8">
+        <div>{{ data.question.text }}</div>
+        <div>- {{ data.question.user }}</div>
+        <div class="course">{{ data.question.coursename }}</div>
+        <div class="tag">{{ data.question.tagname }}</div>
+        <input class="btn btn-default" type='submit' ng-click='removeQuestion(data.question.id)' value='Remove'>
+      </div>
+    </div>
+  </div>
 
-       <!-- number of points current on question -->
-          <a href="" type='submit'  ng-click='updateQuestion("like")'>
-            <span class="glyphicon glyphicon-heart"></span>
-            <span>{{ data.question.points }}</span>
-            <span>Likes</span>
-          </a>
-
-          <!-- number of answers current on question -->
-          <!--<div>-->
-            <!--<span class="glyphicon glyphicon-comment"></span>-->
-            <!--<span>{{ question.responses }}</span>-->
-            <!--<span>Answers</span>-->
-          <!--</div>-->
-
-
-          <div class="course">{{ data.question.coursename }}</div>
-          <div class="tag">{{ data.question.tagname }}</div>
-
-      <!--<input class="btn btn-default" type='submit' ng-click='updateQuestion("good")' value='Approve'>-->
-      <!--<input class="btn btn-default" type='submit' ng-click='updateQuestion("answered")' value='Answered'>-->
+   <div ng-model='data.answers'  >
+     <div class="answer-content">
+      <h3>{{data.answers.length}} Answers</h3>
       <hr>
+      <div ng-repeat='answer in data.answers' class="answer-page-item">
+        <div class="col-xs-4">
+          <div>
+            <img ng-src="{{ answer.imgUrl }}0" width="64" height="64">
+          </div>
+          <div>
+            <a href="" type='submit'  ng-click='updateAnswer($index, "like")'>
+              <span class="glyphicon glyphicon-heart"></span>
+              <span>{{ answer.points }}</span>
+              <span>Likes</span>
+            </a>
+          </div>
+          <div>
+            <a href="" type='submit'  ng-click='updateAnswer($index, "good")'>
+              <span class="glyphicon glyphicon-ok-sign ng-scope"></span>
+              <span>{{ answer.isGood }}</span>
+              <!--<span>Likes</span>-->
+            </a>
+          </div>
+          <!--<input class="btn btn-default" type='submit' ng-click='updateAnswer($index, "good")' value='Good'>-->
+          <!-- <input type='submit' ng-click='updateAnswer($index, "answered")' value='Answered'> -->
+        </div>
+        <div class="col-xs-8">
+          <div>{{ answer.text }}</div>
+          <div>- {{ answer.user }}</div>
+          <!--<div>{{ answer.isGood }}</div>-->
+          <input class="btn btn-default" type='submit' ng-click='removeAnswer($index)' value='remove'>
+        </div>
+      </div>
     </div>
   </div>
 
-
-
-  <div ng-model='data.answers'>
-    <div ng-repeat='answer in data.answers'>
-      <input class="btn btn-default" type='submit' ng-click='updateAnswer($index, "like")' value='Like'>
-      <input class="btn btn-default" type='submit' ng-click='updateAnswer($index, "good")' value='Good'>
-      <!-- <input type='submit' ng-click='updateAnswer($index, "answered")' value='Answered'> -->
-      <div>{{ answer.points }}</div>
-      <div>{{ answer.text }}</div>
-      <div>{{ answer.user }}</div>
-      <div>{{ answer.tag }}</div>
-      <div>{{ answer.isGood }}</div>
-      <input class="btn btn-default" type='submit' ng-click='removeAnswer($index)' value='remove'>
-    </div>
-  </div>
   <div>
-    <h3>Answer this question:</h3>
+    <h3>Your answer</h3>
     <form>
       <textarea class="form-control" rows='5' cols='80' ng-model='newAnswer.text' placeholder='Write your answer'></textarea></br>
       <input class="btn btn-default" type='reset' value='Cancel'>
