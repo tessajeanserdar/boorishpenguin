@@ -57,7 +57,7 @@ select {
 }
 
 .question-list-item {
-  border-top: 1px solid lightgray;
+  border-bottom: 1px solid #eeeeee;
   padding: 5px 5px 15px 5px;
   width: 100%;
 
