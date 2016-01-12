@@ -92,7 +92,7 @@ module.exports = {
             })
             .then(function(result) {
               if (!result.length) {
-                return answer.addVote(user)
+                return answer.addVote(requester)
                 .then(function() {
                   return answer.update({
                     points: answer.points + 1
