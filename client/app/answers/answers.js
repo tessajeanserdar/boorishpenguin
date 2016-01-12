@@ -74,6 +74,20 @@ angular.module('boorish.answers', [])
     Answers.removeAnswer(answerID); // removes answer
   };
 
+  $scope.QuestionisPostedByLoggedInUser = function() {
+    var userID = $window.localStorage.getItem('com.boorish');
+    Users.getUserWithId(userID).then(function(user) {
+      return user.id === $scope.data.question.userid;
+    });
+  };
+
+  $scope.AnswerisPostedByLoggedInUser = function(index) {
+    var userID = $window.localStorage.getItem('com.boorish');
+    Users.getUserWithId(userID).then(function(user) {
+      console.log(user.id === $scope.data.answers[index].userid);
+    });
+  };
+
   if (!Auth.isAuth()) {
     $location.path('/signin');
   } else {
