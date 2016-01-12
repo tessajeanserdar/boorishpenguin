@@ -1,8 +1,10 @@
 body {
 }
 
-h1 {
-
+h3 {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #555555;
 }
 
 select {
@@ -122,5 +124,9 @@ select {
 
 .dropdown-label {
   text-align: right;
-  padding-top:5px;
+  padding: 10px 5px;
+}
+
+.dropdown-form * {
+  display: inline-block;
 }
