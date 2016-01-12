@@ -26,8 +26,13 @@ module.exports = {
             TagId: question.TagId
           })
           .then(function(answer) {
-            user.update({
-              points: user.points + 1
+            question.update({
+              updatedAt: Sequelize.fn('NOW');
+            })
+            .then(function() {
+              return user.update({
+                points: user.points + 1
+              });
             })
             .then(function() {
               res.status(201).json(answer);
