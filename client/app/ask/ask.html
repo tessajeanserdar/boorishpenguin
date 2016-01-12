@@ -1,21 +1,25 @@
 <div ng-module='boorish.ask'>
   <form>
-    <h3>My question:</h3>
-    <input type='question' ng-model='question.title'  size = "50" placeholder='What is your question?'></input>
-    <br>
-    <br>
-    <textarea class="form-control" type='question' ng-model='question.text' rows='5' cols='80' placeholder='Add more details'></textarea>a
-    <br />
-     <div class="form-group col-xs-6">
-      <label class="dropdown-label col-xs-4">Course</label>
-      <select class="col-xs-8 form-control" name="courseSelect" ng-model="courseOptions.selectedOption" ng-options="option.name for option in courseOptions.availableOptions track by option.id"></select>
+    <h3>NEW QUESTION</h3>
+    <hr>
+    <div class="dropdown-form form-group">
+      <label class="dropdown-label">Course</label>
+      <select class="form-control" name="courseSelect" ng-model="courseOptions.selectedOption" ng-options="option.name for option in courseOptions.availableOptions track by option.id"></select>
     </div>
-    <div class="col-xs-6 form-group">
-      <label class="dropdown-label col-xs-4">Topic</label>
-      <select class="col-xs-8 form-control" name="tagSelect" ng-model="tagOptions.selectedOption" ng-options="option.name for option in tagOptions.availableOptions track by option.id"></select>
+    <div class="dropdown-form form-group">
+      <label class="dropdown-label">Topic</label>
+      <select class="form-control" name="tagSelect" ng-model="tagOptions.selectedOption" ng-options="option.name for option in tagOptions.availableOptions track by option.id"></select>
+    </div>
+    <div class="form-group">
+    <input class="form-control" type='question' ng-model='question.title'  size = "50" placeholder='What is your question?'>
+    </div>
+    <div class="form-group">
+      <textarea class="form-control" type='question' ng-model='question.text' rows='5' cols='80' maxlength="255" ng-trim="false" placeholder='Add more details'></textarea>
+      <span>Characters left: {{255 - question.text.length}}</span>
     </div>
 
-    <div class="col-xs-12 form-group">
+
+    <div class="form-group pull-right">
     <input class="btn btn-default" type='reset' value='Cancel'>
     <input class="btn btn-primary" type='submit' ng-click='addQuestion()' value='Ask question'>
     </div>
