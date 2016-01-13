@@ -1,11 +1,19 @@
 var Sequelize = require('sequelize');
 
-var database = process.env.DATABASE || 'c4knetps2i8qgt4b';
-var dbUser = process.env.DBUSER || 'h26f58zju3ge35hv';
-var dbPass = process.env.DBPASS;
-var dbHost = process.env.DBHOST || 'jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
+// var database = process.env.DATABASE || 'c4knetps2i8qgt4b';
+// var dbUser = process.env.DBUSER || 'h26f58zju3ge35hv';
+// var dbPass = process.env.DBPASS;
+// var dbHost = process.env.DBHOST || 'jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
 
-var db = new Sequelize(database, dbUser, dbPass, {
+// var db = new Sequelize(database, dbUser, dbPass, {
+//   host: dbHost
+// });
+
+var database = 'TEST4';
+var dbUser = 'root';
+var dbHost = '127.0.0.1';
+
+var db = new Sequelize(database, dbUser, "", {
   host: dbHost
 });
 

@@ -23,6 +23,7 @@ module.exports = function(app, express, ensureAuth) {
   app.post('/townhall/signup', userControllers.newUser);
 
   app.get('/townhall/courses', ensureAuth, courseControllers.allCourses);
+  app.get('/townhall/courses/:id', ensureAuth, courseControllers.allCoursesForUser);
   app.post('/townhall/CourseUsers', ensureAuth, courseControllers.addUser);
 
   app.get('/townhall/tags', ensureAuth, tagControllers.allTags);

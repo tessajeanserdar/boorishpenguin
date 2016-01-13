@@ -23,5 +23,43 @@ module.exports = {
     db.CourseUser.create(userCourse).then(function (task) {
       res.sendStatus(200);
     });
+  },
+
+  allCoursesForUser: function(req, res) {
+    var uid = req.params.id;
+    uid = +uid.slice(1);
+    console.log('user id: ', uid);
+    db.CourseUser.findAll({
+      where: {
+        UserId: uid
+      }
+    }).then(function(courses) {
+      var courseIds = courses.map(function (obj) {
+        return obj.CourseId;
+      });
+      var allCourses = {};
+
+      db.Course.findAll({
+        where: {
+          id: {
+            $notIn: courseIds
+          }
+        }
+      }).then(function (coursesNotIn) {
+        allCourses.userNotIn = coursesNotIn;
+        db.Course.findAll({
+          where: {
+            id: {
+              $in: courseIds
+            }
+          }
+        })
+        .then(function (coursesIn) {
+          allCourses.userIn = coursesIn;
+          res.json(allCourses);
+        });
+      })
+
+    });
   }
 };
