@@ -1,0 +1,36 @@
+<!-- client/app/users/user.html -->
+<div ng-module='boorish.user'>
+
+  <h3>User</h3>
+  <div ng-model='user' ng-controller='UserController'>
+
+  
+
+  <div clas="container">
+    <div class="row">
+      <div class="col-sm-2">
+        <img ng-src="{{ user.picture }} " width="50" height="50">
+      </div>
+      <div class="col-sm-8">
+        <h2 class="user-title">Welcome, {{user.username}} !</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">Your Classes</div>
+      <span></span>
+        <!-- <div ng-repeat='question in questions | FILTER:USERNAME? | orderBy:"-updatedAt"' class="questions-list-item"> -->
+      <div class="col-sm-8">All Activity</div>
+      <span></span>
+  </div>
+
+<!--     // <ul>
+    //   <li ng-repeat="user in users">
+    //     <span>{{user.name}}</span>
+    //   </li>
+
+    All Activity
+    Questo
+    // </ul> -->
+
+  </div>
+</div>

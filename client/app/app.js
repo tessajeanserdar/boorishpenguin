@@ -1,6 +1,7 @@
 angular.module('boorishpenguin', [
   'boorish.services',
   'boorish.users',
+  'boorish.user',
   'boorish.ask',
   'boorish.questions',
   'boorish.answers',
@@ -29,6 +30,10 @@ angular.module('boorishpenguin', [
     .when('/users', {
       templateUrl: 'app/users/users.html',
       controller: 'UsersController'
+    })
+    .when('/users/user', {
+      templateUrl: 'app/users/user.html',
+      controller: 'UserController'
     })
     .when('/signin', {
       templateUrl: 'app/auth/signin.html',
