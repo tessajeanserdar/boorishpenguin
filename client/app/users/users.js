@@ -18,7 +18,7 @@ angular.module('boorish.users', [])
 
     $scope.allUsers = function(){
       Users.allUsers().then(function(users){
-        $scope.users = users;
+        // $scope.users = users;
       })
     };
 

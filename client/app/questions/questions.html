@@ -73,7 +73,7 @@
       <div ng-show="listFilter==='myClasses'" ng-repeat='question in userCourseQuestions track by $index | filter:searchText | orderBy:"-updatedAt"' class="question-list-item">
         <div class="col-sm-2 col-xs-3">
           <div>
-            <img ng-src="{{ question.imgUrl }}0" width="50" height="50">
+            <a href='#/users/user'><img ng-src="{{ question.imgUrl }}0" width="50" height="50"></a>
           </div>
           <!-- number of points current on question -->
           <div>

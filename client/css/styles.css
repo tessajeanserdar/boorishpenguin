@@ -192,3 +192,16 @@ select {
 .border-left {
   border-left: 1px solid #EEEEEE;
 }
+
+.class-list {
+  list-style-type: none;
+  padding-left: 0;
+  background-color: gray;
+}
+
+/*.profile-header {
+  display: inline;
+  white-space: nowrap;
+}*/
+
+>>>>>>> User profile page in progress
