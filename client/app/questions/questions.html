@@ -1,4 +1,13 @@
-<div ng-module='boorish.questions' >
+<div class="col-md-4">
+  <ul>
+    <li ng-repeat="course in courses">
+      <p>{{course.name}}</p>
+      <button ng-click="addToCourse(courses.indexOf(course))">Join Class</button>
+    </li>
+  </ul>
+</div>
+
+<div ng-module='boorish.questions' class="col-md-8">
   <h3>Questions</h3>
 
     <hr>

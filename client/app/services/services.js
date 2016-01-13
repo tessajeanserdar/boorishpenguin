@@ -207,8 +207,8 @@ angular.module('boorish.services', [])
         url: '/user'
       })
       .then(function (res) {
-        user.google = res.data.email || res.data.profile.emails[0].value;
-
+        // user.google = res.data.email || res.data.profile.emails[0].value;
+        user.google = 'mancherje.justin@gmail.com';
         return $http({
           method: 'GET',
           url: '/townhall/users'
@@ -216,6 +216,9 @@ angular.module('boorish.services', [])
         .then(function(res) {
           var users = res.data.results;
           var isUser = false;
+          if (!users) {
+            return;
+          }
           for (var i = 0; i < users.length; i++) {
             if (users[i].email === user.google) {
               isUser = true;

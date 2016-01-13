@@ -15,5 +15,13 @@ module.exports = {
       courses.results = formattedCourses;
       res.json(courses);
     });
+  },
+
+  addUser: function(req, res) {
+    var userCourse = req.body;
+    console.log(userCourse);
+    db.CourseUser.create(userCourse).then(function (task) {
+      res.sendStatus(200);
+    });
   }
 };
