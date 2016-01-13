@@ -3,8 +3,6 @@ angular.module('boorish.questions', [])
 .controller('questionsController', function($scope, $location, $http, Questions, Auth, Courses) {
   $scope.questions = [];
   $scope.courses = [];
-  Auth.setUser();
-
   $scope.userId = localStorage.getItem('com.boorish');
 
   $scope.addToCourse = function (index) {
@@ -32,11 +30,18 @@ angular.module('boorish.questions', [])
     
   };
 
-  // if user is not authenticated, reroute to /signin
-  if (!Auth.isAuth()) {
-    $location.path('/signin') 
-  // else show questions
-  } else {
-    $scope.init();
-  }
+
+  //On initial reroute after Google Authentication Set the User
+  Auth.setUser()
+  .then(function(){
+    // if user is not authenticated, reroute to /signin
+    if (!Auth.isAuth()) {
+      console.log("Failed isAuth check")
+      $location.path('/signin') 
+    // else show questions
+    } else {
+      $scope.init();
+    }
+  })
+
 });

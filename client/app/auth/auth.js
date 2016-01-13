@@ -7,15 +7,10 @@ angular.module('boorish.auth', [])
     $http({
       method: 'GET',
       url: '/townhall/users'
-    }).then(function(res) {
-      var users = res.results;
-      $window.localStorage.setItem('com.boorish', users);
     })
-    Auth.setUser().then(function() {
-      $location.path('/questions');
-    })
-      .catch(function (error) {
+    .catch(function (error) {
         console.error(error);
-      });
+    });
+
   };
 });
