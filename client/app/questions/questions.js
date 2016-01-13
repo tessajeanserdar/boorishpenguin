@@ -24,8 +24,10 @@ angular.module('boorish.questions', [])
       $scope.questions = data.results;
     });
 
-    Courses.getCourses().then(function (data) {
-      $scope.courses = data.results;
+    Courses.getAllCoursesForUser($scope.userId).then(function (data) {
+      console.log(data);
+      $scope.userInCourses = data.userIn;
+      $scope.userNotInCourses = data.userNotIn;
     });
     
   };

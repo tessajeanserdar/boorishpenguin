@@ -1,6 +1,7 @@
 <div class="col-md-4">
+  <h2>Join a new class</h2>
   <ul>
-    <li ng-repeat="course in courses">
+    <li ng-repeat="course in userInCourses">
       <p>{{course.name}}</p>
       <button ng-click="addToCourse(courses.indexOf(course))">Join Class</button>
     </li>
