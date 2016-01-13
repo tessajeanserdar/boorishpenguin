@@ -196,6 +196,10 @@ select {
 .class-list {
   list-style-type: none;
   padding-left: 0;
+<<<<<<< a3f2049f0d70bd5276ee1a60761faf669e42cff9:client/css/styles.css
+=======
+  background-color: gray;
+>>>>>>> User profile page in progress:client/styles.css
 }
 
 /*.profile-header {
