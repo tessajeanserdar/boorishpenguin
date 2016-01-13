@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize');
 
-var database = 'TEST4';
+var database = 'test4';
 var dbUser = 'root';
 var dbHost = '127.0.0.1';
 
