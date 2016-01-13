@@ -6,6 +6,7 @@
     <div class="row">
       <div class="col-sm-2">
         <img ng-src="{{ user.picture }} " width="50" height="50">
+        <span>Points: {{user.points}} </span>
       </div>
       <div class = "col-sm-6">
         <h2 class="profile-header user-title">Welcome, {{user.username}} !</h2>
@@ -23,7 +24,8 @@
       </div>
       <div class="col-sm-8">
         <h3>All Activity</h3>
-        <!-- <div ng-repeat='question in questions | FILTER:USERNAME? | orderBy:"-updatedAt"' class="questions-list-item"> -->
+          
+
       </div>
   </div>
 </div>
