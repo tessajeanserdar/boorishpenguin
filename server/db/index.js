@@ -1,11 +1,11 @@
 var Sequelize = require('sequelize');
 
-var database = process.env.DATABASE || 'jmuspkeyvjzsvvwp';
-var dbUser = process.env.DBUSER || 'htmaaabw4pe3k9ja';
-var dbPass = process.env.DBPASS;
-var dbHost = process.env.DBHOST || 'jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
+var database = 'TEST4';
+var dbUser = 'root';
+// var dbPass = process.env.DBPASS;
+var dbHost = '127.0.0.1'
 
-var db = new Sequelize(database, dbUser, dbPass, {
+var db = new Sequelize(database, dbUser, "",{
   host: dbHost
 });
 
@@ -50,6 +50,11 @@ var Post = db.define('Post', {
     allowNull: false,
     defaultValue: false
   },
+  isAResource: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
   points: {
     type: Sequelize.INTEGER,
     allowNull: false,
@@ -87,12 +92,12 @@ var Like = db.define('Like', {
     timestamps: false
 });
 
-Course.belongsToMany(User, {
-  through: 'CourseUser'
+var CourseUser = db.define('CourseUser', {
+  }, {
+    timestamps: false
 });
-User.belongsToMany(Course, {
-  through: 'CourseUser'
-});
+
+
 
 User.hasMany(Post);
 Post.belongsTo(User);
@@ -101,6 +106,11 @@ Post.belongsTo(Tag);
 Course.hasMany(Post);
 Post.belongsTo(Course);
 Post.hasMany(Post, {as: 'Responses', foreignKey: 'QuestionId'});
+
+// makes join table for users and courses
+// makes foreign keys that are userId and courseId
+Course.belongsToMany(User, { through: 'CourseUser'});
+User.belongsToMany(Course, { through: 'CourseUser'});
 
 Post.belongsToMany(User, {as: 'Vote', through: 'Like'});
 User.belongsToMany(Post, {through: 'Like'});
@@ -117,9 +127,14 @@ User.sync()
 })
 .then(function() {
   return Like.sync();
+})
+.then(function() {
+  return CourseUser.sync();
 });
 
 exports.User = User;
 exports.Course = Course;
 exports.Tag = Tag;
 exports.Post = Post;
+exports.CourseUser = CourseUser;
+
