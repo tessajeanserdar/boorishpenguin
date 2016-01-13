@@ -1,8 +1,12 @@
 body {
 }
+<<<<<<< 63b9b951ce609b1437be979fc48310a4249c16d6
 #logout {
   cursor: pointer;
 }
+=======
+
+>>>>>>> user profile has activity links
 h3 {
   font-weight: bold;
   text-transform: uppercase;
@@ -154,4 +158,14 @@ select {
 
 .question-filter {
   cursor: pointer;
+}
+.class-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/*#activity-nav > li {*/
+.nav-link {
+  font-size: 24px;
+  font-weight: 500;
 }
