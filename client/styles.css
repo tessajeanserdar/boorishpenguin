@@ -1,6 +1,8 @@
 body {
 }
-
+#logout {
+  cursor: pointer;
+}
 h3 {
   font-weight: bold;
   text-transform: uppercase;
