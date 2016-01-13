@@ -207,14 +207,17 @@ angular.module('boorish.services', [])
         url: '/user'
       })
       .then(function (res) {
-        // user.google = res.data.email || res.data.profile.emails[0].value;
-        user.google = 'mancherje.justin@gmail.com';
+        //TODO - REMOVE IF BLOCK
+        if(res.data) {
+          user.google = res.data.email || res.data.profile.emails[0].value;
+        }
+
         return $http({
           method: 'GET',
           url: '/townhall/users'
         })
         .then(function(res) {
-          var users = res.data.results;
+          var users = res.data.results || [];
           var isUser = false;
           if (!users) {
             return;
@@ -228,6 +231,7 @@ angular.module('boorish.services', [])
           if (isUser) {
             $window.localStorage.setItem('com.boorish', user.id);
           } else {
+            console.log("Redirect to signin from setUser")
             $location.path('/signin');
           }
         })
