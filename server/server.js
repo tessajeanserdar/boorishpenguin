@@ -1,3 +1,4 @@
+//Check for Enviornment Variables
 if(process.env.NODE_ENV !== 'production'){
   require('dotenv').load();
 }
