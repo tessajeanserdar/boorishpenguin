@@ -90,32 +90,33 @@ module.exports = {
   },
   courseQuestions: function(req,res){
     var cid = req.params.id;
-    console.log("hit the route");
+    var response = {};
+    response.results = {};
 
     db.Post.findAll({
       where: {
         CourseId : cid
       }
-    }).then(function(data) {
-      response = {};
-      response.results = data
-      res.send(response);
+    }).then(function(questions) {
+      response.results.questions = questions;
+    }).then(function(){
+      db.CourseUser.findAll({
+        where: {
+          CourseId : cid
+        }
+      }).then(function(students) {
+        response.results.students = students;
+      })
+    }).then(function(){
+      db.Course.findAll({
+        where: {
+          id : cid
+        }
+      }).then(function(classinfo) {
+        response.results.classinfo = classinfo;
+        res.send(response);
+      })
     })
   } 
-
-  // courseUsers: function(req,res){
-  //   var cid = req.params.id;
-  //   console.log("hit the route");
-
-  //   db.Post.findAll({
-  //     where: {
-  //       CourseId : cid
-  //     }
-  //   }).then(function(data) {
-  //     response = {};
-  //     response.results = data
-  //     res.send(response);
-  //   })
-  // }
 
 };
