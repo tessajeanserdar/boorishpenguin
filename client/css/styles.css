@@ -151,3 +151,18 @@ select {
 .dropdown-form * {
   display: inline-block;
 }
+
+.question-filter {
+  cursor: pointer;
+  display: inline;
+  float: left;
+  margin-left: 15px;
+}
+
+.question-filter-ul {
+  list-style: none;
+}
+
+.class-sidebar-li {
+
+}
