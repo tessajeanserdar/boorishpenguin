@@ -26,7 +26,7 @@ module.exports = {
 
   addUser: function(req, res) {
     var userCourse = req.body;
-    db.CourseUser.create(userCourse).then(function (task) {
+    db.CourseUser.create(userCourse).then(function () {
       res.sendStatus(200);
     });
   },
