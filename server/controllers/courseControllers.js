@@ -101,5 +101,21 @@ module.exports = {
       response.results = data
       res.send(response);
     })
-  }
+  } 
+
+  // courseUsers: function(req,res){
+  //   var cid = req.params.id;
+  //   console.log("hit the route");
+
+  //   db.Post.findAll({
+  //     where: {
+  //       CourseId : cid
+  //     }
+  //   }).then(function(data) {
+  //     response = {};
+  //     response.results = data
+  //     res.send(response);
+  //   })
+  // }
+
 };
