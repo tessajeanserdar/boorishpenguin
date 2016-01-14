@@ -147,8 +147,20 @@ angular.module('boorish.services', [])
         method: 'GET',
         url: '/townhall/users/' + userID
       }).then(function(res) {
-        console.log("response in services ",res);
+        console.log("response in services ", res);
         return res.data.results.id;
+      })
+    },
+
+    getUserById: function() {
+      var userID = $window.localStorage.getItem('com.boorish');
+      console.log("GETTING USER ID", userID);
+      return $http({
+        method: 'GET',
+        url: '/townhall/users/' + userID
+      }).then(function(res) {
+        console.log("response in services ", res);
+        return res.data.results;
       })
     },
 
@@ -217,7 +229,8 @@ angular.module('boorish.services', [])
     },
 
     getAllCoursesForUser: function(userId) {
-      var url = '/townhall/courses/' + userId;
+      var url = '/townhall/courses/:' + userId;
+      console.log("url in services" ,url)
       return $http({
         method: 'GET',
         url: url

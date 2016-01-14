@@ -5,31 +5,32 @@
   <div class="profile-container">
     <div class="row">
       <div class="col-sm-2">
-        <img ng-src="{{ user.picture }} " width="50" height="50">
-        <p>Points: {{user.points}}</p>
+        <img ng-src="{{ user.picture }}" width="100" height="100">
+        <p class="profile-points" style="font-size: 20px;">Points: {{user.points}}</p>
       </div>
       <div class = "col-sm-6">
-        <h2 class="profile-header user-title">Welcome, {{user.username}} !</h2>
+        <h2 class="profile-header user-title">Welcome, {{user.name}} !</h2>
       </div>
     </div>
   </div>
     <div class="row">
-      <div class="col-sm-4" ng-model="classes">
+      <div class="col-sm-4" ng-model="courses">
           <h3>Your Classes</h3>
           <ul class="class-list">
-            <li ng-repeat="class in classes">
-              <a href="/#/classes/:id"><p>{{class}}</p></a>
+            <li ng-repeat="class in courses">
+              <a href="/#/classes/:id" style="border-bottom: 1px solid #9E9E9E"><p>{{class}}</p></a>
             </li>
           </ul>
       </div>
       <div class="col-sm-8">
         <div class="collapse navbar-collapse" id="userActivity-navbar-collapse">
           <ul class="nav navbar-nav" style="font-size: 24px;font-weight: 500;">
-            <li><a class="nav-link" href="/#">All Activity</a></li>
-            <li><a class="nav-link" href="/#">My Questions</a></li>
+            <li style="border-right: 1px solid #9E9E9E"><a class="nav-link" href="/#">All Activity</a></li>
+            <li style="border-right: 1px solid #9E9E9E"><a class="nav-link" href="/#">My Questions</a></li>
             <li><a class="nav-link" href="/#">My Answers</a></li>
           </ul>
         <!-- <h3>All Activity</h3> -->
+
           
 
       </div>

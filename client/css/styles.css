@@ -196,18 +196,28 @@ select {
 .class-list {
   list-style-type: none;
   padding-left: 0;
-<<<<<<< acdad87f40981d677e0d7f311b59bc4868ad5270:client/css/styles.css
-<<<<<<< a3f2049f0d70bd5276ee1a60761faf669e42cff9:client/css/styles.css
-=======
   background-color: gray;
->>>>>>> User profile page in progress:client/styles.css
-=======
->>>>>>> user profile view in progress:client/styles.css
 }
 
 /*.profile-header {
   display: inline;
   white-space: nowrap;
 }*/
+.class-list {
+  list-style-type: none;
+  padding-left: 0;
+}
 
->>>>>>> User profile page in progress
+.profile-header {
+  font-size: 24px;
+  font-weight: 500;
+  box-shadow: 0 8px 6px -6px #999;
+}
+
+li {
+  border-right: 1px solid #9E9E9E
+}
+li:last {
+  border-right: none;
+}
+

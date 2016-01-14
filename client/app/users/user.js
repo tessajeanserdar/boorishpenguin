@@ -1,30 +1,21 @@
 //client/app/users/userController.js
 angular.module('boorish.user', [])
-  .controller('UserController', function($scope, Users, Courses){
+  .controller('UserController', function($scope, Users, Courses, Questions){
 
-    //$scope.data = {}
-  $scope.user = {}; 
-    // 'username': 'LizaTheCoolest',
-    // 'name': 'Liza Lopez',
-    // 'name_last': 'Lopez',
-    // 'name_first': 'Liza',
-    // 'isTeacher': '0',
-    // 'points': '7259',
-    // 'email': 'liza@liza.com',
-    // 'picture': 'http://i.imgur.com/8K7s19Q.png'
-    // };
-  //make a call to DB:
-  //SELECT name from courses..inner join courses_students on student.id = coursesStudents.student.id
 
+  Questions.getAllQuestions().then(function(questions) {
+    console.log("QUESTIONS FETCHED", questions);
+  });
 //   $scope.getUserWithId = function(){
-//     Users.getUserWithId().then(function(user){
-//       console.log("USER FETCHED:", user);
-//       $scope.user = user;
-//       $scope.getAllCoursesForUser($scope.user.id).then(function (courses) {
-//         console.log("COURSE FETCHED:", courses);
-//         $scope.classes = courses.userInCourses;
-//     });
-//   });
+  Users.getUserById().then(function(user){
+    // console.log("USER FETCHED:", user);
+    $scope.user = user;
+    console.log("user id in promise",$scope.user.id)
+    Courses.getAllCoursesForUser($scope.user.id).then(function (data) {
+        console.log("COURSE FETCHED:", data);
+        $scope.courses = data.userInCourses;
+    });
+});
 // }
 //   $scope.getUserWithId();
   // $scope.
