@@ -24,10 +24,12 @@ module.exports = function(app, express, ensureAuth) {
   app.post('/townhall/signup', userControllers.newUser);
 
   app.get('/townhall/courses', ensureAuth, courseControllers.allCourses);
+  app.post('/townhall/courses', ensureAuth, courseControllers.createCourse);
   app.get('/townhall/courses/:id', ensureAuth, courseControllers.allCoursesForUser);
   app.post('/townhall/CourseUsers', ensureAuth, courseControllers.addUser);
 
   app.get('/townhall/tags', ensureAuth, tagControllers.allTags);
+  app.post('/townhall/tags', ensureAuth, tagControllers.createTag);
 
   // Client does get request to /auth/google on signin
   app.get('/auth/google',

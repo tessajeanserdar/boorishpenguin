@@ -1,9 +1,20 @@
 <div class="col-md-4">
   <h2>Join a new class</h2>
+  <input type="text" ng-model="newClass">
+  <button ng-click="createClass()">create class</button>
+<br>
   <ul>
     <li class="class-sidebar-li" ng-repeat="course in allCourses">
       <p>{{course.name}}</p>
-      <button ng-show="userCourseIds.indexOf(course.id) === -1" ng-click="addToCourse(courses.indexOf(course))">Join Class</button>
+      <!-- ng-show="userCourseIds.indexOf(course.id) === -1" -->
+      <button ng-click="addToCourse(courses.indexOf(course))">Join Class</button>
+    </li>
+  </ul>
+  <input type="text" ng-model="newTag">
+  <button ng-click="createTag()">create tag</button>
+  <ul>
+    <li ng-repeat="tag in allTags">
+      <p>{{tag.name}}</p>
     </li>
   </ul>
 </div>

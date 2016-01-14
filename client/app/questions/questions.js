@@ -5,8 +5,7 @@ angular.module('boorish.questions', [])
   $scope.courses = [];
   $scope.userId = localStorage.getItem('com.boorish');
   $scope.listFilter = 'allQuestions';
-
-
+  $scope.allCourses = [];
 
   $scope.addToCourse = function (index) {
     var course = $scope.courses[index];
@@ -21,20 +20,43 @@ angular.module('boorish.questions', [])
       });
   };
 
-  // $scope.userInClass = function () {
-  //   if (u)
-  //   return true;
-  // };
+  $scope.createClass = function () {
+    var courseObj = {name: $scope.newClass};
+    $http.post('/townhall/courses', courseObj).success(function () {
+      console.log('course added..');
+      $scope.getAllCourses();
+    });
+  };
+
+  $scope.createTag = function () {
+    var tagObj = {name: $scope.newTag};
+    $http.post('/townhall/tags', tagObj).success(function () {
+      console.log('tag added..');
+      $scope.getTags();
+    });
+  };
 
   $scope.init = function() {
 
-    Courses.getCourses().then(function (data) {
-      $scope.allCourses = data.results;
-    });
+    $scope.getAllCourses = function () {
+      Courses.getCourses().then(function (data) {
+        console.log('get all courses: ', data);
+        $scope.allCourses = data.results;
+      });
+    };
+
+    $scope.getTags = function () {
+      $http.get('/townhall/tags').success(function (data) {
+        $scope.allTags = data.results;
+      });
+    };
+
+    $scope.getTags();
+    $scope.getAllCourses();
 
     Questions.getAllQuestions().then(function(data) {
-      console.log(data.results);
-      $scope.questions = data.results;
+      console.log('get all questions: ', data);
+      $scope.questions = data.data.results;
       // get info for user after getting all questions
       // $scope.questions is default list of questions on main page
       Courses.getAllCoursesForUser($scope.userId).then(function (data) {

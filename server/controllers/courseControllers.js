@@ -17,9 +17,15 @@ module.exports = {
     });
   },
 
+  createCourse: function(req, res) {
+    var course = req.body;
+    db.Course.create(course).then(function (course) {
+      res.sendStatus(200);
+    });
+  },
+
   addUser: function(req, res) {
     var userCourse = req.body;
-    console.log(userCourse);
     db.CourseUser.create(userCourse).then(function (task) {
       res.sendStatus(200);
     });

@@ -15,5 +15,12 @@ module.exports = {
       tags.results = formmatedTags;
       res.json(tags);
     });
+  },
+
+  createTag: function(req, res) {
+    var tagObj = req.body;
+    db.Tag.create(tagObj).then(function (tag) {
+      res.sendStatus(200);
+    });
   }
 };

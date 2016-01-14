@@ -27,7 +27,7 @@ angular.module('boorish.services', [])
         url: '/townhall/questions/'
       })
       .then(function(res) {
-        return res.data; // returns all questions
+        return res; // returns all questions
       })
     },
 
