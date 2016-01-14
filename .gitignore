@@ -11,3 +11,6 @@ bower_components/
 lib/
 
 */.DS_Store
+
+# Environment_Variables
+.env
