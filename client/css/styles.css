@@ -192,3 +192,35 @@ select {
 .border-left {
   border-left: 1px solid #EEEEEE;
 }
+
+.class-list {
+  list-style-type: none;
+  padding-left: 0;
+  background-color: gray;
+}
+
+/*.profile-header {
+  display: inline;
+  white-space: nowrap;
+}*/
+.class-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.profile-header {
+  font-size: 24px;
+  font-weight: 500;
+  box-shadow: 0 8px 6px -6px #999;
+}
+
+li {
+  border-right: 1px solid #9E9E9E
+}
+li:last {
+  border-right: none;
+}
+
+.active {
+    background-color: black;
+}

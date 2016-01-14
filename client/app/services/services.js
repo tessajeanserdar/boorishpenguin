@@ -21,7 +21,6 @@ angular.module('boorish.services', [])
     },
 
     getAllQuestions: function() {
-
       return $http({
         method: 'GET',
         url: '/townhall/questions/'
@@ -42,7 +41,6 @@ angular.module('boorish.services', [])
     },
 
     getQuestionsForUsersClasses: function (listOfIds) {
-      console.log('got to services');
       var list = JSON.stringify(listOfIds);
       var url = '/townhall/classQuestions/' + list;
       return $http({
@@ -146,7 +144,19 @@ angular.module('boorish.services', [])
         method: 'GET',
         url: '/townhall/users/' + userID
       }).then(function(res) {
+        console.log("response in services ", res);
         return res.data.results.id;
+      })
+    },
+
+    getUserById: function() {
+      var userID = $window.localStorage.getItem('com.boorish');
+      return $http({
+        method: 'GET',
+        url: '/townhall/users/' + userID
+      }).then(function(res) {
+        console.log("response in services ", res);
+        return res.data.results;
       })
     },
 
@@ -215,7 +225,7 @@ angular.module('boorish.services', [])
     },
 
     getAllCoursesForUser: function(userId) {
-      var url = '/townhall/courses/' + userId;
+      var url = '/townhall/courses/:' + userId;
       return $http({
         method: 'GET',
         url: url

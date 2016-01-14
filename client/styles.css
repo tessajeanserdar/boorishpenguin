@@ -1,8 +1,10 @@
 body {
 }
+
 #logout {
   cursor: pointer;
 }
+
 h3 {
   font-weight: bold;
   text-transform: uppercase;
@@ -151,7 +153,38 @@ select {
 .dropdown-form * {
   display: inline-block;
 }
-
 .question-filter {
   cursor: pointer;
 }
+.class-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/*#activity-nav > li {*/
+.userActivity-navbar-collapse, .navbar-nav {
+  font-size: 30px;
+  font-weight: 500;
+}
+/*#activity-nav > li {*/
+.profile-header {
+  font-size: 34px;
+  box-shadow: 0 8px 6px -6px #999;
+  font-weight: 500;
+}
+
+li, .mdl-tabs__tab {
+  border-right: 1px solid #9E9E9E;
+  font-size: 24px;font-weight: 500;
+}
+.mdl-tabs__tab:last {
+  border-right: none;
+}
+li:last {
+  border-right: none;
+}
+.active {
+    background-color: black;
+}
+
+

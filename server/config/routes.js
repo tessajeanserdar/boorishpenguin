@@ -19,8 +19,8 @@ module.exports = function(app, express, ensureAuth) {
   app.post('/townhall/answers/:id', ensureAuth, answerControllers.modAnswer);
   app.delete('/townhall/answers/:id', ensureAuth, answerControllers.deleteAnswer);
 
-  app.get('/townhall/users', ensureAuth, userControllers.allUsers);
-  app.get('/townhall/users/:id', ensureAuth, userControllers.oneUser);
+  app.get('/townhall/users',  userControllers.allUsers);//add ensure Auth
+  app.get('/townhall/users/:id',  userControllers.oneUser);  //add ensure Auth
   app.post('/townhall/signup', userControllers.newUser);
 
   app.get('/townhall/courses', ensureAuth, courseControllers.allCourses);

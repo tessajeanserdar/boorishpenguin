@@ -54,6 +54,7 @@ module.exports = {
   },
 
   allCoursesForUser: function(req, res) {
+    console.log("in the all course for user server controller")
     var uid = req.params.id;
     db.CourseUser.findAll({
       where: {
