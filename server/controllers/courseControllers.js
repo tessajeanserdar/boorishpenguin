@@ -64,7 +64,7 @@ module.exports = {
       var courseIds = courses.map(function (obj) {
         return obj.CourseId;
       });
-      var allCourses = {};
+
       allCourses.userCourseIds = courseIds;
       db.Course.findAll({
         where: {
@@ -86,7 +86,6 @@ module.exports = {
           res.json(allCourses);
         });
       })
-
     });
   }
 };
