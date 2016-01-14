@@ -29,6 +29,7 @@ module.exports = function(app, express, ensureAuth) {
   app.get('/townhall/courses/:id', ensureAuth, courseControllers.allUsersCourses);
   
   app.post('/townhall/CourseUsers', ensureAuth, courseControllers.addUser);
+  app.get('/townhall/courseQuestions/:id', ensureAuth, courseControllers.courseQuestions);
 
   app.get('/townhall/tags', ensureAuth, tagControllers.allTags);
   app.post('/townhall/tags', ensureAuth, tagControllers.createTag);

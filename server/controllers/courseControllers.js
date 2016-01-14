@@ -63,8 +63,8 @@ module.exports = {
     }).then(function(courses) {
       var courseIds = courses.map(function (obj) {
         return obj.CourseId;
-      });
-
+      })
+      var allCourses = {};
       allCourses.userCourseIds = courseIds;
       db.Course.findAll({
         where: {
@@ -87,5 +87,19 @@ module.exports = {
         });
       })
     });
+  },
+  courseQuestions: function(req,res){
+    var cid = req.params.id;
+    console.log("hit the route");
+
+    db.Post.findAll({
+      where: {
+        CourseId : cid
+      }
+    }).then(function(data) {
+      response = {};
+      response.results = data
+      res.send(response);
+    })
   }
 };
