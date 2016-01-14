@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV !== 'production'){
+  require('dotenv').config({path: '../.env'});
+}
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var googleAuth = require('./auth/googleAuth.js');
@@ -5,10 +9,10 @@ var passport = require('passport');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var apikeys = require('./config/apikeys.js');
 var controllers = require('./controllers/userControllers.js');
 var app = express();
 var port = process.env.PORT || 8001;
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -34,9 +38,9 @@ passport.deserializeUser(function(obj, done) {
 
 // When user logged in does a get req to auth/google/callback
 passport.use(new GoogleStrategy({
-  clientID: apikeys.googleOauth.clientID,
-  clientSecret: apikeys.googleOauth.clientSecret,
-  // callbackURL: "https://soyhall.herokuapp.com/auth/google/callback"
+  clientID: process.env.GOOGLEID,
+  clientSecret: process.env.GOOGLESECRET,
+  // callbackURL: "https://fathomless-sands-7752.herokuapp.com/auth/google/callback"
   callbackURL: "http://127.0.0.1:8001/auth/google/callback"
 },
   function(accessToken, refreshToken, profile, done) {
