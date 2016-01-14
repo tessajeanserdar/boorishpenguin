@@ -36,6 +36,45 @@ module.exports = {
     });
   },
 
+  // questionsForUsersCourses: function (req, res) {
+  //   var listOfIds = req.params.list;
+  //   list = JSON.parse(listOfIds);
+  //   console.log('got to function! ', list);
+  //   db.Post.findAll({
+  //     where: {
+  //       CourseId: {
+  //         $in: list
+  //       },
+  //       include: [db.User, db.Course, db.Tag]
+  //     }
+  //   })
+  //   .then(function (questions) {
+  //     console.log('found questions: ', questions);
+  //     var formattedQs = questions.map(function(question) {
+  //       return {
+  //         id: question.id,
+  //         title: question.title,
+  //         text: question.text,
+  //         isAnAnswer: false,
+  //         points: question.points,
+  //         responses: question.responses,
+  //         isAnswered: question.isAnswered,
+  //         isGood: question.isGood,
+  //         isClosed: question.isClosed,
+  //         createdAt: question.createdAt,
+  //         coursename: question.Course.name,
+  //         tagname: question.Tag.name,
+  //         user: question.User.name,
+  //         imgUrl: question.User.picture,
+  //         updatedAt: question.updatedAt
+  //       }
+  //     });
+  //     var questions = {};
+  //     questions.results = formattedQs;
+  //     res.json(questions);
+  //   });
+  // },
+
   newQuestion: function(req, res) {
     var titl = req.body.title;
     var txt = req.body.text;

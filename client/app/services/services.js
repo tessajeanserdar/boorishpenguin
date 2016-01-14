@@ -41,6 +41,16 @@ angular.module('boorish.services', [])
       })
     },
 
+    getQuestionsForUsersClasses: function (listOfIds) {
+      console.log('got to services');
+      var list = JSON.stringify(listOfIds);
+      var url = '/townhall/classQuestions/' + list;
+      return $http({
+        method: 'GET',
+        url: url
+      });
+    },
+
     // updates a question. takes in the id of the question and the required modification
     updateQuestion: function(id, mod) {
       return $http({
@@ -194,7 +204,7 @@ angular.module('boorish.services', [])
     }, 
 
     getAllCoursesForUser: function(userId) {
-      var url = '/townhall/courses/:' + userId;
+      var url = '/townhall/courses/' + userId;
       return $http({
         method: 'GET',
         url: url

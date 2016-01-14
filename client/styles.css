@@ -151,3 +151,7 @@ select {
 .dropdown-form * {
   display: inline-block;
 }
+
+.question-filter {
+  cursor: pointer;
+}

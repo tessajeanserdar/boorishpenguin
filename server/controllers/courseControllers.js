@@ -27,8 +27,6 @@ module.exports = {
 
   allCoursesForUser: function(req, res) {
     var uid = req.params.id;
-    uid = +uid.slice(1);
-    console.log('user id: ', uid);
     db.CourseUser.findAll({
       where: {
         UserId: uid
@@ -38,7 +36,7 @@ module.exports = {
         return obj.CourseId;
       });
       var allCourses = {};
-
+      allCourses.userCourseIds = courseIds;
       db.Course.findAll({
         where: {
           id: {

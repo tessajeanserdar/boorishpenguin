@@ -1,19 +1,61 @@
 <div class="col-md-4">
   <h2>Join a new class</h2>
   <ul>
-    <li ng-repeat="course in userInCourses">
+    <li class="class-sidebar-li" ng-repeat="course in allCourses">
       <p>{{course.name}}</p>
-      <button ng-click="addToCourse(courses.indexOf(course))">Join Class</button>
+      <button ng-show="userCourseIds.indexOf(course.id) === -1" ng-click="addToCourse(courses.indexOf(course))">Join Class</button>
     </li>
   </ul>
 </div>
 
 <div ng-module='boorish.questions' class="col-md-8">
-  <h3>Questions</h3>
+  <ul class="question-filter-ul">
+    <li>
+      <h3 class="question-filter" ng-click="listFilter='allQuestions'">All</h3>
+    </li>
+    <li>
+      <h3 class="question-filter" ng-click="listFilter='myClasses'">My Classes</h3>
+    </li>
+  </ul>
 
     <hr>
 
-      <div ng-repeat='question in questions | filter:searchText | orderBy:"-updatedAt"' class="question-list-item">
+  <!-- LIST FOR ALL QUESTIONS (MINIMIZE FOR CONVENIENCE) -->
+      <div ng-show="listFilter==='allQuestions'" ng-repeat='question in questions | filter:searchText | orderBy:"-updatedAt"' class="question-list-item">
+        <div class="col-sm-2 col-xs-3">
+          <div>
+            <img ng-src="{{ question.imgUrl }}0" width="50" height="50">
+          </div>
+          <!-- number of points current on question -->
+          <div>
+            <span class="glyphicon glyphicon-heart"></span>
+            <span>{{ question.points }}</span>
+            <span>Likes</span>
+          </div>
+
+          <!-- number of answers current on question -->
+          <div>
+            <span class="glyphicon glyphicon-comment"></span>
+            <span>{{ question.responses }}</span>
+            <span>Answers</span>
+          </div>
+          <!-- link to question id. Title is currently the first 60 characters in the text -->
+        </div>
+        <div class="col-sm-10 col-xs-9">
+          <h3>
+            <a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a>
+            <span class="glyphicon glyphicon-ok-sign" ng-if="question.isGood == true"></span>
+          </h3>
+
+          <div class="course">{{ question.coursename }}</div>
+          <div class="tag">{{ question.tagname }}</div>
+          <div>- asked by {{ question.user }} at {{ question.createdAt }}</div>
+        </div>
+        <hr>
+      </div>
+
+  <!-- LIST OF ALL QUESTIONS FOR USERS CLASSES -->
+      <div ng-show="listFilter==='myClasses'" ng-repeat='question in userCourseQuestions | filter:searchText | orderBy:"-updatedAt"' class="question-list-item">
         <div class="col-sm-2 col-xs-3">
           <div>
             <img ng-src="{{ question.imgUrl }}0" width="50" height="50">
