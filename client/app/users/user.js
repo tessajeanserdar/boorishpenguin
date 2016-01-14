@@ -1,6 +1,6 @@
 //client/app/users/userController.js
 angular.module('boorish.user', [])
-  .controller('UserController', function($scope, Users, Courses, Questions){
+  .controller('UserController', function($scope, $location, Users, Courses, Questions){
   $scope.allActivity = [];
   var userActivity = [];
   $scope.questions = [];
@@ -35,8 +35,18 @@ angular.module('boorish.user', [])
       $scope.questions = $scope.getAllUserActivity(data.results);
     }).then(function() {
       console.log("NEW DATA");
-    })
+    });
+
+    $(document).ready(function() {
+      $('.nav a').on('click', function(){
+        $(".nav").find(".active").removeClass("active");
+        $(this).parent().addClass("active");
+      });  
+    });
     // $scope.getAllUserActivity();
+    $scope.isActive = function(route) {
+      return route === $location.path;
+    }
     
     // $scope.questions = $scope.allActivity.reduce(function(userArray, questionObj) {
     //   console.log('running reduce here')

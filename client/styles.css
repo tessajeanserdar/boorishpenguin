@@ -162,9 +162,29 @@ select {
 }
 
 /*#activity-nav > li {*/
-.nav-link {
+.nav-link, .navbar-nav {
   font-size: 24px;
   font-weight: 500;
 }
 /*#activity-nav > li {*/
+.profile-header {
+  font-size: 24px;
+  font-weight: 500;
+  box-shadow: 0 8px 6px -6px #999;
+}
+
+li, .mdl-tabs__tab {
+  border-right: 1px solid #9E9E9E;
+  font-size: 24px;font-weight: 500;
+}
+.mdl-tabs__tab:last {
+  border-right: none;
+}
+li:last {
+  border-right: none;
+}
+.active {
+    background-color: black;
+}
+
 
