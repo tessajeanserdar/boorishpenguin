@@ -11,54 +11,47 @@ angular.module('boorish.user', [])
   Users.getUserById().then(function(user){
     // console.log("USER FETCHED:", user);
     $scope.user = user;
-    console.log("user id in promise",$scope.user.id)
+    // console.log("user id in promise",$scope.user.id)
     Courses.getAllCoursesForUser($scope.user.id).then(function (data) {
-        console.log("COURSE FETCHED:", data);
-        $scope.courses = data.userInCourses;
+        // console.log("COURSE FETCHED:", data);
+      $scope.courses = data.userInCourses;
     });
   });
   $scope.getAllUserActivity = function(allActivity) {
-    console.log('INVOKIING ACTIVITY', allActivity);
+    // console.log('INVOKIING ACTIVITY', allActivity);
     return allActivity.reduce(function(userArray, questionObj) {
-      console.log("QOBJ.id:", questionObj.user, "SCOPEID:", $scope.user.name);
+      // console.log("QOBJ.id:", questionObj.user, "SCOPEID:", $scope.user.name);
       if (questionObj.user === $scope.user.name) {
         userArray.push(questionObj);
       }
-      console.log('ONLY USER qs', userArray);
+      // console.log('ONLY USER qs', userArray);
       return userArray;
     }, []);
   };
 
-    Questions.getAllQuestions().then(function(data) {
-      console.log("QUESTIONS FETCHED", data);
-      $scope.allActivity = data.results;
-      $scope.questions = $scope.getAllUserActivity(data.results);
+    Questions.getAllQuestions().then(function(res) {
+      // console.log("QUESTIONS FETCHED", res.data);
+      $scope.allActivity = res.data.results;
+      $scope.questions = $scope.getAllUserActivity(res.data.results);
     }).then(function() {
-      console.log("NEW DATA");
+      // console.log("NEW DATA");
     });
 
-    $(document).ready(function() {
-      $('.nav a').on('click', function(){
-        $(".nav").find(".active").removeClass("active");
-        $(this).parent().addClass("active");
-      });  
-    });
-    // $scope.getAllUserActivity();
-    $scope.isActive = function(route) {
-      return route === $location.path;
-    }
-    
-    // $scope.questions = $scope.allActivity.reduce(function(userArray, questionObj) {
-    //   console.log('running reduce here')
-    //   if (questionObj.id === $scope.userId) {
-    //     userArray.push(questionObj);
-    //   }
-    //   console.log('ONLY USER qs', userArray);
-    //   return userArray;
-    // }, []);      
+    // $(document).ready(function() {
+    //   $('.nav a').on('click', function(){
+    //     $(".nav").find(".active").removeClass("active");
+    //     $(this).parent().addClass("active");
+    //   });  
+    // });
+  // $scope.getAllUserAnswers = function() {
+  //   //all questions -> $scope.AllActivity
+  //   //make server request for read each question - /questions/id
+  //   //for each array of answers returned- search to see if 
+  //   //UserId matches profile user's id, if so, add to array in view
+
+  //   //have a cache of questions checked? so that if length of getAllquestions is new, just check those? 
+
   // }
 
-// }
-//   $scope.getUserWithId();
-  // $scope.
+
 });

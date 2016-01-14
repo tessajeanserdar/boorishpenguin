@@ -162,15 +162,15 @@ select {
 }
 
 /*#activity-nav > li {*/
-.nav-link, .navbar-nav {
-  font-size: 24px;
+.userActivity-navbar-collapse, .navbar-nav {
+  font-size: 30px;
   font-weight: 500;
 }
 /*#activity-nav > li {*/
 .profile-header {
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 34px;
   box-shadow: 0 8px 6px -6px #999;
+  font-weight: 500;
 }
 
 li, .mdl-tabs__tab {
