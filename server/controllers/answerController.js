@@ -1,20 +1,17 @@
 var db = require('../db/index.js');
 var UCtrl = require('./userControllers.js');
+var Sequelize = require('sequelize');
 
 module.exports = {
 
   newAnswer: function(req, res) {
-    //using javascript to get the current time stamp due to seqaulize.now() not working properly
     var d = new Date();
-    console.log("DATEEEEEE",d);
-    console.log("IN NEW ANSWER")
     var txt = req.body.text;
     var uid = req.body.id_user;
     var qid = req.body.id_question;
 
     db.Post.findById(qid)
     .then(function(question) {
-      console.log("Got something back from db.post find by",question);
       if (!question.isClosed) {
         question.update({
           responses: question.responses + 1
@@ -30,7 +27,7 @@ module.exports = {
             })
             .then(function(answer) {
               question.update({
-                updatedAt:  d
+                updatedAt:  Sequelize.fn('NOW')
               }).then(function() {
                 return user.update({
                   points: user.points + 1
