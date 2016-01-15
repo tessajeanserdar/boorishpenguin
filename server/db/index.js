@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize');
 
-var database = process.env.DATABASE
+var database = process.env.DATABASE;
 var dbUser = process.env.DBUSER;
 var dbPass = process.env.DBPASS;
 var dbHost = process.env.DBHOST;
