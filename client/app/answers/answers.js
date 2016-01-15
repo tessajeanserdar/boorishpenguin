@@ -36,16 +36,23 @@ angular.module('boorish.answers', [])
     });
   };
 
-  $scope.addAnswer = function() {
+  $scope.submit = function() {
+    console.log("it go here")
     var id_question = $scope.data.question.id;
-
+    
     Users.getUserWithId().then(function(userID) { // grabs the userID
       $scope.newAnswer.user = userID; // adds the userID to the answer
+      console.log("new answer",$scope.newAnswer);
       Answers.addAnswer($scope.newAnswer, id_question).then(function() { // adds answer
+        console.log("it got here as well")
         $scope.newAnswer.text = '';
         $scope.getQuestion(); // refreshes the view
-      });
-    });
+      }).catch(function(error) {
+        console.error(error);
+      })
+    }).catch(function(error) {
+        console.error(error);
+    })
   };
 
   $scope.updateAnswer = function(index, mod) {
@@ -89,6 +96,8 @@ angular.module('boorish.answers', [])
       console.log(user.id === $scope.data.answers[index].userid);
     });
   };
+
+
 
   if (!Auth.isAuth()) {
     $location.path('/signin');
