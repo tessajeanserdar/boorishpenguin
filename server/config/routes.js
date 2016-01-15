@@ -52,4 +52,9 @@ module.exports = function(app, express, ensureAuth) {
     res.json(req.user);
   });
 
+  app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+  });
+
 }
