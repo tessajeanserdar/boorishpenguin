@@ -1,0 +1,27 @@
+<div ng-module='boorish.recommend'>
+  <form>
+    <h3>NEW RESOURCE</h3>
+    <hr>
+    <div class="dropdown-form form-group">
+      <label class="dropdown-label">Course</label>
+      <select class="form-control" name="courseSelect" ng-model="courseOptions.selectedOption" ng-options="option.name for option in courseOptions.availableOptions track by option.id"></select>
+    </div>
+    <div class="dropdown-form form-group">
+      <label class="dropdown-label">Topic</label>
+      <select class="form-control" name="tagSelect" ng-model="tagOptions.selectedOption" ng-options="option.name for option in tagOptions.availableOptions track by option.id"></select>
+    </div>
+    <div class="form-group">
+    <input class="form-control" type='rec' ng-model='rec.title'  size = "50" placeholder='What resource do you recommend?'>
+    </div>
+    <div class="form-group">
+      <textarea class="form-control" type='rec' ng-model='rec.text' rows='5' cols='80' maxlength="255" ng-trim="false" placeholder='Add more details'></textarea>
+      <span>Characters left: {{255 - rec.text.length}}</span>
+    </div>
+
+
+    <div class="form-group pull-right">
+    <input class="btn btn-default" type='reset' value='Cancel'>
+    <input class="btn btn-primary" type='submit' ng-click='addResource()' value='Post Resource'>
+    </div>
+  </form>
+</div>

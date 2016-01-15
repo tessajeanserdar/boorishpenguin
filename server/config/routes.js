@@ -3,6 +3,7 @@ var answerControllers = require ('../controllers/answerController.js');
 var userControllers = require ('../controllers/userControllers.js');
 var courseControllers = require ('../controllers/courseControllers.js');
 var tagControllers = require ('../controllers/tagControllers.js');
+var resourceControllers = require('../controllers/resourceController.js');
 var passport = require('passport');
 
 
@@ -19,6 +20,11 @@ module.exports = function(app, express, ensureAuth) {
   app.post('/townhall/answers', ensureAuth, answerControllers.newAnswer);
   app.post('/townhall/answers/:id', ensureAuth, answerControllers.modAnswer);
   app.delete('/townhall/answers/:id', ensureAuth, answerControllers.deleteAnswer);
+
+  app.get('/townhall/resources', ensureAuth, resourceControllers.allResources);
+  app.post('/townhall/resources', ensureAuth, resourceControllers.newResource);
+  // app.post('/townhall/resources/:id', ensureAuth, questionControllers.modAnswer);
+  // app.delete('/townhall/resources/:id', ensureAuth, questionControllers.deleteQuestion);
 
   app.get('/townhall/users',  userControllers.allUsers);//add ensure Auth
   app.get('/townhall/users/:id',  userControllers.oneUser);  //add ensure Auth
