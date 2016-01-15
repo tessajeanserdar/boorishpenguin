@@ -63,7 +63,7 @@ module.exports = {
     }).then(function(courses) {
       var courseIds = courses.map(function (obj) {
         return obj.CourseId;
-      });
+      })
       var allCourses = {};
       allCourses.userCourseIds = courseIds;
       db.Course.findAll({
@@ -86,7 +86,37 @@ module.exports = {
           res.json(allCourses);
         });
       })
-
     });
-  }
+  },
+  courseQuestions: function(req,res){
+    var cid = req.params.id;
+    var response = {};
+    response.results = {};
+
+    db.Post.findAll({
+      where: {
+        CourseId : cid
+      }
+    }).then(function(questions) {
+      response.results.questions = questions;
+    }).then(function(){
+      db.CourseUser.findAll({
+        where: {
+          CourseId : cid
+        }
+      }).then(function(students) {
+        response.results.students = students;
+      })
+    }).then(function(){
+      db.Course.findAll({
+        where: {
+          id : cid
+        }
+      }).then(function(classinfo) {
+        response.results.classinfo = classinfo;
+        res.json(response);
+      })
+    })
+  } 
+
 };

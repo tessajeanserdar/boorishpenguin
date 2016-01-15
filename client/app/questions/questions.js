@@ -16,6 +16,10 @@ angular.module('boorish.questions', [])
     });
   };
 
+  $scope.showCourse = function (courseId) {
+    $location.path('/class/' + courseId); 
+  };
+
   $scope.createTag = function () {
     var tagObj = {name: $scope.newTag};
     $http.post('/townhall/tags', tagObj).success(function () {
