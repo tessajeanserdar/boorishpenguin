@@ -233,6 +233,19 @@ angular.module('boorish.services', [])
       .then(function(res) {
         return res.data;       
       });
+    },
+
+    getCourseInfo: function(courseId) {
+      var url = '/townhall/courseInfo/' + courseId;
+      return $http({
+        method: "GET",
+        url:url
+      })
+      .then(function(resp) {
+        console.log("RESPONSE",resp)
+        return resp.data.results;
+
+      })
     }
 
   };

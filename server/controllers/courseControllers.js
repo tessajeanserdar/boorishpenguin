@@ -114,7 +114,7 @@ module.exports = {
         }
       }).then(function(classinfo) {
         response.results.classinfo = classinfo;
-        res.send(response);
+        res.json(response);
       })
     })
   } 
