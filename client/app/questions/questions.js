@@ -3,7 +3,6 @@ angular.module('boorish.questions', [])
 .controller('questionsController', function($scope, $location, $http, Questions, Auth, Courses) {
   $scope.questions = [];
   $scope.courses = [];
-  $scope.userId = localStorage.getItem('com.boorish');
   $scope.listFilter = 'allQuestions';
   $scope.allCourses = [];
 
@@ -115,6 +114,7 @@ angular.module('boorish.questions', [])
       $location.path('/signin') 
     // else show questions
     } else {
+      $scope.userId = localStorage.getItem('com.boorish');
       return getQuestions();
     }
   })
