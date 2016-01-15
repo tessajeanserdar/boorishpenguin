@@ -36,7 +36,7 @@ angular.module('boorish.answers', [])
     });
   };
 
-  $scope.submit = function() {
+  $scope.submitAnswer = function() {
     console.log("it go here")
     var id_question = $scope.data.question.id;
     

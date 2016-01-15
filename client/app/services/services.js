@@ -248,8 +248,7 @@ angular.module('boorish.services', [])
         url:url
       })
       .then(function(resp) {
-        return resp.data.results;
-
+        return resp.data;
       })
     }
 
