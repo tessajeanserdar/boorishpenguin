@@ -193,12 +193,6 @@ select {
   border-left: 1px solid #EEEEEE;
 }
 
-.class-list {
-  list-style-type: none;
-  padding-left: 0;
-  background-color: gray;
-}
-
 /*.profile-header {
   display: inline;
   white-space: nowrap;
@@ -208,13 +202,15 @@ select {
   padding-left: 0;
 }
 
-.profile-header {
-  font-size: 24px;
-  font-weight: 500;
-  box-shadow: 0 8px 6px -6px #999;
+.answer-text {
+  font-size: 20px;
+}
+.answer-user {
+  font-size: 15px;
+  font-weight: 600;
 }
 
-li {
+li.nav-link {
   border-right: 1px solid #9E9E9E
 }
 li:last {

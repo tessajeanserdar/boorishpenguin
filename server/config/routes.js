@@ -15,6 +15,7 @@ module.exports = function(app, express, ensureAuth) {
   // app.get('/townhall/classQuestions/:list', ensureAuth, questionControllers.questionsForUsersCourses);
   app.post('/townhall/questions/:id', ensureAuth, questionControllers.modQuestion);
 
+  app.get('/townhall/answers', questionControllers.allAnswers);
   app.post('/townhall/answers', ensureAuth, answerControllers.newAnswer);
   app.post('/townhall/answers/:id', ensureAuth, answerControllers.modAnswer);
   app.delete('/townhall/answers/:id', ensureAuth, answerControllers.deleteAnswer);
