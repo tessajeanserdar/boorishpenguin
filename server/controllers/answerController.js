@@ -1,8 +1,11 @@
 var db = require('../db/index.js');
 var UCtrl = require('./userControllers.js');
+var Sequelize = require('sequelize');
 
 module.exports = {
+
   newAnswer: function(req, res) {
+    var d = new Date();
     var txt = req.body.text;
     var uid = req.body.id_user;
     var qid = req.body.id_question;
@@ -12,38 +15,34 @@ module.exports = {
       if (!question.isClosed) {
         question.update({
           responses: question.responses + 1
-        })
-        .then(function() {
-          return db.User.findById(uid);
-        })
-        .then(function(user) {
-          db.Post.create({
-            text: txt,
-            isAnAnswer: true,
-            UserId: uid,
-            QuestionId: qid,
-            CourseId: question.CourseId,
-            TagId: question.TagId
+        }).then(function() {
+          db.User.findById(uid).then(function(user) {
+            db.Post.create({
+              text: txt,
+              isAnAnswer: true,
+              UserId: uid,
+              QuestionId: qid,
+              CourseId: question.CourseId,
+              TagId: question.TagId
+            })
+            .then(function(answer) {
+              question.update({
+                updatedAt:  Sequelize.fn('NOW')
+              }).then(function() {
+                return user.update({
+                  points: user.points + 1
+                }).then(function() {
+                res.status(201).json(answer);
+              })
+            })
           })
-          .then(function(answer) {
-            question.update({
-              updatedAt: Sequelize.fn('NOW')
-            })
-            .then(function() {
-              return user.update({
-                points: user.points + 1
-              });
-            })
-            .then(function() {
-              res.status(201).json(answer);
-            });
-          });
-        });
+       })
+      })
       } else {
         res.sendStatus(404);
       }
-    });
-  },
+  })
+},
 
   modAnswer: function(req, res) {
     var aid = req.params.id;
