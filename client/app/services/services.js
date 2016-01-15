@@ -29,7 +29,15 @@ angular.module('boorish.services', [])
         return res; // returns all questions
       })
     },
-
+    getAllAnswers: function() {
+      return $http({
+        method: 'GET',
+        url: '/townhall/answers/'
+      })
+      .then(function(res) {
+        return res; // returns all answers
+      })
+    },
     getQuestion: function(path) { 
       return $http({
         method: 'GET',

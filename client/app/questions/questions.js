@@ -97,29 +97,7 @@ angular.module('boorish.questions', [])
       console.log('get all questions: ', data);
       $scope.questions = data.data.results;
       console.log('all questions: ', $scope.questions);
-      
       $scope.getAllCourses();
-      // get info for user after getting all questions
-      // $scope.questions is default list of questions on main page
-      // Courses.getAllCoursesForUser($scope.userId).then(function (data) {
-      //   console.log('user course data: ', data);
-      //   $scope.userCourseIds = data.userCourseIds;
-      //   $scope.userInCourses = data.userIn;
-      //   $scope.userNotInCourses = data.userNotIn;
-
-      //   // get questions for classes user is in only
-      //   // stored in %scope.userCourseQuestions
-      //   // used for secondary view of questions ('My Classes')
-      //   if ($scope.questions && $scope.userCourseIds) {
-      //     $scope.userCourseQuestions = $scope.questions.reduce(function (array, question) {
-      //       if ($scope.userCourseIds.indexOf(question.id)) {
-      //         array.push(question);
-      //       }
-      //       return array;
-      //     }, []);
-      //     console.log('users course questions: ', $scope.userCourseQuestions);
-      //   }
-      // })
     });
     // get all tags and courses
     $scope.getTags();

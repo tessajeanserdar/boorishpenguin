@@ -30,8 +30,8 @@
         </a>
       </div>
       <div class="col-xs-9">
-        <div>{{ data.question.text }}</div>
-        <div>- {{ data.question.user }}</div>
+        <div class="answer-text">{{ data.question.text }}</div>
+        <div class="answer-user">- {{ data.question.user }}</div>
         <div class="course">{{ data.question.coursename }}</div>
         <div class="tag">{{ data.question.tagname }}</div>
         <input class="btn btn-default pull-right" type='submit' ng-click='removeQuestion(data.question.id)' value='Remove'>
@@ -66,11 +66,11 @@
           <!-- <input type='submit' ng-click='updateAnswer($index, "answered")' value='Answered'> -->
         </div>
         <div class="col-xs-9">
-          <div>{{ answer.text }}</div>
-          <div>- {{ answer.user }}</div>
+          <div class="answer-text">{{ answer.text }}</div>
+          <div class="answer-user">- {{ answer.user }}</div>
           <!--<div>{{ answer.isGood }}</div>-->
           <input class="btn btn-default pull-right" type='submit' ng-click='removeAnswer($index)' value='remove'>
-        </div>
+        </div>class="answer-text"
       </div>
     </div>
   </div>

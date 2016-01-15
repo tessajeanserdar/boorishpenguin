@@ -37,6 +37,35 @@ module.exports = {
       res.json(questions);
     });
   },
+  allAnswers: function(req, res) {
+    db.Post.findAll({
+      where: {
+        isAnAnswer: true
+      },
+      include: [db.User, db.Course, db.Tag]
+    })
+    .then(function(answers) {
+      var formattedAs = answers.map(function(answer) {
+        return {
+          id: answer.id,
+          text: answer.text,
+          isAnAnswer: true,
+          points: answer.points,
+          isGood: answer.isGood,
+          QuestionId: answer.QuestionId,
+          user: answer.User.name,
+          userid: answer.User.id,
+          createdAt: answer.createdAt,
+          imgUrl: answer.User.picture
+        }
+      });
+
+      answers = {};
+      answers.results = formattedAs;
+      res.json(answers);
+    });
+  },
+
 
   // questionsForUsersCourses: function (req, res) {
   //   var listOfIds = req.params.list;
