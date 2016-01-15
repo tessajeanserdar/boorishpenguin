@@ -3,7 +3,6 @@ angular.module('boorish.questions', [])
 .controller('questionsController', function($scope, $location, $http, Questions, Auth, Courses) {
   $scope.questions = [];
   $scope.courses = [];
-  $scope.userId = localStorage.getItem('com.boorish');
   $scope.listFilter = 'allQuestions';
   $scope.allCourses = [];
 
@@ -28,6 +27,24 @@ angular.module('boorish.questions', [])
     });
   };
 
+  $scope.addToCourse = function (index) {
+    console.log('all courses: ', $scope.allCourses);
+    console.log('index of course: ', index);
+    var course = $scope.allCourses[index];
+    console.log('course: ', course);
+    var id = course.id;
+    $scope.userCourseIds.push(id);
+    var associationObject = {
+      UserId: +$scope.userId,
+      CourseId: id
+    };
+    $http.post('/townhall/CourseUsers', associationObject)
+      .success(function () {
+        console.log('successful post to CourseUsers');
+      });
+  };
+
+
   $scope.filterQuestionsByClasses = function () {
     $scope.listFilter='myClasses';
     console.log('filtering..', $scope.questions);
@@ -46,62 +63,47 @@ angular.module('boorish.questions', [])
     console.log('question for users courses: ', $scope.userCourseQuestions);
   };
 
-  $scope.init = function() {
-
-    $scope.getAllCourses = function () {
-      Courses.getCourses().then(function (data) {
-        console.log('get all courses: ', data);
-        $scope.allCourses = data.results;
-        // GET COURSES SPECIFIC FOR USER
-        Courses.getUsersCourses($scope.userId).then(function(courseObj) {
-          console.log(courseObj);
-          // $scope.userCourses = courseObj.courses;
-          $scope.userCourseIds = courseObj.courseIds;
-          if ($scope.allCourses) {
-            $scope.userCourses = $scope.allCourses.map(function (course) {
-              if ($scope.userCourseIds.indexOf(course.id) > -1) {
-                return course;
-              }
-            });
+  var getAllCourses = function () {
+    return Courses.getCourses()
+    .then(function (data) {
+      console.log('get all courses: ', data);
+      $scope.allCourses = data.results;
+      // GET COURSES SPECIFIC FOR USER
+      return Courses.getUsersCourses($scope.userId)
+    })
+    .then(function(courseObj) {
+      console.log(courseObj);
+      // $scope.userCourses = courseObj.courses;
+      $scope.userCourseIds = courseObj.courseIds;
+      if ($scope.allCourses) {
+        $scope.userCourses = $scope.allCourses.map(function (course) {
+          if ($scope.userCourseIds.indexOf(course.id) > -1) {
+            return course;
           }
         });
-      });
-    };
-    // function for a user to join a course
-    $scope.addToCourse = function (index) {
-      console.log('all courses: ', $scope.allCourses);
-      console.log('index of course: ', index);
-      var course = $scope.allCourses[index];
-      console.log('course: ', course);
-      var id = course.id;
-      $scope.userCourseIds.push(id);
-      var associationObject = {
-        UserId: +$scope.userId,
-        CourseId: id
-      };
-      $http.post('/townhall/CourseUsers', associationObject)
-        .success(function () {
-          console.log('successful post to CourseUsers');
-        });
-    };
-
-    $scope.getTags = function () {
-      $http.get('/townhall/tags').success(function (data) {
-        $scope.allTags = data.results;
-      });
-    };
-
-
-    // GET ALL DATA
-    Questions.getAllQuestions().then(function(data) {
-      $scope.questions = data.data.results;
-      $scope.getAllCourses();
-    });
-    // get all tags and courses
-    $scope.getTags();
-
+      }
+    })
+    .catch(function(err){
+      console.log(err);
+    })
   };
 
+  var getTags = function () {
+    return $http.get('/townhall/tags')
+    .then(function (data) {
+      $scope.allTags = data.results;
+    });
+  };
+
+  // GET ALL DATA
+  var getQuestions = function(){
+    return Questions.getAllQuestions()
+    .then(function(data) {
+      console.log('get all questions: ', data);
+      $scope.questions = data.data.results;
+      console.log('all questions: ', $scope.questions);
+    });    
+  };
 
   //On initial reroute after Google Authentication Set the User
   Auth.setUser()
@@ -112,8 +114,15 @@ angular.module('boorish.questions', [])
       $location.path('/signin') 
     // else show questions
     } else {
-      $scope.init();
+      $scope.userId = localStorage.getItem('com.boorish');
+      return getQuestions();
     }
+  })
+  .then(function(){
+    return getAllCourses();
+  })
+  .then(function(){
+    return getTags();
   })
 
 });
