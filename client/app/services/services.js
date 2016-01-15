@@ -152,7 +152,6 @@ angular.module('boorish.services', [])
         method: 'GET',
         url: '/townhall/users/' + userID
       }).then(function(res) {
-        console.log("response in services ", res);
         return res.data.results.id;
       })
     },
@@ -163,7 +162,6 @@ angular.module('boorish.services', [])
         method: 'GET',
         url: '/townhall/users/' + userID
       }).then(function(res) {
-        console.log("response in services ", res);
         return res.data.results;
       })
     },
@@ -250,7 +248,6 @@ angular.module('boorish.services', [])
         url:url
       })
       .then(function(resp) {
-        console.log("RESPONSE",resp)
         return resp.data.results;
 
       })

@@ -26,10 +26,7 @@ module.exports = {
   },
 
   oneUser: function(req, res) {
-    console.log("hitting the server route controller");
     var uid = req.params.id;
-    console.log("this is the id in the server controller : " ,uid);
-
     db.User.findById(uid)
     .then(function(user) {
       var formattedUser = {
@@ -40,7 +37,7 @@ module.exports = {
         name_last: user.name_first,
         email: user.email,
         points: user.points,
-        image: user.image
+        image: user.picture
       }
 
       user = {};

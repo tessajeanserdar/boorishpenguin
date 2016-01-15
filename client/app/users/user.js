@@ -2,9 +2,7 @@
 angular.module('boorish.user', [])
   .controller('UserController', function($scope, $location, Users, Courses, Questions){
   $scope.allActivity = [];
-  var userActivity = [];
   $scope.questions = [];
-  var userAnswers = [];
   $scope.allCourses = [];
   $scope.answers = [];
   $scope.courses = [];
@@ -25,8 +23,13 @@ angular.module('boorish.user', [])
       return userArray;
     }, []);
   };
-
-
+  Questions.getAllQuestions().then(function(res) {
+    $scope.allActivity = res.data.results;
+    $scope.questions = $scope.getAllUserActivity(res.data.results);
+  }).then(function() {
+  });
+  
+// http://127.0.0.1:8001/#/class/7
     $scope.getAllCourses = function () {
       Courses.getCourses().then(function (data) {
         $scope.allCourses = data.results;

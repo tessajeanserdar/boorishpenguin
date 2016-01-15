@@ -94,9 +94,7 @@ angular.module('boorish.questions', [])
 
     // GET ALL DATA
     Questions.getAllQuestions().then(function(data) {
-      console.log('get all questions: ', data);
       $scope.questions = data.data.results;
-      console.log('all questions: ', $scope.questions);
       $scope.getAllCourses();
     });
     // get all tags and courses
