@@ -220,3 +220,7 @@ li:last {
 .active {
     background-color: black;
 }
+
+img, .header-img {
+  border: 2px solid #93C54B;
+}
