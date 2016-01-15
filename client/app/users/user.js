@@ -2,14 +2,11 @@
 angular.module('boorish.user', [])
   .controller('UserController', function($scope, $location, Users, Courses, Questions){
   $scope.allActivity = [];
-  var userActivity = [];
   $scope.questions = [];
-  var userAnswers = [];
   $scope.allCourses = [];
   $scope.answers = [];
   $scope.courses = [];
   $scope.filterBy = 'questions';
-  $scope.courses = [];
   $scope.userId = localStorage.getItem('com.boorish');
 
   Users.getUserById().then(function(user){
@@ -27,14 +24,12 @@ angular.module('boorish.user', [])
     }, []);
   };
   Questions.getAllQuestions().then(function(res) {
-    // console.log("QUESTIONS FETCHED", res.data);
     $scope.allActivity = res.data.results;
     $scope.questions = $scope.getAllUserActivity(res.data.results);
   }).then(function() {
-    // console.log("NEW DATA");
   });
   
-
+// http://127.0.0.1:8001/#/class/7
     $scope.getAllCourses = function () {
       Courses.getCourses().then(function (data) {
         $scope.allCourses = data.results;
