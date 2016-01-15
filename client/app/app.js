@@ -7,6 +7,7 @@ angular.module('boorishpenguin', [
   'boorish.answers',
   'boorish.auth',
   'boorish.courses',
+  'boorish.resources',
   'ngRoute'
   ])
 
@@ -43,6 +44,10 @@ angular.module('boorishpenguin', [
     .when('/class/:id', {
       templateUrl: 'app/courses/course.html',
       controller: 'courseController'
+    })
+    .when('/resources', {
+      templateUrl: 'app/users/resources.html',
+      controller: 'resourceController'
     })
     .otherwise({
       routeTo: '/signin'
