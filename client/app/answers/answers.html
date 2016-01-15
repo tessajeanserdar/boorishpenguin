@@ -69,6 +69,8 @@
           <div class="answer-text">{{ answer.text }}</div>
           <div class="answer-user">- {{ answer.user }}</div>
           <!--<div>{{ answer.isGood }}</div>-->
+          <img src="{{answer.text}}">
+          
           <input class="btn btn-default pull-right" type='submit' ng-click='removeAnswer($index)' value='remove'>
         </div>
       </div>
