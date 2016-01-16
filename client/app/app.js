@@ -65,4 +65,12 @@ angular.module('boorishpenguin', [
     })
 
   $sceProvider.enabled(false);
-});
+})
+
+.controller('navController', function($scope, $location) {
+  $scope.isActive = function (viewLocation) { 
+        return viewLocation === $location.path();
+    };
+
+  }
+)
