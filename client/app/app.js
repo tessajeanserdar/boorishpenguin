@@ -10,6 +10,7 @@ angular.module('boorishpenguin', [
   'boorish.recommend',
   'boorish.resources',
   'boorish.chat',
+  'ngMaterial',
   'ngRoute'
   ])
 

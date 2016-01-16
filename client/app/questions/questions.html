@@ -1,109 +1,121 @@
 <div class="col-md-3">
-  <h3 class="question-filter" id="join-class-header">All Classes</h3>
-  <div class="list-of-courses">
-    <ul>
-      <li class="class-sidebar-li lead" ng-repeat="course in allCourses">
-        <div class="row">
-          <div class="col-xs-3">
-            
-       <!--      <button class="btn btn-default" ng-show="userCourseIds.indexOf(course.id) === -1" ng-click="addToCourse(allCourses.indexOf(course))"><span class="glyphicon glyphicon-plus-sign"></span></button> -->
+  <h3>All Classes</h3>
+  <md-list ng-cloak>
+    <md-list-item ng-repeat="course in allCourses">
+      <p ng-click="showCourse(course.id)"> {{course.name}} </p>
+      <md-button ng-click="addToCourse(allCourses.indexOf(course))" ng-show="userCourseIds.indexOf(course.id) === -1"  class="md-icon-button md-accent" aria-label="Favorite"><i class="material-icons">star_border</i></md-button>
+      <md-button ng-click="addToCourse(allCourses.indexOf(course))" ng-show="userCourseIds.indexOf(course.id) >= 0"  class="md-icon-button md-accent" aria-label="Favorite"><i class="material-icons">star</i></md-button>
+    </md-list-item>
+  </md-list>
 
-           <div ng-show="userCourseIds.indexOf(course.id) === -1" ng-click="addToCourse(allCourses.indexOf(course))" class="glyphicon glyphicon-plus-sign add-class-botton"></div>
+  <form ng-submit="createClass()" name="createClass">
+    <div layout-gt-sm="row">
+      <md-input-container flex>
+        <label>Class</label>
+        <input type="text" ng-model="newClass"/>
+      </md-input-container>
+      <md-button type="submit" name="submit">Submit</md-button>
+    </div>
+  </form>
 
-          </div>
+  <form ng-submit="createTag()" name="createTag">
+    <div layout-gt-sm="row">
+      <md-input-container flex>
+        <label>Tag</label>
+        <input type="text" ng-model="newTag" />
+      </md-input-container>
+      <md-button type="submit" name="submit">Submit</md-button>
+    </div>
+  </form>
 
-          <div ng-click="showCourse(course.id)" class="col-xs-9">
-            <p class="sidebar-class-name">{{course.name}}</p>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <input type="text" ng-model="newClass">
+  <!-- <input type="text" ng-model="newClass">
   <button ng-click="createClass()">create class</button>
-<br>
+  <br>
   <input type="text" ng-model="newTag">
-  <button ng-click="createTag()">create tag</button>
+  <button ng-click="createTag()">create tag</button> -->
 </div>
 
 <div ng-module='boorish.questions' class="col-xs-9 border-left">
-  <ul class="question-filter-ul">
-    <li>
-      <h3 class="question-filter" ng-click="listFilter='allQuestions'">All</h3>
-    </li>
-    <li>
-      <h3 class="question-filter" ng-click="filterQuestionsByClasses()">My Classes</h3>
-    </li>
-  </ul>
+  <div ng-cloak>
+    <md-content>
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab ng-click="listFilter='allQuestions'" label="All">
+          <md-content class="md-padding">
+            <!-- LIST FOR ALL QUESTIONS (MINIMIZE FOR CONVENIENCE) -->
+              <md-card ng-show="listFilter==='allQuestions'" ng-repeat='question in questions | filter:searchText | orderBy:"-updatedAt"' class="question-list-item">
+                <div class="col-sm-2 col-xs-3">
+                  <div>
+                    <img ng-src="{{ question.imgUrl }}" class="profile">
+                  </div>
+                  <!-- number of points current on question -->
+                  <div>
+                    <span class="glyphicon glyphicon-heart"></span>
+                    <span>{{ question.points }}</span>
+                    <span>Likes</span>
+                  </div>
 
-  <!-- LIST FOR ALL QUESTIONS (MINIMIZE FOR CONVENIENCE) -->
-      <div ng-show="listFilter==='allQuestions'" ng-repeat='question in questions | filter:searchText | orderBy:"-updatedAt"' class="question-list-item">
-        <div class="col-sm-2 col-xs-3">
-          <div>
-            <img ng-src="{{ question.imgUrl }}0" width="50" height="50">
-          </div>
-          <!-- number of points current on question -->
-          <div>
-            <span class="glyphicon glyphicon-heart"></span>
-            <span>{{ question.points }}</span>
-            <span>Likes</span>
-          </div>
+                  <!-- number of answers current on question -->
+                  <div>
+                    <span class="glyphicon glyphicon-comment"></span>
+                    <span>{{ question.responses }}</span>
+                    <span>Answers</span>
+                  </div>
+                  <!-- link to question id. Title is currently the first 60 characters in the text -->
+                </div>
+                <div class="col-sm-10 col-xs-9">
+                  <h3>
+                    <a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a>
+                    <span class="glyphicon glyphicon-ok-sign" ng-if="question.isGood == true"></span>
+                  </h3>
+                  <md-chips>
+                    <md-chip>{{ question.coursename }}</md-chip>
+                    <md-chip>{{ question.tagname }}</md-chip>
+                  </md-chips>
+                  <div>- asked by {{ question.user }} at {{ question.createdAt }}</div>
+                </div>
+              </md-card>
+          </md-content>
+        </md-tab>
+        <md-tab ng-click="filterQuestionsByClasses()" label="My Classes">
+          <md-content class="md-padding">
+            <!-- LIST OF ALL QUESTIONS FOR USERS CLASSES -->
+            <md-card ng-show="listFilter==='myClasses'" ng-repeat='question in userCourseQuestions track by $index | filter:searchText | orderBy:"-updatedAt"' class="question-list-item">
+              <div class="col-sm-2 col-xs-3">
+                <div>
+                  <img ng-src="{{ question.imgUrl }}" class="profile">
+                </div>
+                <!-- number of points current on question -->
+                <div>
+                  <span class="glyphicon glyphicon-heart"></span>
+                  <span>{{ question.points }}</span>
+                  <span>Likes</span>
+                </div>
 
-          <!-- number of answers current on question -->
-          <div>
-            <span class="glyphicon glyphicon-comment"></span>
-            <span>{{ question.responses }}</span>
-            <span>Answers</span>
-          </div>
-          <!-- link to question id. Title is currently the first 60 characters in the text -->
-        </div>
-        <div class="col-sm-10 col-xs-9">
-          <h3>
-            <a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a>
-            <span class="glyphicon glyphicon-ok-sign" ng-if="question.isGood == true"></span>
-          </h3>
-
-          <div class="course mdl-button">{{ question.coursename }}</div>
-          <div class="tag mdl-button">{{ question.tagname }}</div>
-          <div>- asked by {{ question.user }} at {{ question.createdAt }}</div>
-        </div>
-        <hr>
-      </div>
-
-  <!-- LIST OF ALL QUESTIONS FOR USERS CLASSES -->
-      <div ng-show="listFilter==='myClasses'" ng-repeat='question in userCourseQuestions track by $index | filter:searchText | orderBy:"-updatedAt"' class="question-list-item">
-        <div class="col-sm-2 col-xs-3">
-          <div>
-            <a href='#/users/user'><img ng-src="{{ question.imgUrl }}0" width="50" height="50"></a>
-          </div>
-          <!-- number of points current on question -->
-          <div>
-            <span class="glyphicon glyphicon-heart"></span>
-            <span>{{ question.points }}</span>
-            <span>Likes</span>
-          </div>
-
-          <!-- number of answers current on question -->
-          <div>
-            <span class="glyphicon glyphicon-comment"></span>
-            <span>{{ question.responses }}</span>
-            <span>Answers</span>
-          </div>
-          <!-- link to question id. Title is currently the first 60 characters in the text -->
-        </div>
-        <div class="col-sm-10 col-xs-9">
-          <h3>
-            <a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a>
-            <span class="glyphicon glyphicon-ok-sign" ng-if="question.isGood == true"></span>
-          </h3>
-
-          <div class="course mdl-button">{{ question.coursename }}</div>
-          <div class="tag mdl-button">{{ question.tagname }}</div>
-          <div>- asked by {{ question.user }} at {{ question.createdAt }}</div>
-        </div>
-        <hr>
-      </div>
-  <!--<hr>-->
+                <!-- number of answers current on question -->
+                <div>
+                  <span class="glyphicon glyphicon-comment"></span>
+                  <span>{{ question.responses }}</span>
+                  <span>Answers</span>
+                </div>
+                <!-- link to question id. Title is currently the first 60 characters in the text -->
+              </div>
+              <div class="col-sm-10 col-xs-9">
+                <h3>
+                  <a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a>
+                  <span class="glyphicon glyphicon-ok-sign" ng-if="question.isGood == true"></span>
+                </h3>
+                <md-chips>
+                  <md-chip>{{ question.coursename }}</md-chip>
+                  <md-chip>{{ question.tagname }}</md-chip>
+                </md-chips>
+                <div>- asked by {{ question.user }} at {{ question.createdAt }}</div>
+              </div>
+            </md-card>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-content>
+   </div>
 </div>
 
 
