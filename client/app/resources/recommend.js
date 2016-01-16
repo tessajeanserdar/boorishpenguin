@@ -36,7 +36,7 @@ angular.module('boorish.recommend', [])
       $scope.rec.userId = $window.localStorage.getItem('com.boorish');  // pulls userId from localStorage
       $scope.rec.course = $scope.courseOptions.selectedOption.name; // pulls selected course
       $scope.rec.tag = $scope.tagOptions.selectedOption.name;  // pulls selected tag
-      console.log("COURSE:", $scope.courseOptions.selectedOption.name, "REC OBJ", $scope.rec);
+      // console.log("COURSE:", $scope.courseOptions.selectedOption.name, "REC OBJ", $scope.rec);
       Resources.addResource($scope.rec).then(function() { // adds new Question with addQuestion factory method
         $location.path('/resources'); // redirects to all questions
       });

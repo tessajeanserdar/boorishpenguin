@@ -9,6 +9,7 @@ angular.module('boorishpenguin', [
   'boorish.courses',
   'boorish.recommend',
   'boorish.resources',
+  'boorish.chat',
   'ngRoute'
   ])
 
@@ -53,6 +54,10 @@ angular.module('boorishpenguin', [
     .when('/resources', {
       templateUrl: 'app/resources/resources.html',
       controller: 'resourcesController'
+    })
+    .when('/chat', {
+      templateUrl: 'app/chat/chat.html',
+      controller: 'chatController'
     })
     .otherwise({
       routeTo: '/signin'
