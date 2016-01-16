@@ -1,8 +1,8 @@
 angular.module('boorish.chat', ['firebase'])
 
-.controller('chatController', function($scope, $window, Users, Auth, $firebaseArray) {
+.controller('chatController', function($scope,  $firebaseArray, $window, Users, Auth) {
   var ref = new Firebase('https://soymilk.firebaseIO.com/');
-  $scope.messages = $firebaseArray(ref);
+  // $scope.messages = $firebaseArray(ref);
 
   $scope.addMessage = function(){
       var name = $('#nameInput').val();
@@ -15,8 +15,10 @@ angular.module('boorish.chat', ['firebase'])
     displayChatMessage(message.name, message.text);
   });
   function displayChatMessage(name, text) {
-    $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+    $('<div/>').text(text).prepend($('<em/>').text(name+':  ')).appendTo($('#messagesDiv'));
+    $scope.messages = ref;
     $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+    
   };
 
 

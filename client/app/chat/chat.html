@@ -1,16 +1,35 @@
 <div ng-module='boorish.chat'>
-  <div ng-model='messages' ng-controller='chatController'>
-  <h1>Welcome to the chat room!</h1>
-  <p>Name : <input type='text' ng-model='message.user' placeholder='Enter me'></p>
-  <p>Message: <input type='text' ng-model='message.text' placeholder='Enter message..'></p>
-  <input class="btn btn-primary" type='submit' ng-click='addMessage()' value='Submit'>
-    
-    <ul>
-      <li ng-repeat="message in messages">
-        {{message.user}} says : {{message.text}}
-      </li>
-    </ul>
-    <div id="messagesDiv">
+  <div id="parent chat" ng-model='messages' ng-controller='chatController'>
+    <div container class="chat-container">
+      <div class='row'>
+        <div class="col-sm-6 col-sm-offset-3">
+          <h3>Welcome to the chat room!</h3>
+        </div>
+      </div>
+      <div class='row'>
+        <div class="col-sm-4 col-sm-offset-2">
+          <label>Name</label>
+          <div class='row'>
+            <input type='text' id='nameInput' ng-model='message.name' placeholder='Enter name...'>
+          </div>     
+        </div>
+      </div>
+      <div class='row'>
+        <div class="col-sm-4 col-sm-offset-2">
+          <label id="inner">Message</label>
+              <input style="height:50px;"type='text' id='messageInput' ng-model='message.text' placeholder='Enter message...'>
+        </div>
+      </div>
+      <div class='row'>
+        <div class="col-sm-6 col-sm-offset-2">
+          <input class="btn btn-primary" type='submit' ng-click='addMessage()' value='Submit'>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div id="messagesDiv" style="background-color: #243336; border: 6px solid #949791; padding: 12px; color: white;">
+        </div>
+      </div>
     </div>
   </div>
 </div>
