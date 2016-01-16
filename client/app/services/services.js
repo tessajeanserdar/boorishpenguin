@@ -94,12 +94,12 @@ angular.module('boorish.services', [])
 
     // adds an answer to a question. requires the answer object and question ID
     addAnswer: function(answer, questionID) {
-        console.log("in add answer")
       return $http({
         method: 'POST',
         url: 'townhall/answers',
         data: JSON.stringify({
           text: answer.text,
+          url : answer.url,
           id_question: questionID,
           id_user: answer.user
         })

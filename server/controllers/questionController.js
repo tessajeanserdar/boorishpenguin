@@ -205,6 +205,7 @@ module.exports = {
         tagname: question.Tag.name,
         user: question.User.name,
         userid: question.User.id,
+        giphyUrl : question.giphyUrl,
         imgUrl: question.User.picture,
         updatedAt: question.updatedAt
       }];
@@ -226,6 +227,7 @@ module.exports = {
             QuestionId: qid,
             user: answer.User.name,
             userid: answer.User.id,
+            giphyUrl : answer.giphyUrl,
             createdAt: answer.createdAt,
             imgUrl: answer.User.picture
           }

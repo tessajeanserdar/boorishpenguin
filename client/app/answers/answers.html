@@ -67,10 +67,9 @@
         </div>
         <div class="col-xs-9">
           <div class="answer-text">{{ answer.text }}</div>
-          <div class="answer-user">- {{ answer.user }}</div>
+          <div class="answer-user">{{ answer.user }}</div>
           <!--<div>{{ answer.isGood }}</div>-->
-          <img src="{{answer.text}}">
-          
+            <img ng-src="{{answer.giphyUrl}}">
           <input class="btn btn-default pull-right" type='submit' ng-click='removeAnswer($index)' value='remove'>
         </div>
       </div>

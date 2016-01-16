@@ -9,6 +9,7 @@ module.exports = {
     var txt = req.body.text;
     var uid = req.body.id_user;
     var qid = req.body.id_question;
+    var url = req.body.url;
 
     db.Post.findById(qid)
     .then(function(question) {
@@ -22,6 +23,7 @@ module.exports = {
               isAnAnswer: true,
               UserId: uid,
               QuestionId: qid,
+              giphyUrl : url,
               CourseId: question.CourseId,
               TagId: question.TagId
             })
