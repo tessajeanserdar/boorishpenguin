@@ -6,6 +6,7 @@ angular.module('boorish.questions', [])
   $scope.listFilter = 'allQuestions';
   $scope.allCourses = [];
 
+
   var getAllCourses = function () {
     return Courses.getCourses()
     .then(function (data) {
@@ -32,10 +33,12 @@ angular.module('boorish.questions', [])
   };
 
 
-  $scope.createClass = function () {
+  $scope.createAClass = function () {
+    console.log("clicked create class");
     var courseObj = {name: $scope.newClass};
     $http.post('/townhall/courses', courseObj).success(function () {
       console.log('course added..');
+      $scope.newClass='';
       getAllCourses();
     });
   };
@@ -44,10 +47,11 @@ angular.module('boorish.questions', [])
     $location.path('/class/' + courseId); 
   };
 
-  $scope.createTag = function () {
+  $scope.createATag = function () {
     var tagObj = {name: $scope.newTag};
     $http.post('/townhall/tags', tagObj).success(function () {
       console.log('tag added..');
+      $scope.newTag='';
       getTags();
     });
   };
