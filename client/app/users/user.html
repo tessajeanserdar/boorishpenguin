@@ -2,10 +2,10 @@
 <div ng-module='boorish.user'>
   <div ng-model='user' ng-controller='UserController'>
 
-  <div class="profile-container">
+  <div class="well well-lg">
     <div class="row">
       <div class="col-sm-2">
-        <img ng-src="{{ user.image }}" width="100" height="100">
+        <img class="img-circle" ng-src="{{ user.image }}" width="100" height="100">
         <p class="profile-points" style="font-size: 20px;">Points: {{user.points}}</p>
       </div>
       <div class = "col-sm-6">
@@ -14,32 +14,52 @@
       </div>
     </div>
   </div>
+<div class="panel panel-default">
+  <div class="panel-body">
+
+
     <div class="row">
       <div class="col-sm-4" ng-model="courses">
           <h3>My Classes</h3>
-          <ul class="lead class-list">
-            <li ng-repeat="course in courses track by $index">
-              <a href="/#/class/{{course.id}}" style="border-bottom: 1px solid #9E9E9E"><p>{{course.name}}</p></a>
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="course in courses track by $index">
+              <a class="btn btn-primary" href="/#/class/{{course.id}}">
+               {{course.name}}
+              </a>
             </li>
           </ul>
       </div>
+
+<!--       <div class="list-group">
+        <div class="list-group-item" ng-model="courses" ng-repeat="course in courses track by $index">
+          <div class="row-action-primary">
+            <i class="material-icons">folder</i>
+          </div>
+          <div class="row-content" >
+            <div class="least-content">15m</div>
+            <h4 class="list-group-item-heading">Tile with a label</h4>
+            <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus.</p>
+          </div>
+        </div>
+        <div class="list-group-separator"></div>
+      </div> -->
+
+
       <div class="col-sm-8">
         <div class="row">
           <div class="collapse navbar-collapse" id="userActivity-navbar-collapse">
             <ul class="nav navbar-nav" style="font-size: 30px;font-weight: 500;">
-<!--               <li style="border-right: 1px solid #9E9E9E"><a class="nav-link" href=''>All Activity</a></li> -->
               <li style="border-right: 1px solid #9E9E9E"><a class="nav-link" ng-click="filterBy='questions'" href=''>My Questions</a></li>
               <li><a class="nav-link" ng-click="filterBy='answers'" href=''>My Answers</a></li>
             </ul>
           </div>
-          <!-- <h3>All Activity</h3> -->
         </div>
         <div class="row">
           <hr>
           <div ng-show="filterBy==='questions'" ng-repeat='question in questions'>
             <div class="col-sm-2 col-xs-3">
               <div>
-                <img ng-src="{{ question.imgUrl }}" width="50" height="50">
+                <img class="img-circle" ng-src="{{ question.imgUrl }}" width="50" height="50">
               </div>
               <!-- number of points current on question -->
               <div>
@@ -71,7 +91,7 @@
           <div ng-show="filterBy==='answers'" ng-repeat='answer in answers' class="answer-page-item">
             <div class="col-xs-3">
               <div>
-                <img ng-src="{{ answer.imgUrl }}0" width="64" height="64">
+                <img class="img-circle" ng-src="{{ answer.imgUrl }}0" width="64" height="64">
               </div>
               <div>
                 <a href="" type='submit'  ng-click='updateAnswer($index, "like")'>
@@ -87,8 +107,8 @@
                   <!--<span>Likes</span>-->
                 </a>
               </div>
-              <!--<input class="btn btn-default" type='submit' ng-click='updateAnswer($index, "good")' value='Good'>-->
-              <!-- <input type='submit' ng-click='updateAnswer($index, "answered")' value='Answered'> -->
+              <input class="btn btn-default" type='submit' ng-click='updateAnswer($index, "good")' value='Good'>
+              <input type='submit' ng-click='updateAnswer($index, "answered")' value='Answered'>
             </div>
             <div class="col-xs-9">
               <div class="answer-text">{{ answer.text }}</div>
@@ -96,14 +116,12 @@
               <!--<div>{{ answer.isGood }}</div>-->
             </div>
           </div>
-
-
-        <!-- SAJFSDKJALSKDFJ; -->
-        <hr>
+         <hr>
         </div>
       </div>
     </div>
-
+  </div>
+</div>
 <!--     // <ul>
     //   <li ng-repeat="user in users">
     //     <span>{{user.name}}</span>
@@ -115,3 +133,6 @@
 
   </div>
 </div>
+
+
+
