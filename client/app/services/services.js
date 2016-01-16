@@ -261,6 +261,7 @@ angular.module('boorish.services', [])
         url:url
       })
       .then(function(resp) {
+        console.log('from db: ',resp);
         return resp.data;
       })
     }

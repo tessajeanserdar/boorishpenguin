@@ -91,7 +91,6 @@ module.exports = {
   courseQuestions: function(req,res){
     var cid = req.params.id;
     var response = {};
-    response.results = {};
 
     db.Post.findAll({
       where: {
@@ -121,9 +120,21 @@ module.exports = {
           updatedAt: question.updatedAt
         }
       });
-      questions = {};
-      questions.results = formattedQs;
-      res.json(questions);
+      // add formatted Questions
+      response.results = formattedQs;
+      db.Course.findOne({
+        where: {
+          id: cid
+        }
+      }).then(function (course) {
+        // add course object
+        response.course = course;
+        course.getUsers()
+        .then(function (users) {
+          response.users = users;
+          res.json(response);
+        })
+      })
     })
   }
 };

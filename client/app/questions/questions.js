@@ -6,11 +6,37 @@ angular.module('boorish.questions', [])
   $scope.listFilter = 'allQuestions';
   $scope.allCourses = [];
 
+  var getAllCourses = function () {
+    return Courses.getCourses()
+    .then(function (data) {
+      console.log('get all courses: ', data);
+      $scope.allCourses = data.results;
+      // GET COURSES SPECIFIC FOR USER
+      return Courses.getUsersCourses($scope.userId)
+    })
+    .then(function(courseObj) {
+      console.log(courseObj);
+      // $scope.userCourses = courseObj.courses;
+      $scope.userCourseIds = courseObj.courseIds;
+      if ($scope.allCourses) {
+        $scope.userCourses = $scope.allCourses.map(function (course) {
+          if ($scope.userCourseIds.indexOf(course.id) > -1) {
+            return course;
+          }
+        });
+      }
+    })
+    .catch(function(err){
+      console.log(err);
+    })
+  };
+
+
   $scope.createClass = function () {
     var courseObj = {name: $scope.newClass};
     $http.post('/townhall/courses', courseObj).success(function () {
       console.log('course added..');
-      $scope.getAllCourses();
+      getAllCourses();
     });
   };
 
@@ -22,7 +48,7 @@ angular.module('boorish.questions', [])
     var tagObj = {name: $scope.newTag};
     $http.post('/townhall/tags', tagObj).success(function () {
       console.log('tag added..');
-      $scope.getTags();
+      getTags();
     });
   };
 
@@ -62,30 +88,7 @@ angular.module('boorish.questions', [])
     console.log('question for users courses: ', $scope.userCourseQuestions);
   };
 
-  var getAllCourses = function () {
-    return Courses.getCourses()
-    .then(function (data) {
-      console.log('get all courses: ', data);
-      $scope.allCourses = data.results;
-      // GET COURSES SPECIFIC FOR USER
-      return Courses.getUsersCourses($scope.userId)
-    })
-    .then(function(courseObj) {
-      console.log(courseObj);
-      // $scope.userCourses = courseObj.courses;
-      $scope.userCourseIds = courseObj.courseIds;
-      if ($scope.allCourses) {
-        $scope.userCourses = $scope.allCourses.map(function (course) {
-          if ($scope.userCourseIds.indexOf(course.id) > -1) {
-            return course;
-          }
-        });
-      }
-    })
-    .catch(function(err){
-      console.log(err);
-    })
-  };
+
 
   var getTags = function () {
     return $http.get('/townhall/tags')
