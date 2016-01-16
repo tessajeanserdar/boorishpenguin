@@ -11,13 +11,15 @@ module.exports = {
     })
     .then(function(questions) {
       var formattedQs = questions.map(function(question) {
+        console.log('each question**********', question);
         return {
           courseId: question.CourseId,
           userId: question.UserId,
           id: question.id,
           title: question.title,
           text: question.text,
-          isAnAnswer: false,
+          isAnAnswer: question.isAnAnswer,
+          isAResource: question.isAResource,
           points: question.points,
           responses: question.responses,
           isAnswered: question.isAnswered,
