@@ -296,3 +296,7 @@ li:last {
   background-color: #243336;
 }
 
+.course-name-link:hover {
+  font-weight: bold;
+}
+

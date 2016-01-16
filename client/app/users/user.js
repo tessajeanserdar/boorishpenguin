@@ -36,10 +36,8 @@ angular.module('boorish.user', [])
         Courses.getUsersCourses($scope.userId).then(function(courseObj) {
           $scope.userCourseIds = courseObj.courseIds;
           if ($scope.allCourses) {
-            $scope.courses = $scope.allCourses.map(function (course) {
-              if ($scope.userCourseIds.indexOf(course.id) > -1) {
-                return course;
-              }
+            $scope.courses = $scope.allCourses.filter(function (course) {
+              return $scope.userCourseIds.indexOf(course.id) > -1
             });
           }
         });

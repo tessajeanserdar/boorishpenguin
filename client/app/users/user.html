@@ -14,14 +14,23 @@
       </div>
     </div>
   </div>
+
+    <!-- main container (under the welcome user / picture) -->
     <div class="row">
+      <!-- sidebar  -->
       <div class="col-sm-4" ng-model="courses">
           <h3>My Classes</h3>
-          <ul class="lead class-list">
+          <md-list>
+            <md-list-item ng-repeat="course in courses">
+              <p ng-click="showCourse(course.id)" class="course-name-link">{{course.name}}</p>
+            </md-list-item>
+          </md-list>
+
+          <!-- <ul class="lead class-list">
             <li ng-repeat="course in courses track by $index">
               <a href="/#/class/{{course.id}}" style="border-bottom: 1px solid #9E9E9E"><p>{{course.name}}</p></a>
             </li>
-          </ul>
+          </ul> -->
       </div>
       <div class="col-sm-8">
         <div class="row">

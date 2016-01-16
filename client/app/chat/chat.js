@@ -3,9 +3,15 @@ angular.module('boorish.chat', ['firebase'])
 .controller('chatController', function($scope,  $firebaseArray, $window, Users, Auth) {
   var ref = new Firebase('https://soymilk.firebaseIO.com/');
   $scope.messages = $firebaseArray(ref);
+  $scope.userName = 'user';
+
+  Users.getUserWithId().then(function (user) {
+    $scope.user = user;
+  });
 
   $scope.addMessage = function(){
-      var name = $('#nameInput').val();
+      // var name = $('#nameInput').val();
+      var name = $scope.user.name;
       var text = $('#messageInput').val();
       ref.push({name: name, text: text});
       $('#messageInput').val('');
