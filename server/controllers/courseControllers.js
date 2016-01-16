@@ -97,35 +97,33 @@ module.exports = {
       where: {
         CourseId : cid,
         isAnAnswer : 0
-      }
-    }).then(function(posts) {
-      response.results.posts = posts;
-      db.CourseUser.findAll({
-        where: {
-          CourseId : cid
+      },
+      include : [db.User, db.Course, db.Tag]
+    }).then(function(questions) {
+      var formattedQs = questions.map(function(question) {
+        return {
+          courseId: question.CourseId,
+          userId: question.UserId,
+          id: question.id,
+          title: question.title,
+          text: question.text,
+          isAnAnswer: false,
+          points: question.points,
+          responses: question.responses,
+          isAnswered: question.isAnswered,
+          isGood: question.isGood,
+          isClosed: question.isClosed,
+          createdAt: question.createdAt,
+          coursename: question.Course.name,
+          tagname: question.Tag.name,
+          user: question.User.name,
+          imgUrl: question.User.picture,
+          updatedAt: question.updatedAt
         }
-      }).then(function(students) {
-        var studentIds = students.map(function(student){
-          return student.UserId;
-        })
-        db.User.findAll({
-          where: {
-            id : {
-              $in: studentIds
-            }
-          }
-        }).then(function(students){
-          response.results.students = students;
-          db.Course.findOne({
-            where: {
-              id : cid
-            }
-        }).then(function(classinfo) {
-          response.results.classinfo = classinfo;
-          res.json(response);
-        })
-     })
-  })
-}) 
-}
+      });
+      questions = {};
+      questions.results = formattedQs;
+      res.json(questions);
+    })
+  }
 };
