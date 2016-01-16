@@ -39,11 +39,11 @@ angular.module('boorish.answers', [])
   $scope.submitAnswer = function() {
     //need to add giphy error handling for unfound GIPHY searches
     var id_question = $scope.data.question.id;
-    var isGiphy = $scope.newAnswer.text.slice(0,5)
+    var isGiphy = $scope.newAnswer.text.slice(0,6)
     var giphySearch = $scope.newAnswer.text.slice(6,$scope.newAnswer.text.length);
     var giphySearch = giphySearch.replace(' ', '+')
     console.log(giphySearch);
-    if(isGiphy === "giphy"){
+    if(isGiphy === "/giphy"){
       console.log("running Giphy search with: ", giphySearch);
       Giphy.getGiphy(giphySearch).then(function(data){
         $scope.newAnswer.text = data.data.data.image_url
@@ -55,8 +55,6 @@ angular.module('boorish.answers', [])
           }).catch(function(error) {
             console.error(error);
           })
-        }).catch(function(error) {
-            console.error(error);
         })
       })
     } else {
