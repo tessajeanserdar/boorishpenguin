@@ -5,7 +5,7 @@
   <div class="profile-container">
     <div class="row">
       <div class="col-sm-2">
-        <img ng-src="{{ user.image }}" width="100" height="100">
+        <img class="img-circle" ng-src="{{ user.image }}" width="100" height="100">
         <p class="profile-points" style="font-size: 20px;">Points: {{user.points}}</p>
       </div>
       <div class = "col-sm-6">
@@ -39,7 +39,7 @@
           <div ng-show="filterBy==='questions'" ng-repeat='question in questions'>
             <div class="col-sm-2 col-xs-3">
               <div>
-                <img ng-src="{{ question.imgUrl }}" width="50" height="50">
+                <img class="img-circle" ng-src="{{ question.imgUrl }}" width="50" height="50">
               </div>
               <!-- number of points current on question -->
               <div>
@@ -71,7 +71,7 @@
           <div ng-show="filterBy==='answers'" ng-repeat='answer in answers' class="answer-page-item">
             <div class="col-xs-3">
               <div>
-                <img ng-src="{{ answer.imgUrl }}0" width="64" height="64">
+                <img class="img-circle" ng-src="{{ answer.imgUrl }}0" width="64" height="64">
               </div>
               <div>
                 <a href="" type='submit'  ng-click='updateAnswer($index, "like")'>
