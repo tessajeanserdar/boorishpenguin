@@ -219,7 +219,8 @@ h3.question-filter {
 }
 
 div.add-class-botton {
-  color: #5CB85C;
+  /*color: #5CB85C;*/
+  color: #0275D8;
   cursor: pointer;
 }
 
