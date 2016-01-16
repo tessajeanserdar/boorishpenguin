@@ -1,6 +1,6 @@
 angular.module('boorish.answers', [])
 
-.controller('answersController', function($scope, $location, $window, Answers, Questions, Users, Auth) {
+.controller('answersController', function($scope, $location, $window, Answers, Questions, Users, Auth, Giphy) {
   $scope.data = {};
   $scope.newAnswer = {};
 
@@ -37,22 +37,39 @@ angular.module('boorish.answers', [])
   };
 
   $scope.submitAnswer = function() {
-    console.log("it go here")
+    //need to add giphy error handling for unfound GIPHY searches
     var id_question = $scope.data.question.id;
-    
-    Users.getUserWithId().then(function(userID) { // grabs the userID
-      $scope.newAnswer.user = userID; // adds the userID to the answer
-      console.log("new answer",$scope.newAnswer);
-      Answers.addAnswer($scope.newAnswer, id_question).then(function() { // adds answer
-        console.log("it got here as well")
-        $scope.newAnswer.text = '';
-        $scope.getQuestion(); // refreshes the view
-      }).catch(function(error) {
-        console.error(error);
+    var isGiphy = $scope.newAnswer.text.slice(0,6)
+    var giphySearch = $scope.newAnswer.text.slice(6,$scope.newAnswer.text.length);
+    var giphySearch = giphySearch.replace(' ', '+')
+    console.log(giphySearch);
+    if(isGiphy === "/giphy"){
+      console.log("running Giphy search with: ", giphySearch);
+      Giphy.getGiphy(giphySearch).then(function(data){
+        $scope.newAnswer.text = data.data.data.image_url
+        Users.getUserWithId().then(function(userID) { // grabs the userID
+          $scope.newAnswer.user = userID; // adds the userID to the answer
+          Answers.addAnswer($scope.newAnswer, id_question).then(function() { // adds answer
+            $scope.newAnswer.text = '';
+            $scope.getQuestion(); // refreshes the view
+          }).catch(function(error) {
+            console.error(error);
+          })
+        })
       })
-    }).catch(function(error) {
-        console.error(error);
-    })
+    } else {
+      Users.getUserWithId().then(function(userID) { // grabs the userID
+        $scope.newAnswer.user = userID; // adds the userID to the answer
+        Answers.addAnswer($scope.newAnswer, id_question).then(function() { // adds answer
+          $scope.newAnswer.text = '';
+          $scope.getQuestion(); // refreshes the view
+        }).catch(function(error) {
+          console.error(error);
+        })
+      }).catch(function(error) {
+          console.error(error);
+      })      
+    }
   };
 
   $scope.updateAnswer = function(index, mod) {

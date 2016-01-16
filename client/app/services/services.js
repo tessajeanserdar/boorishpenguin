@@ -181,8 +181,21 @@ angular.module('boorish.services', [])
         })
       })
     }
-
   };
+})
+
+.factory('Giphy', function($http) {
+  return {
+    getGiphy: function(giphySearch){
+      var url = 'http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=' + giphySearch; 
+      return $http({
+      method :"GET",
+      url : url
+    }).then(function(res){
+      return res
+    })
+   }
+  }
 })
 
 // Tags and Course factories just pull Tags and Courses from the database
