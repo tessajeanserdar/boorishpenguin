@@ -46,7 +46,8 @@ angular.module('boorish.answers', [])
     if(isGiphy === "/giphy"){
       console.log("running Giphy search with: ", giphySearch);
       Giphy.getGiphy(giphySearch).then(function(data){
-        $scope.newAnswer.text = data.data.data.image_url
+        $scope.newAnswer.url = data.data.data.image_url;
+        $scope.newAnswer.text = "giphy";
         Users.getUserWithId().then(function(userID) { // grabs the userID
           $scope.newAnswer.user = userID; // adds the userID to the answer
           Answers.addAnswer($scope.newAnswer, id_question).then(function() { // adds answer

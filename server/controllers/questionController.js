@@ -11,6 +11,7 @@ module.exports = {
     })
     .then(function(questions) {
       var formattedQs = questions.map(function(question) {
+        console.log("QUESTIONNNNNNNN",question);
         return {
           courseId: question.CourseId,
           userId: question.UserId,
