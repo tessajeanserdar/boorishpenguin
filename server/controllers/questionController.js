@@ -12,6 +12,7 @@ module.exports = {
     .then(function(questions) {
       var formattedQs = questions.map(function(question) {
         return {
+          giphyUrl: question.giphyUrl,
           courseId: question.CourseId,
           userId: question.UserId,
           id: question.id,
