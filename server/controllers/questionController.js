@@ -4,14 +4,13 @@ var UCtrl = require('./userControllers.js');
 module.exports = {
   allQuestions: function(req, res) {
     db.Post.findAll({
-      where: {
-        isAnAnswer: false
-      },
+      // where: {
+      //   isAnAnswer: false
+      // },
       include: [db.User, db.Course, db.Tag]
     })
     .then(function(questions) {
       var formattedQs = questions.map(function(question) {
-        console.log('each question**********', question);
         return {
           courseId: question.CourseId,
           userId: question.UserId,
@@ -39,6 +38,41 @@ module.exports = {
       res.json(questions);
     });
   },
+
+  allActivityForUser: function(req, res) {
+    var uid = req.params.id;
+    db.Post.findAll({
+      where: {
+        UserId: +uid
+      }
+    }).then(function (questions) {
+      console.log('************************found questions from user: ', questions);
+      var formattedActivity = questions.map(function(question) {
+        return {
+          courseId: question.CourseId,
+          userId: question.UserId,
+          id: question.id,
+          title: question.title,
+          text: question.text,
+          isAnAnswer: question.isAnAnswer,
+          isAResource: question.isAResource,
+          points: question.points,
+          responses: question.responses,
+          isAnswered: question.isAnswered,
+          isGood: question.isGood,
+          isClosed: question.isClosed,
+          createdAt: question.createdAt,
+          coursename: question.Course.name,
+          tagname: question.Tag.name,
+          user: question.User.name,
+          imgUrl: question.User.picture,
+          updatedAt: question.updatedAt
+        }
+      });
+      res.json(formattedActivity);
+    });
+  },
+
   allAnswers: function(req, res) {
     db.Post.findAll({
       where: {

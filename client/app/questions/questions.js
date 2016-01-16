@@ -108,7 +108,7 @@ angular.module('boorish.questions', [])
       console.log('get all questions: ', data);
       if (data.data.results) {
         $scope.questions = data.data.results.filter(function (question) {
-          return !question.isAResource;
+          return !question.isAResource && !question.isAnAnswer;
         });
       }
       console.log('all questions: ', $scope.questions);
