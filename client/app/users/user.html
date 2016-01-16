@@ -14,95 +14,105 @@
       </div>
     </div>
   </div>
+
+    <!-- main container (under the welcome user / picture) -->
     <div class="row">
+      <!-- sidebar  -->
       <div class="col-sm-4" ng-model="courses">
           <h3>My Classes</h3>
-          <ul class="lead class-list">
-            <li ng-repeat="course in courses track by $index">
-              <a href="/#/class/{{course.id}}" style="border-bottom: 1px solid #9E9E9E"><p>{{course.name}}</p></a>
-            </li>
-          </ul>
+          <md-list>
+            <md-list-item ng-repeat="course in courses">
+              <p ng-click="showCourse(course.id)" class="course-name-link">{{course.name}}</p>
+            </md-list-item>
+          </md-list>
       </div>
-      <div class="col-sm-8">
-        <div class="row">
-          <div class="collapse navbar-collapse" id="userActivity-navbar-collapse">
-            <ul class="nav navbar-nav" style="font-size: 30px;font-weight: 500;">
-<!--               <li style="border-right: 1px solid #9E9E9E"><a class="nav-link" href=''>All Activity</a></li> -->
-              <li style="border-right: 1px solid #9E9E9E"><a class="nav-link" ng-click="filterBy='questions'" href=''>My Questions</a></li>
-              <li><a class="nav-link" ng-click="filterBy='answers'" href=''>My Answers</a></li>
-            </ul>
-          </div>
-          <!-- <h3>All Activity</h3> -->
-        </div>
-        <div class="row">
-          <hr>
-          <div ng-show="filterBy==='questions'" ng-repeat='question in questions'>
-            <div class="col-sm-2 col-xs-3">
-              <div>
-                <img class="img-circle" ng-src="{{ question.imgUrl }}" width="50" height="50">
-              </div>
-              <!-- number of points current on question -->
-              <div>
-                <span class="glyphicon glyphicon-heart"></span>
-                <span>{{ question.points }}</span>
-                <span>Likes</span>
-              </div>
 
-              <!-- number of answers current on question -->
-              <div>
-                <span class="glyphicon glyphicon-comment"></span>
-                <span>{{ question.responses }}</span>
-                <span>Answers</span>
-              </div>
-            </div>
-            <!-- link to question id. Title is currently the first 60 characters in the text -->
-            <div class="col-sm-10 col-xs-9">
-              <h3>
-                <a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a>
-                <span class="glyphicon glyphicon-ok-sign" ng-if="question.isGood == true"></span>
-              </h3>
+      <!-- test filtering: -->
+      <div ng-cloak>
+          <md-content>
+            <md-tabs md-dynamic-height md-border-bottom>
+              <md-tab ng-click="filterBy='questions'" label="Questions">
+                <md-content class="md-padding">
+                  <!-- LIST FOR ALL QUESTIONS (MINIMIZE FOR CONVENIENCE) -->
+                    <md-card ng-show="filterBy==='questions'" ng-repeat='question in questions | filter:searchText | orderBy:"-updatedAt"' class="question-list-item">
+                      <div class="col-sm-2 col-xs-3">
+                        <div>
+                          <img class="img-circle" ng-src="{{ question.imgUrl }}" class="profile">
+                        </div>
+                        <!-- number of points current on question -->
+                        <div>
+                          <span class="glyphicon glyphicon-heart"></span>
+                          <span>{{ question.points }}</span>
+                          <span>Likes</span>
+                        </div>
 
-              <div class="course">{{ question.coursename }}</div>
-              <div class="tag">{{ question.tagname }}</div>
-              <div>- asked by {{ question.user }} at {{ question.createdAt }}</div>
-            </div>
-          
-          </div>
-          <div ng-show="filterBy==='answers'" ng-repeat='answer in answers' class="answer-page-item">
-            <div class="col-xs-3">
-              <div>
-                <img class="img-circle" ng-src="{{ answer.imgUrl }}0" width="64" height="64">
-              </div>
-              <div>
-                <a href="" type='submit'  ng-click='updateAnswer($index, "like")'>
-                  <span class="glyphicon glyphicon-heart"></span>
-                  <span>{{ answer.points }}</span>
-                  <span>Likes</span>
-                </a>
-              </div>
-              <div>
-                <a href="" type='submit'  ng-click='updateAnswer($index, "good")'>
-                  <span class="glyphicon glyphicon-ok-sign ng-scope"></span>
-                  <span>{{ answer.isGood }}</span>
-                  <!--<span>Likes</span>-->
-                </a>
-              </div>
-              <!--<input class="btn btn-default" type='submit' ng-click='updateAnswer($index, "good")' value='Good'>-->
-              <!-- <input type='submit' ng-click='updateAnswer($index, "answered")' value='Answered'> -->
-            </div>
-            <div class="col-xs-9">
-              <div class="answer-text">{{ answer.text }}</div>
-              <div class="answer-user">- {{ answer.user }}</div>
-              <!--<div>{{ answer.isGood }}</div>-->
-            </div>
-          </div>
+                        <!-- number of answers current on question -->
+                        <div>
+                          <span class="glyphicon glyphicon-comment"></span>
+                          <span>{{ question.responses }}</span>
+                          <span>Answers</span>
+                        </div>
+                        <!-- link to question id. Title is currently the first 60 characters in the text -->
+                      </div>
+                      <div class="col-sm-10 col-xs-9">
+                        <h3>
+                          <a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a>
+                          <span class="glyphicon glyphicon-ok-sign" ng-if="question.isGood == true"></span>
+                        </h3>
+                        <md-chips>
+                          <md-chip>{{ question.coursename }}</md-chip>
+                          <md-chip>{{ question.tagname }}</md-chip>
+                        </md-chips>
+                        <div>- asked by {{ question.user }} at {{ question.createdAt }}</div>
+                      </div>
+                    </md-card>
+                </md-content>
+              </md-tab>
+              <md-tab ng-click="filterBy='answers'" label="answers">
+                <md-content class="md-padding">
+                  <!-- LIST OF ALL QUESTIONS FOR USERS CLASSES -->
+                  <md-card ng-show="filterBy==='answers'" ng-repeat='question in answers | orderBy:"-updatedAt"' class="question-list-item">
+                    <div class="col-sm-2 col-xs-3">
+                      <div>
+                        <img class="img-circle" ng-src="{{ question.imgUrl }}" class="profile">
+                      </div>
+                      <!-- number of points current on question -->
+                      <div>
+                        <span class="glyphicon glyphicon-heart"></span>
+                        <span>{{ question.points }}</span>
+                        <span>Likes</span>
+                      </div>
 
+                      <!-- number of answers current on question -->
+                      <div>
+                        <span class="glyphicon glyphicon-comment"></span>
+                        <span>{{ question.responses }}</span>
+                        <span>Answers</span>
+                      </div>
+                      <!-- link to question id. Title is currently the first 60 characters in the text -->
+                    </div>
+                    <div class="col-sm-10 col-xs-9">
+                      <h3>
+                        <a ng-href='#/questions/{{ question.id }}'>{{ question.text }}</a>
+                        <span class="glyphicon glyphicon-ok-sign" ng-if="question.isGood == true"></span>
+                      </h3>
+                      <img ng-src="{{question.giphyUrl}}" ng-show="!!question.giphyUrl">
+                      <md-chips>
+                        <md-chip>{{ question.coursename }}</md-chip>
+                        <md-chip>{{ question.tagname }}</md-chip>
+                      </md-chips>
+                      <div>- asked by {{ question.user }} at {{ question.createdAt }}</div>
+                    </div>
+                  </md-card>
+                </md-content>
+              </md-tab>
+            </md-tabs>
+          </md-content>
+         </div>
 
-        <!-- SAJFSDKJALSKDFJ; -->
-        <hr>
-        </div>
-      </div>
-    </div>
+<!-- cut info here -->
+
+<!-- paste it here -->
 
 <!--     // <ul>
     //   <li ng-repeat="user in users">

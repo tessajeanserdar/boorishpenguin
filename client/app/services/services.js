@@ -84,12 +84,10 @@ angular.module('boorish.services', [])
         url: 'townhall/resources',
       })
       .then(function(res) {
-    console.log("inside get resource: THEN:", res);
         return res.data;
       })
     },
     addResource: function(resource) {
-    console.log("inside add resource:", resource);
       return $http({
         method: 'POST',
         url: 'townhall/resources',
@@ -188,7 +186,7 @@ angular.module('boorish.services', [])
         method: 'GET',
         url: '/townhall/users/' + userID
       }).then(function(res) {
-        return res.data.results.id;
+        return res.data.results;
       })
     },
 
@@ -215,6 +213,17 @@ angular.module('boorish.services', [])
           email: user.email,
           picture: user.picture
         })
+      })
+    }, 
+
+    allUserActivity: function() {
+      var uid = localStorage.getItem('com.boorish');
+      return $http({
+        method: 'GET',
+        url: '/townhall/activity/' + uid
+      }).then(function(res) {
+        console.log('got a response: ', res);
+        return res;
       })
     }
   };
@@ -297,7 +306,6 @@ angular.module('boorish.services', [])
         url:url
       })
       .then(function(resp) {
-        console.log('from db: ',resp);
         return resp.data;
       })
     }
@@ -340,7 +348,6 @@ angular.module('boorish.services', [])
           if (isUser) {
             $window.localStorage.setItem('com.boorish', user.id);
           } else {
-            console.log("Redirect to signin from setUser")
             $location.path('/signin');
           }
         })

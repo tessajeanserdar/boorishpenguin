@@ -1,8 +1,9 @@
+<!-- sidebar of classes -->
 <div class="col-md-3">
   <h3>All Classes</h3>
   <md-list ng-cloak>
     <md-list-item ng-repeat="course in allCourses">
-      <p ng-click="showCourse(course.id)"> {{course.name}} </p>
+      <p  class="course-name-link" ng-click="showCourse(course.id)"> {{course.name}} </p>
       <md-button ng-click="addToCourse(allCourses.indexOf(course))" ng-show="userCourseIds.indexOf(course.id) === -1"  class="md-icon-button md-accent" aria-label="Favorite"><i class="material-icons">star_border</i></md-button>
       <md-button ng-click="addToCourse(allCourses.indexOf(course))" ng-show="userCourseIds.indexOf(course.id) >= 0"  class="md-icon-button md-accent" aria-label="Favorite"><i class="material-icons">star</i></md-button>
     </md-list-item>
@@ -27,12 +28,6 @@
       <md-button ng-click="createATag()">Submit</md-button>
     </div>
   </form>
-
-  <!-- <input type="text" ng-model="newClass">
-  <button ng-click="createClass()">create class</button>
-  <br>
-  <input type="text" ng-model="newTag">
-  <button ng-click="createTag()">create tag</button> -->
 </div>
 
 <div ng-module='boorish.questions' class="col-xs-9 border-left">
