@@ -86,7 +86,11 @@ var Post = db.define('Post', {
   },
   updatedAt: Sequelize.DATE,
   url: {
-    type: Sequelize.DATE,
+    type: Sequelize.STRING,
+    defaultValue: null
+  },
+  giphyUrl: {
+    type: Sequelize.STRING,
     defaultValue: null
   }
 });
