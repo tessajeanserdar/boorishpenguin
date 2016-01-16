@@ -11,6 +11,7 @@ angular.module('boorishpenguin', [
   'boorish.resources',
   'boorish.chat',
   'ngMaterial',
+  'boorish.scheduleApp',
   'ngRoute'
   ])
 
@@ -60,6 +61,10 @@ angular.module('boorishpenguin', [
       templateUrl: 'app/chat/chat.html',
       controller: 'chatController'
     })
+    .when('/schedule', {
+       templateUrl: 'app/schedule/schedule.html',
+       controller: 'scheduleController '
+     })
     .otherwise({
       routeTo: '/signin'
     })
