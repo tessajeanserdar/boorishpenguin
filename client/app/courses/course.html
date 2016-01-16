@@ -8,19 +8,100 @@
   </div>
 
   <div class="col-xs-9">
-    <ul class="question-filter-ul">
+<!--     <ul class="question-filter-ul">
       <li>
         <h3 class="question-filter" ng-click="listFilter='questions'">All</h3>
       </li>
       <li>
         <h3 class="question-filter" ng-click="listFilter='resources'">Resources</h3>
       </li>
-    </ul>
+    </ul> -->
 
+
+<div ng-cloak>
+    <md-content>
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab ng-click="listFilter='questions'" label="Questions">
+          <md-content class="md-padding">
+            <!-- LIST FOR ALL QUESTIONS (MINIMIZE FOR CONVENIENCE) -->
+              <md-card ng-show="listFilter==='questions'" ng-repeat="question in courseInfo.questions" class="question-list-item">
+                <div class="col-sm-2 col-xs-3">
+                  <div>
+                    <img class="img-circle" ng-src="{{ question.imgUrl }}" class="profile">
+                  </div>
+                  <!-- number of points current on question -->
+                  <div>
+                    <span class="glyphicon glyphicon-heart"></span>
+                    <span>{{ question.points }}</span>
+                    <span>Likes</span>
+                  </div>
+
+                  <!-- number of answers current on question -->
+                  <div>
+                    <span class="glyphicon glyphicon-comment"></span>
+                    <span>{{ question.responses }}</span>
+                    <span>Answers</span>
+                  </div>
+                  <!-- link to question id. Title is currently the first 60 characters in the text -->
+                </div>
+                <div class="col-sm-10 col-xs-9">
+                  <h3>
+                    <a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a>
+                    <span class="glyphicon glyphicon-ok-sign" ng-if="question.isGood == true"></span>
+                  </h3>
+                  <md-chips>
+                    <md-chip>{{ question.coursename }}</md-chip>
+                    <md-chip>{{ question.tagname }}</md-chip>
+                  </md-chips>
+                  <div>- asked by {{ question.user }} at {{ question.createdAt }}</div>
+                </div>
+              </md-card>
+          </md-content>
+        </md-tab>
+        <md-tab ng-click="listFilter='resources'" label="Resources">
+          <md-content class="md-padding">
+            <!-- LIST OF ALL QUESTIONS FOR USERS CLASSES -->
+            <md-card ng-show="listFilter==='resources'" ng-repeat="question in courseInfo.resources" class="question-list-item">
+              <div class="col-sm-2 col-xs-3">
+                <div>
+                  <img class="img-circle" ng-src="{{ question.imgUrl }}" class="profile">
+                </div>
+                <!-- number of points current on question -->
+                <div>
+                  <span class="glyphicon glyphicon-heart"></span>
+                  <span>{{ question.points }}</span>
+                  <span>Likes</span>
+                </div>
+
+                <!-- number of answers current on question -->
+                <div>
+                  <span class="glyphicon glyphicon-comment"></span>
+                  <span>{{ question.responses }}</span>
+                  <span>Answers</span>
+                </div>
+                <!-- link to question id. Title is currently the first 60 characters in the text -->
+              </div>
+              <div class="col-sm-10 col-xs-9">
+                <h3>
+                  <a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a>
+                  <span class="glyphicon glyphicon-ok-sign" ng-if="question.isGood == true"></span>
+                </h3>
+                <md-chips>
+                  <md-chip>{{ question.coursename }}</md-chip>
+                  <md-chip>{{ question.tagname }}</md-chip>
+                </md-chips>
+                <div>- asked by {{ question.user }} at {{ question.createdAt }}</div>
+              </div>
+            </md-card>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-content>
+   </div>
 
 
       <!-- filter for only questions -->
-    <div ng-show="listFilter==='questions'" class="question-list-item" ng-repeat="question in courseInfo.questions">
+<!--     <div ng-show="listFilter==='questions'" class="question-list-item" ng-repeat="question in courseInfo.questions">
       <div class="col-sm-2 col-xs-3">
         <div>
           <img class="img-circle" ng-src="{{ question.imgUrl }}0" width="50" height="50">
@@ -47,11 +128,11 @@
               <div>- asked by {{ question.user }} at {{ question.createdAt }}</div>
             </div>
             <hr>
-          </div>
+          </div> -->
 
 
           <!-- filter for only resources -->
-          <div ng-show="listFilter==='resources'" class="question-list-item" ng-repeat="question in courseInfo.resources">
+<!--           <div ng-show="listFilter==='resources'" class="question-list-item" ng-repeat="question in courseInfo.resources">
             <div class="col-sm-2 col-xs-3">
               <div>
                 <img ng-src="{{ question.imgUrl }}0" width="50" height="50">
@@ -78,7 +159,7 @@
                     <div>- asked by {{ question.user }} at {{ question.createdAt }}</div>
                   </div>
                   <hr>
-          </div>
+          </div> -->
 
  <!--    </div>
     </div> -->
