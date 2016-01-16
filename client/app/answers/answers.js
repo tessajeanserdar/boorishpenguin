@@ -3,6 +3,7 @@ angular.module('boorish.answers', [])
 .controller('answersController', function($scope, $location, $window, Answers, Questions, Users, Auth, Giphy) {
   $scope.data = {};
   $scope.newAnswer = {};
+  $scope.giphyString = '';
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
   ///// Answers Controller:
@@ -34,6 +35,7 @@ angular.module('boorish.answers', [])
       console.log(res.data)
       $scope.data.question = res.data.results[0];
       $scope.data.answers = res.data.results.slice(1);
+      console.log($scope.data.answers);
     });
   };
 
@@ -44,16 +46,19 @@ angular.module('boorish.answers', [])
     var giphySearch = $scope.newAnswer.text.slice(6,$scope.newAnswer.text.length);
     var giphySearch = giphySearch.replace(' ', '+')
     console.log(giphySearch);
-    if(isGiphy === "/giphy"){
-      console.log("running Giphy search with: ", giphySearch);
-      Giphy.getGiphy(giphySearch).then(function(data){
+    console.log('giphy string with input: ', $scope.giphyString);
+    // if(isGiphy === "/giphy"){
+    if($scope.giphyString.length > 0){
+      // console.log("running Giphy search with: ", giphySearch);
+      Giphy.getGiphy('+' + $scope.giphySearch).then(function(data){
         $scope.newAnswer.url = data.data.data.image_url;
         // HERE is where we need to implement text and giphy
-        $scope.newAnswer.text = "giphy";
+        // $scope.newAnswer.text = "giphy";
         Users.getUserWithId().then(function(userID) { // grabs the userID
           $scope.newAnswer.user = userID; // adds the userID to the answer
           Answers.addAnswer($scope.newAnswer, id_question).then(function() { // adds answer
             $scope.newAnswer.text = '';
+            $scope.giphyString = '';
             $scope.getQuestion(); // refreshes the view
           }).catch(function(error) {
             console.error(error);
@@ -65,6 +70,7 @@ angular.module('boorish.answers', [])
         $scope.newAnswer.user = userID; // adds the userID to the answer
         Answers.addAnswer($scope.newAnswer, id_question).then(function() { // adds answer
           $scope.newAnswer.text = '';
+          $scope.giphyString = '';
           $scope.getQuestion(); // refreshes the view
         }).catch(function(error) {
           console.error(error);

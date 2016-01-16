@@ -251,6 +251,10 @@ a {
   color: rgb(76,175,80);
 }
 
+.submit-answer-button {
+  float: right;
+}
+
 .mdl-button {
     background: 0 0;
     border: none;
