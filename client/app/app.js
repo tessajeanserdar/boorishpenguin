@@ -63,7 +63,7 @@ angular.module('boorishpenguin', [
     })
     .when('/schedule', {
        templateUrl: 'app/schedule/schedule.html',
-       controller: 'scheduleController '
+       controller: 'scheduleController'
      })
     .otherwise({
       routeTo: '/signin'
