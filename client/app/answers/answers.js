@@ -42,21 +42,16 @@ angular.module('boorish.answers', [])
   $scope.submitAnswer = function() {
     //need to add giphy error handling for unfound GIPHY searches
     var id_question = $scope.data.question.id;
-    var isGiphy = $scope.newAnswer.text.slice(0,6)
-    var giphySearch = $scope.newAnswer.text.slice(6,$scope.newAnswer.text.length);
-    var giphySearch = giphySearch.replace(' ', '+')
-    console.log(giphySearch);
-    console.log('giphy string with input: ', $scope.giphyString);
-    // if(isGiphy === "/giphy"){
+
+
     if($scope.giphyString.length > 0){
-      // console.log("running Giphy search with: ", giphySearch);
-      Giphy.getGiphy('+' + $scope.giphySearch).then(function(data){
+      Giphy.getGiphy('+' + $scope.giphyString).then(function(data){
         $scope.newAnswer.url = data.data.data.image_url;
         // HERE is where we need to implement text and giphy
-        // $scope.newAnswer.text = "giphy";
         Users.getUserWithId().then(function(userID) { // grabs the userID
           $scope.newAnswer.user = userID; // adds the userID to the answer
           Answers.addAnswer($scope.newAnswer, id_question).then(function() { // adds answer
+          console.log('new Answer: ', $scope.newAnswer, 'id_question: ', id_question);
             $scope.newAnswer.text = '';
             $scope.giphyString = '';
             $scope.getQuestion(); // refreshes the view
@@ -68,7 +63,9 @@ angular.module('boorish.answers', [])
     } else {
       Users.getUserWithId().then(function(userID) { // grabs the userID
         $scope.newAnswer.user = userID; // adds the userID to the answer
+        $scope.newAnswer.url = '';
         Answers.addAnswer($scope.newAnswer, id_question).then(function() { // adds answer
+          console.log('new Answer: ', $scope.newAnswer, 'id_question: ', id_question);
           $scope.newAnswer.text = '';
           $scope.giphyString = '';
           $scope.getQuestion(); // refreshes the view
