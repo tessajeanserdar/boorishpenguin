@@ -31,6 +31,7 @@ angular.module('boorish.answers', [])
   $scope.getQuestion = function() {
     var path = $location.path(); // e.g., '/questions/19'
     Questions.getQuestion(path).then(function(res) {
+      console.log(res.data)
       $scope.data.question = res.data.results[0];
       $scope.data.answers = res.data.results.slice(1);
     });
@@ -47,6 +48,7 @@ angular.module('boorish.answers', [])
       console.log("running Giphy search with: ", giphySearch);
       Giphy.getGiphy(giphySearch).then(function(data){
         $scope.newAnswer.url = data.data.data.image_url;
+        // HERE is where we need to implement text and giphy
         $scope.newAnswer.text = "giphy";
         Users.getUserWithId().then(function(userID) { // grabs the userID
           $scope.newAnswer.user = userID; // adds the userID to the answer
