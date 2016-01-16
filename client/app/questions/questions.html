@@ -1,26 +1,28 @@
 <div class="col-md-3">
-  <h3 class="question-filter" id="join-class-header">Join a new class</h3>
+  <h3 class="question-filter" id="join-class-header">All Classes</h3>
   <div class="list-of-courses">
     <ul>
       <li class="class-sidebar-li lead" ng-repeat="course in allCourses">
         <div class="row">
           <div class="col-xs-3">
             
-            <button class="btn btn-default" ng-show="userCourseIds.indexOf(course.id) === -1" ng-click="addToCourse(allCourses.indexOf(course))"><span class="glyphicon glyphicon-plus-sign"></span></button>
+            <!-- <button class="btn btn-default" ng-show="userCourseIds.indexOf(course.id) === -1" ng-click="addToCourse(allCourses.indexOf(course))"><span class="glyphicon glyphicon-plus-sign"></span></button> -->
+
+           <div ng-show="userCourseIds.indexOf(course.id) === -1" ng-click="addToCourse(allCourses.indexOf(course))" class="glyphicon glyphicon-plus-sign add-class-botton"></div>
 
           </div>
 
           <div ng-click="showCourse(course.id)" class="col-xs-9">
-            <p>{{course.name}}</p>
+            <p class="sidebar-class-name">{{course.name}}</p>
           </div>
         </div>
       </li>
     </ul>
   </div>
-  <!-- <input type="text" ng-model="newClass">
+  <input type="text" ng-model="newClass">
   <button ng-click="createClass()">create class</button>
-<br> -->
-  <!-- <input type="text" ng-model="newTag">
+<br>
+<!--   <input type="text" ng-model="newTag">
   <button ng-click="createTag()">create tag</button> -->
 </div>
 

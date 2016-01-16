@@ -159,8 +159,16 @@ select {
   display: inline;
   float: left;
   margin-left: 15px;
+  margin-bottom: 20px
 }
-
+h3.question-filter {
+  border-right: 1px solid grey;
+  padding-right: 13px
+}
+/*h3.question-filter:last-child {
+  border: none;
+}
+*/
 .question-filter-ul {
   list-style: none;
 }
@@ -187,10 +195,18 @@ select {
   cursor: default;
   display: block;
   width: 100%;
+  border-right: 0;
 }
 
 .border-left {
   border-left: 1px solid #EEEEEE;
+}
+
+.sidebar-class-name {
+  cursor: pointer;
+}
+.sidebar-class-name:hover {
+  font-weight: bold;
 }
 
 /*.profile-header {
@@ -200,6 +216,11 @@ select {
 .class-list {
   list-style-type: none;
   padding-left: 0;
+}
+
+div.add-class-botton {
+  color: #5CB85C;
+  cursor: pointer;
 }
 
 .answer-text {
@@ -218,7 +239,7 @@ li:last {
 }
 
 .active {
-    background-color: black;
+  background-color: black;
 }
 
 img, .header-img {
