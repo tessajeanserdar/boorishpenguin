@@ -76,6 +76,42 @@ angular.module('boorish.services', [])
   }
 })
 
+.factory('Resources', function($http) {
+  return {
+    getAllResources: function() {
+      return $http({
+        method: 'GET',
+        url: 'townhall/resources',
+      })
+      .then(function(res) {
+    console.log("inside get resource: THEN:", res);
+        return res.data;
+      })
+    },
+    addResource: function(resource) {
+    console.log("inside add resource:", resource);
+      return $http({
+        method: 'POST',
+        url: 'townhall/resources',
+        data: JSON.stringify({
+          text: resource.text,
+          // id_courseId? ,
+          id_user: resource.userId,
+          course: resource.course,  // these are not setup yet
+          tag: resource.tag,  // these are not setup yet
+          title: resource.title
+        })
+      })
+    }, 
+    updateResource: function() {
+
+    },
+    removeResource: function() {
+
+    } 
+  }
+})
+
 // Answers factory handles all requests to add, retrieve, or modify answers in the database
 
 .factory('Answers', function($http) {
