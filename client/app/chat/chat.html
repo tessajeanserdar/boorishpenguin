@@ -29,7 +29,13 @@
       </div>
       <hr>
       <div class="row">
-        <div id="messagesDiv" style="background-color: #009688; border: 6px solid #002D29; padding: 12px; color: white;">
+        <div id="messagesDiv" style="background-color: #009688; border: 6px solid #002D29; padding: 12px; color: white; font-size: 18px;">
+          <div ng-repeat='message in messages'>
+            <p>
+              <span style="font-weight:bold;">{{message.name}}:</span>  
+              <span style="font-style:italic">{{message.text}}</span>
+            </p>
+          </div>
         </div>
       </div>
     </div>
