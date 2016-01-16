@@ -24,6 +24,9 @@ angular.module('boorish.user', [])
       return userArray;
     }, []);
   };
+  $scope.showCourse = function (courseId) {
+    $location.path('/class/' + courseId); 
+  };
   // Questions.getAllQuestions().then(function(res) {
   //   var allActivity = res.data.results;
   //   if (allActivity) {

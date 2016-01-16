@@ -7,9 +7,10 @@ module.exports = {
   newAnswer: function(req, res) {
     var d = new Date();
     var txt = req.body.text;
-    var uid = req.body.id_user;
+    var uid = req.body.id_user.id;
     var qid = req.body.id_question;
     var url = req.body.url;
+    console.log('**************** userid', uid);
 
     db.Post.findById(qid)
     .then(function(question) {
