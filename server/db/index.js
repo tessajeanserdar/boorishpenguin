@@ -84,7 +84,11 @@ var Post = db.define('Post', {
     type: Sequelize.DATE,
     defaultValue: Sequelize.fn('NOW')
   },
-  updatedAt: Sequelize.DATE
+  updatedAt: Sequelize.DATE,
+  url: {
+    type: Sequelize.DATE,
+    defaultValue: null
+  }
 });
 
 var Like = db.define('Like', {
