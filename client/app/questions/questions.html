@@ -5,10 +5,10 @@
       <li class="class-sidebar-li lead" ng-repeat="course in allCourses">
         <div class="row">
           <div class="col-xs-3">
-            <!-- 
-            <button class="btn btn-default" ng-show="userCourseIds.indexOf(course.id) === -1" ng-click="addToCourse(allCourses.indexOf(course))"><span class="glyphicon glyphicon-plus-sign"></span></button>
- -->
- <div class="glyphicon glyphicon-plus-sign add-class-botton"></div>
+            
+            <!-- <button class="btn btn-default" ng-show="userCourseIds.indexOf(course.id) === -1" ng-click="addToCourse(allCourses.indexOf(course))"><span class="glyphicon glyphicon-plus-sign"></span></button> -->
+
+           <div ng-show="userCourseIds.indexOf(course.id) === -1" ng-click="addToCourse(allCourses.indexOf(course))" class="glyphicon glyphicon-plus-sign add-class-botton"></div>
 
           </div>
 

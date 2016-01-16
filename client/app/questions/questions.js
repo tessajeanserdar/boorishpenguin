@@ -6,7 +6,6 @@ angular.module('boorish.questions', [])
   $scope.listFilter = 'allQuestions';
   $scope.allCourses = [];
 
-
   $scope.createClass = function () {
     var courseObj = {name: $scope.newClass};
     $http.post('/townhall/courses', courseObj).success(function () {

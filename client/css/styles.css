@@ -220,7 +220,7 @@ h3.question-filter {
 
 div.add-class-botton {
   color: #5CB85C;
-  margin-top: 4px;
+  cursor: pointer;
 }
 
 .answer-text {
