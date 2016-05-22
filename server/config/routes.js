@@ -50,8 +50,9 @@ module.exports = function(app, express, ensureAuth) {
   app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   function(req, res) {
+    console.log("successfully authenticated")
     // sends user to questions page after they successfully login
-    res.redirect('/#/questions');
+    res.redirect('https://afternoon-fjord-60393.herokuapp.com/#/questions');
   });
 
   app.get('/user', ensureAuth, function (req, res){
