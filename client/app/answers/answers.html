@@ -69,7 +69,7 @@
           <div class="answer-text">{{ answer.text }}</div>
           <div class="answer-user">{{ answer.user }}</div>
           <!--<div>{{ answer.isGood }}</div>-->
-            <img ng-show="!!answer.giphyUrl" ng-src="{{answer.giphyUrl}}">
+            <img class="giphy-box" ng-show="!!answer.giphyUrl" ng-src="{{answer.giphyUrl}}">
           <input class="btn btn-default pull-right" type='submit' ng-click='removeAnswer($index)' value='remove'>
         </div>
       </div>
