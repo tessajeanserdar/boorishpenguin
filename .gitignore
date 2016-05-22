@@ -15,3 +15,7 @@ lib/
 
 # Environment_Variables
 .env
+
+
+### BOWER ###
+bower_components

@@ -1,0 +1,85 @@
+<body>
+<div class="container" ng-model="boorish.scheduleApp">
+  <form class="form-horizontal">
+    <fieldset>
+      <legend>Create Events</legend>
+      <div class="form-group">
+          <label name="input" for="select111" class="col-md-2 control-label">Day</label>
+          <div class="col-md-10">
+            <select id="select111" class="form-control" ng-model="item.text">
+              <option>Monday</option>
+              <option>Tuesday</option>
+              <option>Wednesday</option>
+              <option>Thursday</option>
+              <option>Friday</option>
+              <option>Saturday</option>
+              <option>Sunday</option>
+            </select>
+          </div>
+        </div>
+      <div class="form-group">
+        <label for="text" class="col-md-2 control-label">Event</label>
+      <div class="col-md-10">
+        <input name="input" type="text" ng-model="item.event" class="form-control" id="text" placeholder="Tutoring with James">
+        </div>
+      </div>
+      <div class="form-group">
+        <label name="input" for="select111" class="col-md-2 control-label">Time</label>
+        <div class="col-md-10">
+          <select id="select111" class="form-control" ng-model="item.times">
+            <option>9:00 AM</option>
+            <option>10:00 AM</option>
+            <option>11:00 AM</option>
+            <option>12:00 PM</option>
+            <option>1:00 PM</option>
+            <option>2:00 PM</option>
+            <option>3:00 PM</option>
+            <option>4:00 PM</option>
+            <option>5:00 PM</option>
+            <option>8:00 PM</option>
+            <option>7:00 PM</option>
+            <option>8:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+              <div class="togglebutton">
+                <label>
+                  <input name="input" type="checkbox" checked="" ng-model="item.busy"> Show As Busy
+                </label>
+              </div>
+            </div>
+          </div>
+      <div class="form-group">
+        <div class="col-md-10 col-md-offset-2">
+               <a href="#/schedule" ng-click="addTime(item)" class="btn btn-primary">Submit</a>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="row times">
+      
+    <div ng-repeat="schedule in schedules.userSchedules">
+      <div class="col-xs-4 text-center" ng-repeat="(key,value) in schedule | orderBy:'name'">
+      <h2>{{ value.name }}</h2>
+      <div>{{ value.title}}</div>
+      <div class="time-slot" >     
+         
+        <input type="checkbox" id="{{ value.title }}-{{ $index }}" ng-model="value.booked" ng-disabled="value.booked">
+        <label for="{{ day.name }}-{{ $index }}">{{ value.time }}<br>
+          <span ng-if="value.booked">Booked</span>
+          <span ng-if="!value.booked">Available</span>
+        </label>
+
+      </div>
+    </div>       
+    </div>
+  </div> 
+    <p class="text-center">    
+      <a href="#/schedule" ng-click="reset()" class="btn btn-primary">Reset</a>
+    </p>    
+  </div>
+</div>
+</row>
