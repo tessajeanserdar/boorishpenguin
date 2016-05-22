@@ -42,7 +42,7 @@ passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLEID,
   clientSecret: process.env.GOOGLESECRET,
   // callbackURL: "http://soyhall.herokuapp.com/auth/google/callback"
-  callbackURL: "http://127.0.0.1:8001/auth/google/callback"
+  callbackURL: "https://afternoon-fjord-60393.herokuapp.com/auth/google/callback"
 },
   function(accessToken, refreshToken, profile, done) {
     controllers.isUserInDb(profile.emails[0].value, function (inDb){
